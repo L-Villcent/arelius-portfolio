@@ -81,20 +81,20 @@ const pptDecks = [
     title: 'UMA协议与乐观预言机',
     category: 'PRESENTATION DECK',
     images: [
-      'images/ppt/ppt-01/01.jpg',
-      'images/ppt/ppt-01/02.jpg',
-      'images/ppt/ppt-01/03.jpg',
-      'images/ppt/ppt-01/04.jpg',
-      'images/ppt/ppt-01/05.jpg',
-      'images/ppt/ppt-01/06.jpg',
-      'images/ppt/ppt-01/07.jpg',
-      'images/ppt/ppt-01/08.jpg',
-      'images/ppt/ppt-01/09.jpg',
-      'images/ppt/ppt-01/10.jpg',
-      'images/ppt/ppt-01/11.jpg',
-      'images/ppt/ppt-01/12.jpg',
-      'images/ppt/ppt-01/13.jpg',
-      'images/ppt/ppt-01/14.jpg'
+      'images/ppt/ppt-02/01.jpg',
+      'images/ppt/ppt-02/02.jpg',
+      'images/ppt/ppt-02/03.jpg',
+      'images/ppt/ppt-02/04.jpg',
+      'images/ppt/ppt-02/05.jpg',
+      'images/ppt/ppt-02/06.jpg',
+      'images/ppt/ppt-02/07.jpg',
+      'images/ppt/ppt-02/08.jpg',
+      'images/ppt/ppt-02/09.jpg',
+      'images/ppt/ppt-02/10.jpg',
+      'images/ppt/ppt-02/11.jpg',
+      'images/ppt/ppt-02/12.jpg',
+      'images/ppt/ppt-02/13.jpg',
+      'images/ppt/ppt-02/14.jpg'
     ]
   }
 ];
