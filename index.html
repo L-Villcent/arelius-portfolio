@@ -398,17 +398,19 @@
 
         <div class="feature-copy">
           <p class="eyebrow mono"><span></span> SELECTED WORK / PRESENTATION</p>
-          <span class="feature-number" id="feature-number">01</span>
-          <h2 id="feature-title">国泰逸旅<br>航司介绍</h2>
-          <p id="feature-description">围绕虚构航空品牌构建的航司介绍演示，包含品牌定位、服务体验与视觉叙事。</p>
-          <dl class="feature-specs">
-            <div><dt>TYPE</dt><dd>PRESENTATION DECK</dd></div>
-            <div><dt>PAGES</dt><dd id="feature-pages">19 SLIDES</dd></div>
-            <div><dt>STATUS</dt><dd>ARCHIVED / ACTIVE</dd></div>
-          </dl>
-          <button class="interface-button interface-button--light" id="open-feature-deck" data-open-deck="0" data-magnetic>
-            <span>OPEN FULL DECK</span><i>↗</i>
-          </button>
+          <div class="feature-copy__payload" id="feature-copy-payload">
+            <span class="feature-number" id="feature-number">01</span>
+            <h2 id="feature-title">国泰逸旅<br>航司介绍</h2>
+            <p id="feature-description">围绕虚构航空品牌构建的航司介绍演示，包含品牌定位、服务体验与视觉叙事。</p>
+            <dl class="feature-specs">
+              <div><dt>TYPE</dt><dd>PRESENTATION DECK</dd></div>
+              <div><dt>PAGES</dt><dd id="feature-pages">19 SLIDES</dd></div>
+              <div><dt>STATUS</dt><dd>ARCHIVED / ACTIVE</dd></div>
+            </dl>
+            <button class="interface-button interface-button--light" id="open-feature-deck" data-open-deck="0" data-magnetic>
+              <span>OPEN FULL DECK</span><i>↗</i>
+            </button>
+          </div>
         </div>
 
         <div class="deck-console" id="deck-console" data-interactive>
@@ -416,8 +418,14 @@
             <span id="deck-console-id">PPT—001 / FRAME 01</span>
             <span>MOVE CURSOR TO SCRUB</span>
           </div>
-          <div class="deck-console__screen">
-            <img id="feature-image" src="images/previews/ppt-01/01.webp" alt="国泰逸旅航司介绍封面" width="1920" height="1080" decoding="async">
+          <div class="deck-console__screen" id="feature-screen" role="img" aria-label="国泰逸旅航司介绍第 1 页">
+            <span class="deck-console__image-layer" data-feature-layer="0">
+              <img id="feature-image-0" data-feature-image="0" src="images/previews/ppt-01/01.webp" alt="" width="1920" height="1080" decoding="async">
+            </span>
+            <span class="deck-console__image-layer" data-feature-layer="1">
+              <img id="feature-image-1" data-feature-image="1" src="images/previews/ppt-02/01.webp" alt="" width="1920" height="1080" loading="eager" decoding="async">
+            </span>
+            <span class="deck-transfer-plane" aria-hidden="true"></span>
             <span class="scan-line"></span>
             <span class="screen-bracket screen-bracket--tl"></span>
             <span class="screen-bracket screen-bracket--tr"></span>

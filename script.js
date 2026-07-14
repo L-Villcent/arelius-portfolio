@@ -154,18 +154,21 @@
   ];
 
   const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
-  const compactLayout = window.matchMedia("(max-width: 820px), (max-height: 720px), (hover: none) and (pointer: coarse)");
+  const compactLayout = window.matchMedia("(max-width: 820px), (max-height: 620px), (max-width: 1180px) and (max-height: 720px), (hover: none) and (pointer: coarse)");
   const finePointer = window.matchMedia("(hover: hover) and (pointer: fine)");
 
   const state = {
     activeDeck: 0,
     activeNote: 0,
     activeSection: "overview",
+    featureMix: 0,
+    featureDirection: 1,
     previewFrame: 0,
+    previewFrames: [0, 0],
+    featureTokens: [0, 0],
     viewerDeck: 0,
     viewerFrame: 0,
     viewerToken: 0,
-    featureToken: 0,
     scrollQueued: false,
     scrollIdleTimer: null,
     spineTimer: null,
@@ -212,7 +215,6 @@
     mobileMenuTimer: null,
     chromeHeight: 0,
     layoutMetrics: {},
-    featureManualUntil: 0,
     noteManualUntil: 0,
     toastTimer: null,
     opener: null,
@@ -296,7 +298,10 @@
       deckConsoleId: $("#deck-console-id"),
       deckConsoleCounter: $("#deck-console-counter"),
       deckScrubProgress: $("#deck-scrub-progress"),
-      featureImage: $("#feature-image"),
+      featureCopyPayload: $("#feature-copy-payload"),
+      featureScreen: $("#feature-screen"),
+      featureImages: $$("[data-feature-image]"),
+      featureImageLayers: $$("[data-feature-layer]"),
       deckFragments: $("#deck-fragments"),
       featureStateProgress: $("#feature-state-progress"),
       featureStateLabel: $("#feature-state-label"),
@@ -384,14 +389,7 @@
     dom.rednoteTrack.replaceChildren(fragment);
   }
 
-  function renderDeckFragments(deckIndex) {
-    const deck = DECKS[deckIndex];
-    const points = [
-      1,
-      Math.max(2, Math.round(deck.frames.length * 0.34)),
-      Math.max(3, Math.round(deck.frames.length * 0.62)),
-      deck.frames.length - 2,
-    ];
+  function renderDeckFragments() {
     const positions = [
       { left: "0%", top: "14%", x: "-18px", y: "8px", r: "-4deg" },
       { left: "25%", top: "0%", x: "0px", y: "0px", r: "2deg" },
@@ -399,21 +397,45 @@
       { left: "77%", top: "4%", x: "20px", y: "6px", r: "4deg" },
     ];
 
-    const fragment = document.createDocumentFragment();
-    points.forEach((frameIndex, index) => {
-      const frame = document.createElement("span");
-      const pos = positions[index];
-      frame.className = "deck-fragment";
-      frame.style.left = pos.left;
-      frame.style.top = pos.top;
-      frame.style.setProperty("--fragment-x", pos.x);
-      frame.style.setProperty("--fragment-y", pos.y);
-      frame.style.setProperty("--fragment-r", pos.r);
-      frame.innerHTML = `<img src="${deck.previews[frameIndex]}" alt="" loading="lazy" decoding="async">`;
-      fragment.appendChild(frame);
+    const root = document.createDocumentFragment();
+
+    DECKS.forEach((deck, deckIndex) => {
+      const points = [
+        1,
+        Math.max(2, Math.round(deck.frames.length * 0.34)),
+        Math.max(3, Math.round(deck.frames.length * 0.62)),
+        deck.frames.length - 2,
+      ];
+      const layer = document.createElement("div");
+      layer.className = "deck-fragments__layer";
+      layer.dataset.deckFragmentLayer = String(deckIndex);
+
+      points.forEach((frameIndex, index) => {
+        const frame = document.createElement("span");
+        const pos = positions[index];
+        frame.className = "deck-fragment";
+        frame.style.left = pos.left;
+        frame.style.top = pos.top;
+        frame.style.setProperty("--fragment-x", pos.x);
+        frame.style.setProperty("--fragment-y", pos.y);
+        frame.style.setProperty("--fragment-r", pos.r);
+        frame.innerHTML = `<img src="${deck.previews[frameIndex]}" alt="" loading="lazy" decoding="async">`;
+        layer.appendChild(frame);
+      });
+
+      root.appendChild(layer);
     });
-    dom.deckFragments.replaceChildren(fragment);
-    dom.deckFragmentItems = $$('.deck-fragment', dom.deckFragments);
+
+    dom.deckFragments.replaceChildren(root);
+    dom.deckFragmentLayers = $$(".deck-fragments__layer", dom.deckFragments);
+    dom.deckFragmentItems = $$(".deck-fragment", dom.deckFragments);
+  }
+
+  function positionProjectRailCursor(activeNode = $(".project-chip.is-active", dom.projectNodes)) {
+    if (!dom.projectNodes || !activeNode) return;
+    const firstNode = $(".project-chip", dom.projectNodes);
+    const offset = firstNode ? activeNode.offsetLeft - firstNode.offsetLeft : 0;
+    dom.projectNodes.style.setProperty("--node-x", `${offset}px`);
   }
 
   function syncProjectRail(type, index) {
@@ -427,7 +449,7 @@
 
     if (!activeNode) return;
     const position = type === "deck" ? index : DECKS.length + index;
-    dom.projectNodes?.style.setProperty("--node-x", `${position * 48}px`);
+    positionProjectRailCursor(activeNode);
 
     const nextCode = activeNode.dataset.projectCode || "ARCHIVE FILE";
     const nextName = activeNode.dataset.projectName || "ACTIVE SPECIMEN";
@@ -543,62 +565,123 @@
     });
   }
 
-  function setActiveDeck(index, options = {}) {
+  function commitActiveDeck(index, options = {}) {
     const next = clamp(Number(index) || 0, 0, DECKS.length - 1);
     const deck = DECKS[next];
     const changed = next !== state.activeDeck;
-    state.activeDeck = next;
-    state.previewFrame = 0;
+    if (!changed && !options.force) return;
 
+    state.activeDeck = next;
+    state.previewFrame = state.previewFrames[next] || 0;
+    const frame = state.previewFrame;
+
+    dom.featureStage.dataset.activeDeck = String(next);
     dom.featureBreadcrumb.textContent = deck.id;
     dom.featureNumber.textContent = pad(next + 1);
     dom.featureTitle.innerHTML = deck.titleHtml;
     dom.featureDescription.textContent = deck.description;
     dom.featurePages.textContent = `${deck.frames.length} SLIDES`;
     dom.openFeatureDeck.dataset.openDeck = String(next);
-    dom.deckConsoleId.textContent = `${deck.id} / FRAME 01`;
-    dom.featureImage.alt = `${deck.title}第 1 页`;
+    dom.deckConsoleId.textContent = `${deck.id} / FRAME ${pad(frame + 1)}`;
+    dom.deckConsoleCounter.textContent = `${pad(frame + 1)} / ${pad(deck.frames.length)}`;
+    dom.deckScrubProgress.style.transform = `scaleX(${(frame + 1) / deck.frames.length})`;
     dom.featureStateLabel.textContent = `${pad(next + 1)} / ${pad(DECKS.length)}`;
-    dom.featureStateProgress.style.transform = `scaleX(${(next + 1) / DECKS.length})`;
+    dom.featureScreen.setAttribute("aria-label", `${deck.title}第 ${frame + 1} 页`);
 
-    $$('[data-deck-switch]').forEach((button) => {
+    $$("[data-deck-switch]").forEach((button) => {
       const active = Number(button.dataset.deckSwitch) === next;
       button.classList.toggle("is-active", active);
       button.setAttribute("aria-pressed", String(active));
       button.tabIndex = 0;
     });
 
-    if (state.activeSection === "selected" || options.forceRail) syncProjectRail("deck", next);
+    dom.featureImageLayers.forEach((layer, layerIndex) => {
+      layer.classList.toggle("is-active", layerIndex === next);
+    });
+    dom.deckFragmentLayers?.forEach((layer, layerIndex) => {
+      layer.classList.toggle("is-active", layerIndex === next);
+    });
 
-    if (changed || options.force) renderDeckFragments(next);
-    swapFeaturePreview(0, true);
+    if (state.activeSection === "selected" || options.forceRail) syncProjectRail("deck", next);
   }
 
-  function swapFeaturePreview(index, immediate = false) {
-    const deck = DECKS[state.activeDeck];
+  function applyFeatureMix(value, options = {}) {
+    const mixValue = clamp(value);
+    const previous = state.featureMix;
+    state.featureMix = mixValue;
+
+    const distance = Math.abs(mixValue - 0.5);
+    const payloadOpacity = smoothstep((distance - 0.06) / 0.26);
+    const payloadPhase = mixValue < 0.5
+      ? smoothstep(mixValue * 2)
+      : smoothstep((1 - mixValue) * 2);
+    const payloadX = (mixValue < 0.5 ? -1 : 1) * payloadPhase * 18;
+    const transferEnergy = Math.sin(Math.PI * mixValue);
+    const transferring = mixValue > 0.08 && mixValue < 0.92;
+
+    dom.featureStage.style.setProperty("--deck-mix", mixValue.toFixed(4));
+    dom.featureStage.style.setProperty("--deck-a-opacity", (1 - mixValue).toFixed(4));
+    dom.featureStage.style.setProperty("--deck-b-opacity", mixValue.toFixed(4));
+    dom.featureStage.style.setProperty("--deck-a-x", `${-12 * mixValue}px`);
+    dom.featureStage.style.setProperty("--deck-b-x", `${12 * (1 - mixValue)}px`);
+    dom.featureStage.style.setProperty("--deck-a-scale", String(1 + mixValue * 0.008));
+    dom.featureStage.style.setProperty("--deck-b-scale", String(1.008 - mixValue * 0.008));
+    dom.featureStage.style.setProperty("--deck-payload-opacity", payloadOpacity.toFixed(4));
+    dom.featureStage.style.setProperty("--deck-payload-x", `${payloadX}px`);
+    dom.featureStage.style.setProperty("--deck-transfer-energy", transferEnergy.toFixed(4));
+    dom.featureStage.style.setProperty("--deck-transfer-x", `${mixValue * 500}%`);
+    dom.featureStage.style.setProperty("--deck-switch-x", `${mixValue * 100}%`);
+    dom.featureStateProgress.style.transform = `scaleX(${0.5 + mixValue * 0.5})`;
+    dom.deckConsole.classList.toggle("is-transferring", transferring);
+    dom.deckConsole.setAttribute("aria-busy", String(transferring));
+
+    if (options.commit !== false) {
+      if (state.activeDeck === 0 && mixValue >= 0.56) commitActiveDeck(1);
+      else if (state.activeDeck === 1 && mixValue <= 0.44) commitActiveDeck(0);
+    }
+
+    state.featureDirection = mixValue >= previous ? 1 : -1;
+  }
+
+  function swapFeaturePreview(index, deckIndex = state.activeDeck, immediate = false) {
+    const deck = DECKS[deckIndex];
     const next = clamp(Math.round(index), 0, deck.frames.length - 1);
-    state.previewFrame = next;
-    dom.deckConsoleCounter.textContent = `${pad(next + 1)} / ${pad(deck.frames.length)}`;
-    dom.deckConsoleId.textContent = `${deck.id} / FRAME ${pad(next + 1)}`;
-    dom.deckScrubProgress.style.transform = `scaleX(${(next + 1) / deck.frames.length})`;
+    const target = dom.featureImages[deckIndex];
+    if (!target) return;
+
+    state.previewFrames[deckIndex] = next;
+    if (deckIndex === state.activeDeck) {
+      state.previewFrame = next;
+      dom.deckConsoleCounter.textContent = `${pad(next + 1)} / ${pad(deck.frames.length)}`;
+      dom.deckConsoleId.textContent = `${deck.id} / FRAME ${pad(next + 1)}`;
+      dom.deckScrubProgress.style.transform = `scaleX(${(next + 1) / deck.frames.length})`;
+    }
 
     const source = deck.previews[next];
-    if (dom.featureImage.getAttribute("src") === source) return;
+    const token = ++state.featureTokens[deckIndex];
+    if (target.getAttribute("src") === source) {
+      target.classList.remove("is-loading");
+      if (deckIndex === state.activeDeck) {
+        dom.featureScreen.setAttribute("aria-label", `${deck.title}第 ${next + 1} 页`);
+      }
+      return;
+    }
 
-    const token = ++state.featureToken;
-    dom.featureImage.classList.add("is-loading");
+    target.classList.add("is-loading");
     const loader = new Image();
     loader.decoding = "async";
     loader.src = source;
 
     const finish = () => {
-      if (token !== state.featureToken) return;
-      dom.featureImage.src = source;
-      dom.featureImage.alt = `${deck.title}第 ${next + 1} 页`;
-      if (immediate) {
-        dom.featureImage.classList.remove("is-loading");
+      if (token !== state.featureTokens[deckIndex]) return;
+      target.src = source;
+      if (deckIndex === state.activeDeck) {
+        dom.featureScreen.setAttribute("aria-label", `${deck.title}第 ${next + 1} 页`);
+      }
+      if (immediate || reducedMotion.matches) {
+        target.classList.remove("is-loading");
       } else {
-        requestAnimationFrame(() => dom.featureImage.classList.remove("is-loading"));
+        requestAnimationFrame(() => target.classList.remove("is-loading"));
       }
     };
 
@@ -922,16 +1005,13 @@
     dom.featureStage.style.setProperty("--feature-exit", String(exit));
     dom.featureStage.style.setProperty("--feature-content-opacity", String(1 - exit * 0.46));
     dom.featureStage.style.setProperty("--feature-content-y", `${exit * -18}px`);
-    dom.featureStateProgress.style.transform = `scaleX(${progress})`;
 
-    const desiredDeck = progress < 0.5 ? 0 : 1;
-    if (performance.now() > state.featureManualUntil && desiredDeck !== state.activeDeck) {
-      setActiveDeck(desiredDeck);
-    }
+    const deckMix = smoothstep((progress - 0.42) / 0.16);
+    applyFeatureMix(deckMix);
 
     const fragments = dom.deckFragmentItems || [];
     fragments.forEach((fragment, index) => {
-      const local = clamp((progress - index * 0.035) / 0.55);
+      const local = clamp((progress - (index % 4) * 0.035) / 0.55);
       fragment.style.setProperty("--fragment-opacity", String(0.18 + local * 0.55));
       fragment.style.setProperty("--fragment-y", `${(1 - local) * 36}px`);
     });
@@ -1120,6 +1200,18 @@
     requestAnimationFrame(updateScrollScenes);
   }
 
+  function positionModeDockCursor(index) {
+    if (!dom.modeDock) return;
+    const items = $$(".mode-dock__item", dom.modeDock);
+    const firstItem = items[0];
+    const activeItem = items[index];
+    const offset = firstItem && activeItem
+      ? activeItem.offsetTop - firstItem.offsetTop
+      : index * 68;
+    dom.modeDock.style.setProperty("--dock-y", `${offset}px`);
+    dom.modeDock.style.setProperty("--dock-x", `${index * 100}%`);
+  }
+
   function setActiveSection(section) {
     if (!section) return;
     dom.heroStage.classList.toggle("is-orbit-live", section.id === "overview");
@@ -1137,8 +1229,7 @@
         if (link.getAttribute("href") === `#${section.id}`) link.setAttribute("aria-current", "page");
         else link.removeAttribute("aria-current");
       });
-      dom.modeDock.style.setProperty("--dock-y", `${meta.index * 68}px`);
-      dom.modeDock.style.setProperty("--dock-x", `${meta.index * 100}%`);
+      positionModeDockCursor(meta.index);
       dom.projectContextCode.textContent = meta.context;
       dom.continuityBusCode.textContent = `${meta.context} / ONLINE`;
       dom.continuityBusNodes.forEach((node) => {
@@ -1439,6 +1530,16 @@
     window.scrollTo({ top: dom.feature.offsetTop + travel * progress, behavior: "smooth" });
   }
 
+  function requestFeatureDeck(index) {
+    const next = clamp(Number(index) || 0, 0, DECKS.length - 1);
+    const staticMode = compactLayout.matches || reducedMotion.matches;
+    if (staticMode) {
+      commitActiveDeck(next, { forceRail: true });
+      applyFeatureMix(next, { commit: false });
+    }
+    scrollToFeatureDeck(next);
+  }
+
   function setupCatalogNavigation() {
     $$('a[href="#catalog"]').forEach((link) => {
       link.addEventListener("click", (event) => {
@@ -1472,10 +1573,7 @@
         }
         const index = Number(chip.dataset.projectIndex);
         if (chip.dataset.projectType === "deck") {
-          state.featureManualUntil = performance.now() + 1200;
-          syncProjectRail("deck", index);
-          setActiveDeck(index);
-          scrollToFeatureDeck(index);
+          requestFeatureDeck(index);
         } else if (chip.dataset.projectType === "note") {
           state.noteManualUntil = performance.now() + 1200;
           syncProjectRail("note", index);
@@ -1488,10 +1586,7 @@
 
     $$('[data-deck-switch]').forEach((button) => {
       button.addEventListener("click", () => {
-        const index = Number(button.dataset.deckSwitch);
-        state.featureManualUntil = performance.now() + 1200;
-        setActiveDeck(index);
-        scrollToFeatureDeck(index);
+        requestFeatureDeck(Number(button.dataset.deckSwitch));
       });
     });
 
@@ -1529,25 +1624,29 @@
 
   function setupDeckScrubber() {
     let lastSwap = 0;
+    const deckIsTransferring = () => state.featureMix > 0.08 && state.featureMix < 0.92;
     dom.deckConsole.addEventListener("pointermove", (event) => {
-      if (!finePointer.matches || reducedMotion.matches) return;
+      if (!finePointer.matches || reducedMotion.matches || deckIsTransferring()) return;
       const now = performance.now();
       if (now - lastSwap < 74) return;
-      const rect = dom.deckConsole.getBoundingClientRect();
+      const rect = dom.featureScreen.getBoundingClientRect();
       const ratio = clamp((event.clientX - rect.left) / rect.width);
-      const next = Math.round(ratio * (DECKS[state.activeDeck].frames.length - 1));
-      if (next === state.previewFrame) return;
+      const deckIndex = state.featureMix >= 0.5 ? 1 : 0;
+      const next = Math.round(ratio * (DECKS[deckIndex].frames.length - 1));
+      if (next === state.previewFrames[deckIndex]) return;
       lastSwap = now;
-      swapFeaturePreview(next);
+      swapFeaturePreview(next, deckIndex);
     });
-    dom.deckConsole.addEventListener("click", () => openViewer(state.activeDeck, state.previewFrame, dom.deckConsole));
+    dom.deckConsole.addEventListener("click", () => {
+      openViewer(state.activeDeck, state.previewFrames[state.activeDeck], dom.deckConsole);
+    });
     dom.deckConsole.tabIndex = 0;
     dom.deckConsole.setAttribute("role", "button");
     dom.deckConsole.setAttribute("aria-label", "移动指针预览页面；点击打开完整幻灯片");
     dom.deckConsole.addEventListener("keydown", (event) => {
       if (event.key === "Enter" || event.key === " ") {
         event.preventDefault();
-        openViewer(state.activeDeck, state.previewFrame, dom.deckConsole);
+        openViewer(state.activeDeck, state.previewFrames[state.activeDeck], dom.deckConsole);
       }
     });
   }
@@ -1778,20 +1877,36 @@
   }
 
   function setupResponsiveMotion() {
-    const refresh = () => {
+    let refreshFrame = 0;
+
+    const refreshNow = () => {
+      refreshFrame = 0;
       refreshLayoutMetrics();
+      positionProjectRailCursor();
+      const meta = SECTION_META[state.activeSection] || SECTION_META.overview;
+      positionModeDockCursor(meta.index);
       positionRednoteTrack(false);
       queueScrollUpdate();
     };
+
+    const refresh = () => {
+      if (refreshFrame) cancelAnimationFrame(refreshFrame);
+      refreshFrame = requestAnimationFrame(refreshNow);
+    };
+
     const refreshMotionMode = () => {
       syncPointerSystem();
-      if (reducedMotion.matches || compactLayout.matches) updateHeroScene(0.68);
+      if (reducedMotion.matches || compactLayout.matches) {
+        updateHeroScene(0.68);
+        applyFeatureMix(state.activeDeck, { commit: false });
+      }
       refresh();
     };
     compactLayout.addEventListener?.("change", refreshMotionMode);
     reducedMotion.addEventListener?.("change", refreshMotionMode);
     finePointer.addEventListener?.("change", refreshMotionMode);
     window.addEventListener("resize", refresh, { passive: true });
+    window.visualViewport?.addEventListener("resize", refresh, { passive: true });
     window.addEventListener("load", refresh, { once: true });
     if (document.fonts?.ready) document.fonts.ready.then(refresh).catch(() => {});
   }
@@ -1802,7 +1917,9 @@
     updateClock();
     window.setInterval(updateClock, 1000);
     renderRednotes();
-    setActiveDeck(0, { force: true });
+    renderDeckFragments();
+    commitActiveDeck(0, { force: true });
+    applyFeatureMix(0, { commit: false });
     setActiveNote(0, { animate: false });
     syncProjectRail("deck", 1);
     setProcessStep(0, { animate: false });
