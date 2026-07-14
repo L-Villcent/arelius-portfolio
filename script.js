@@ -4,6 +4,11 @@
   const $ = (selector, scope = document) => scope.querySelector(selector);
   const $$ = (selector, scope = document) => Array.from(scope.querySelectorAll(selector));
   const clamp = (value, min = 0, max = 1) => Math.min(max, Math.max(min, value));
+  const smoothstep = (value) => {
+    const amount = clamp(value);
+    return amount * amount * (3 - 2 * amount);
+  };
+  const mix = (from, to, amount) => from + (to - from) * amount;
   const pad = (value) => String(value).padStart(2, "0");
 
   const makeFrames = (folder, count) =>
@@ -73,33 +78,83 @@
   const PROCESS = [
     {
       code: "OBSERVE",
+      scene: "observe",
       title: "观察内容与语境",
       copy: "先理解主题、受众和内容密度，再决定视觉方向。风格从信息出发，而不是先套模板。",
+      signal: "RAW SIGNAL / CONTEXT",
+      output: "CONTEXT MAP",
+      angle: -66,
+      route: 0.16,
     },
     {
       code: "STRUCTURE",
+      scene: "structure",
       title: "建立信息骨架",
       copy: "整理叙事顺序、层级和阅读路径，让复杂内容先变得清晰，再进入画面设计。",
+      signal: "SORTED SIGNAL / HIERARCHY",
+      output: "INFORMATION ARCHITECTURE",
+      angle: -28,
+      route: 0.34,
     },
     {
       code: "DESIGN",
+      scene: "design",
       title: "设计视觉系统",
       copy: "用字体、色彩、网格与图形建立统一规则，让每一页既有个性，也属于同一个系统。",
+      signal: "GRID / TYPE / COLOR",
+      output: "VISUAL SYSTEM",
+      angle: 10,
+      route: 0.52,
     },
     {
       code: "REVIEW",
+      scene: "review",
       title: "校验节奏与细节",
       copy: "检查文字、对齐、留白、动效与真实使用场景，确保表达准确、阅读顺畅。",
+      signal: "MEASURE / VALIDATE",
+      output: "VALIDATED FRAME",
+      angle: 48,
+      route: 0.72,
     },
     {
       code: "ARCHIVE",
+      scene: "archive",
       title: "归档与持续迭代",
       copy: "把完成的作品沉淀为可回看的档案，同时保留下一轮修改与扩展的空间。",
+      signal: "PACKAGE / VERSION",
+      output: "ARCHIVE PACKAGE",
+      angle: 86,
+      route: 0.92,
     },
   ];
 
+  const SECTION_META = {
+    overview: { index: 0, label: "OVERVIEW", context: "SEC_00 / OVERVIEW", dark: false },
+    catalog: { index: 1, label: "ARCHIVE DIRECTORY", context: "SEC_01 / DIRECTORY", dark: false },
+    selected: { index: 2, label: "PRESENTATION DECKS", context: "SEC_02 / DECKS", dark: true },
+    rednote: { index: 3, label: "REDNOTE ARRAY", context: "SEC_03 / NOTES", dark: false },
+    process: { index: 4, label: "PROCESS MODULE", context: "SEC_04 / PROCESS", dark: false },
+    about: { index: 5, label: "IDENTITY", context: "SEC_05 / IDENTITY", dark: true },
+  };
+
+  const CARRIER_STATES = {
+    overview: { points: [1150, -180, 900, 80, 780, 300, 650, 520, 510, 760, 270, 930, -130, 1160], width: 320, opacity: 0.82, code: "ACQUIRE" },
+    catalog: { points: [1080, -80, 830, 180, 720, 360, 590, 500, 450, 650, 320, 830, 120, 1080], width: 18, opacity: 0.7, code: "ROUTE" },
+    selected: { points: [-120, 980, 200, 820, 410, 640, 610, 430, 760, 270, 900, 80, 1120, -140], width: 300, opacity: 0.76, code: "PROJECT" },
+    rednote: { points: [-120, 220, 220, 260, 390, 420, 580, 560, 760, 690, 910, 740, 1120, 780], width: 220, opacity: 0.72, code: "SPECIMEN" },
+    process: { points: [1100, 190, 780, 20, 360, 100, 250, 430, 145, 750, 520, 980, 960, 690], width: 150, opacity: 0.68, code: "CALIBRATE" },
+    about: { points: [-100, 900, 230, 800, 520, 620, 710, 390, 850, 220, 920, 90, 1100, -80], width: 12, opacity: 0.76, code: "VERIFIED" },
+  };
+
+  const CATALOG_NODES = [
+    { code: "SEC—02 / LOCKED", title: "PRESENTATION DECKS", meta: "02 FILES / ACTIVE NODE" },
+    { code: "SEC—03 / LOCKED", title: "REDNOTE COVER ARRAY", meta: "05 FILES / ACTIVE NODE" },
+    { code: "SEC—04 / LOCKED", title: "PROCESS MODULE", meta: "05 NODES / ACTIVE NODE" },
+    { code: "SEC—05 / LOCKED", title: "IDENTITY CHANNEL", meta: "01 PROFILE / ACTIVE NODE" },
+  ];
+
   const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
-  const compactLayout = window.matchMedia("(max-width: 820px)");
+  const compactLayout = window.matchMedia("(max-width: 820px), (max-height: 720px), (hover: none) and (pointer: coarse)");
   const finePointer = window.matchMedia("(hover: hover) and (pointer: fine)");
 
   const state = {
@@ -112,9 +167,51 @@
     viewerToken: 0,
     featureToken: 0,
     scrollQueued: false,
-    pointerQueued: false,
+    scrollIdleTimer: null,
+    spineTimer: null,
     pointerX: window.innerWidth / 2,
     pointerY: window.innerHeight / 2,
+    pointerTargetX: 0,
+    pointerTargetY: 0,
+    pointerCurrentX: 0,
+    pointerCurrentY: 0,
+    pointerFarX: 0,
+    pointerFarY: 0,
+    pointerMicroX: 0,
+    pointerMicroY: 0,
+    heroLocalTargetX: 0,
+    heroLocalTargetY: 0,
+    heroLocalCurrentX: 0,
+    heroLocalCurrentY: 0,
+    heroProximityTarget: 0,
+    heroProximityCurrent: 0,
+    heroScrollLock: 0,
+    heroPhase: "",
+    pointerFrame: 0,
+    pointerTime: 0,
+    pointerEnabled: false,
+    tiltCard: null,
+    tiltX: 0,
+    tiltY: 0,
+    activeCatalog: 0,
+    catalogCommitted: 0,
+    continuityCommittedId: "overview",
+    continuityBaseColor: "#fbfbf8",
+    continuityPendingId: "",
+    continuityCommitFrame: 0,
+    continuityEpoch: 0,
+    continuityBusLength: 0,
+    continuityNodeProgresses: [],
+    activeProcess: 0,
+    processToken: 0,
+    processSwapTimer: null,
+    processFinishTimer: null,
+    drawerOpen: false,
+    projectStatusTimer: null,
+    drawerFocusTimer: null,
+    mobileMenuTimer: null,
+    chromeHeight: 0,
+    layoutMetrics: {},
     featureManualUntil: 0,
     noteManualUntil: 0,
     toastTimer: null,
@@ -134,11 +231,59 @@
       clock: $("#clock"),
       menuToggle: $("#menu-toggle"),
       mobileMenu: $("#mobile-menu"),
+      projectContextCode: $("#project-context-code"),
+      projectNodes: $("#project-nodes"),
+      projectStatus: $(".project-status"),
+      projectStatusImage: $("#project-status-image"),
+      projectStatusCode: $("#project-status-code"),
+      projectStatusName: $("#project-status-name"),
+      projectStatusCount: $("#project-status-count"),
+      archiveDrawerToggle: $("#archive-drawer-toggle"),
+      archiveDrawer: $("#archive-drawer"),
+      modeDock: $("#mode-dock"),
+      archiveSpine: $("#archive-spine"),
+      archiveSpineIndex: $("#archive-spine-index"),
+      archiveSpineLabel: $("#archive-spine-label"),
+      transitionField: $("#transition-field"),
+      transitionFieldCode: $("#transition-field-code"),
+      archiveCarrier: $("#archive-carrier"),
+      archiveCarrierHalo: $("#archive-carrier-halo"),
+      archiveCarrierBody: $("#archive-carrier-body"),
+      archiveCarrierTrace: $("#archive-carrier-trace"),
+      archiveCarrierPulse: $("#archive-carrier-pulse"),
+      archiveCarrierCode: $("#archive-carrier-code"),
+      continuityBus: $("#continuity-bus"),
+      continuityBusPath: $(".continuity-bus__track"),
+      continuityBusPulse: $("#continuity-bus-pulse"),
+      continuityBusNodes: $$('[data-bus-section]'),
+      continuityBusCode: $("#continuity-bus-code"),
       hero: $("#overview"),
       heroStage: $("#hero-stage"),
       heroSpecimen: $("#hero-specimen"),
+      specimenOrbit: $("#specimen-orbit"),
+      specimenLock: $("#specimen-lock"),
+      heroAcquisitionState: $("#hero-acquisition-state"),
+      heroLockValue: $("#hero-lock-value"),
+      heroAcquisitionBar: $("#hero-acquisition-bar"),
+      heroIdentityState: $("#hero-identity-state"),
+      heroTelemetryState: $("#hero-telemetry-state"),
+      heroIdentity: $(".hero-identity"),
+      heroMetrics: $(".hero-metrics"),
       coordX: $("#coord-x"),
       coordY: $("#coord-y"),
+      coordLock: $("#coord-lock"),
+      catalog: $("#catalog"),
+      catalogStage: $("#catalog-stage"),
+      catalogStack: $("#catalog-stack"),
+      catalogFolders: $$(".catalog-folder"),
+      catalogDisplay: $("#catalog-display"),
+      catalogRadar: $("#catalog-radar"),
+      catalogPreviewNumber: $("#catalog-preview-number"),
+      catalogRouterCounter: $("#catalog-router-counter"),
+      catalogReadoutCode: $("#catalog-readout-code"),
+      catalogReadoutTitle: $("#catalog-readout-title"),
+      catalogReadoutMeta: $("#catalog-readout-meta"),
+      about: $("#about"),
       feature: $("#selected"),
       featureStage: $("#feature-stage"),
       featureBreadcrumb: $("#feature-breadcrumb"),
@@ -162,6 +307,17 @@
       rednoteTitle: $("#rednote-title"),
       rednoteIndex: $("#rednote-index"),
       rednoteLink: $("#rednote-link"),
+      rednoteInfo: $(".rednote-info"),
+      processConsole: $("#process-console"),
+      processEngine: $("#process-engine"),
+      processEngineLabel: $("#process-engine-label"),
+      processEngineOutput: $("#process-engine-output"),
+      processStatusOutput: $("#process-status-output"),
+      processStatusState: $("#process-status-state"),
+      processReadout: $(".process-readout"),
+      processNodes: $$(".process-node"),
+      processMeter: $$(".process-readout__meter i"),
+      identityCard: $(".identity-card"),
       processCode: $("#process-code"),
       processNumber: $("#process-number"),
       processTitle: $("#process-title"),
@@ -257,12 +413,133 @@
       fragment.appendChild(frame);
     });
     dom.deckFragments.replaceChildren(fragment);
+    dom.deckFragmentItems = $$('.deck-fragment', dom.deckFragments);
   }
 
   function syncProjectRail(type, index) {
-    $$('.project-chip[data-project-type]').forEach((button) => {
+    let activeNode = null;
+    $$('[data-project-type][data-project-index]').forEach((button) => {
       const active = button.dataset.projectType === type && Number(button.dataset.projectIndex) === index;
       button.classList.toggle("is-active", active);
+      if (button.classList.contains("project-chip")) button.setAttribute("aria-current", active ? "true" : "false");
+      if (active && button.classList.contains("project-chip")) activeNode = button;
+    });
+
+    if (!activeNode) return;
+    const position = type === "deck" ? index : DECKS.length + index;
+    dom.projectNodes?.style.setProperty("--node-x", `${position * 48}px`);
+
+    const nextCode = activeNode.dataset.projectCode || "ARCHIVE FILE";
+    const nextName = activeNode.dataset.projectName || "ACTIVE SPECIMEN";
+    const nextImage = activeNode.dataset.projectImage || "";
+    const currentCode = dom.projectStatusCode?.textContent;
+    if (currentCode === nextCode) return;
+
+    window.clearTimeout(state.projectStatusTimer);
+    dom.projectStatus?.classList.add("is-swapping");
+    state.projectStatusTimer = window.setTimeout(() => {
+      if (nextImage) dom.projectStatusImage.src = nextImage;
+      dom.projectStatusCode.textContent = nextCode;
+      dom.projectStatusName.textContent = nextName;
+      dom.projectStatusCount.textContent = `${pad(position + 1)} / ${pad(DECKS.length + NOTES.length)}`;
+      requestAnimationFrame(() => dom.projectStatus?.classList.remove("is-swapping"));
+    }, reducedMotion.matches ? 0 : 120);
+  }
+
+  function setArchiveDrawer(open, restoreFocus = false) {
+    window.clearTimeout(state.drawerFocusTimer);
+    state.drawerOpen = Boolean(open);
+    dom.archiveDrawer.classList.toggle("is-open", state.drawerOpen);
+    dom.archiveDrawer.setAttribute("aria-hidden", String(!state.drawerOpen));
+    dom.archiveDrawerToggle.setAttribute("aria-expanded", String(state.drawerOpen));
+    dom.archiveDrawerToggle.setAttribute("aria-label", state.drawerOpen ? "关闭完整档案目录" : "打开完整档案目录");
+    dom.body.classList.toggle("drawer-open", state.drawerOpen);
+
+    if (state.drawerOpen) {
+      const active = $(".archive-drawer__item.is-active", dom.archiveDrawer) || $(".archive-drawer__item", dom.archiveDrawer);
+      state.drawerFocusTimer = window.setTimeout(() => {
+        if (state.drawerOpen && active?.isConnected) active.focus({ preventScroll: true });
+      }, reducedMotion.matches ? 0 : 180);
+    } else if (restoreFocus || dom.archiveDrawer.contains(document.activeElement)) {
+      dom.archiveDrawerToggle.focus({ preventScroll: true });
+    }
+  }
+
+  function setupArchiveDrawer() {
+    dom.archiveDrawerToggle.addEventListener("click", () => setArchiveDrawer(!state.drawerOpen));
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && state.drawerOpen) {
+        event.preventDefault();
+        setArchiveDrawer(false, true);
+      }
+    });
+    document.addEventListener("pointerdown", (event) => {
+      if (!state.drawerOpen) return;
+      if (event.target.closest("#archive-drawer, #archive-drawer-toggle")) return;
+      setArchiveDrawer(false);
+    });
+  }
+
+  function setCatalogFolder(index, scan = true) {
+    const next = clamp(Number(index) || 0, 0, CATALOG_NODES.length - 1);
+    const node = CATALOG_NODES[next];
+    state.activeCatalog = next;
+
+    $$('.catalog-folder', dom.catalogStack).forEach((folder) => {
+      const active = Number(folder.dataset.catalogIndex) === next;
+      folder.classList.toggle("is-catalog-active", active);
+      if (active) folder.setAttribute("aria-current", "location");
+      else folder.removeAttribute("aria-current");
+    });
+
+    dom.catalogReadoutCode.textContent = node.code;
+    dom.catalogReadoutTitle.textContent = node.title;
+    dom.catalogReadoutMeta.textContent = node.meta;
+    dom.catalogDisplay.dataset.node = String(next);
+    dom.catalogPreviewNumber.textContent = pad(next + 1);
+    dom.catalogRouterCounter.textContent = `NODE ${pad(next + 1)} / ${pad(CATALOG_NODES.length)}`;
+    dom.catalogStack.style.setProperty("--catalog-bus-progress", `${(next / Math.max(1, CATALOG_NODES.length - 1)) * 100}%`);
+
+    if (scan && !reducedMotion.matches) {
+      dom.catalogRadar.classList.remove("is-scanning");
+      void dom.catalogRadar.offsetWidth;
+      dom.catalogRadar.classList.add("is-scanning");
+    }
+  }
+
+  function setupCatalogInteraction() {
+    const folders = dom.catalogFolders;
+    dom.catalogStack.addEventListener("pointermove", (event) => {
+      const folder = event.target.closest(".catalog-folder");
+      if (!folder) return;
+      const index = Number(folder.dataset.catalogIndex);
+      if (!Number.isFinite(index)) return;
+      dom.catalogStack.classList.add("is-interacting");
+      if (index !== state.activeCatalog) setCatalogFolder(index);
+    });
+    folders.forEach((folder) => {
+      const index = Number(folder.dataset.catalogIndex);
+      folder.addEventListener("pointerenter", () => {
+        dom.catalogStack.classList.add("is-interacting");
+        setCatalogFolder(index);
+      });
+      folder.addEventListener("focus", () => {
+        dom.catalogStack.classList.add("is-interacting");
+        setCatalogFolder(index);
+      });
+      folder.addEventListener("click", () => {
+        state.catalogCommitted = index;
+        setCatalogFolder(index, false);
+      });
+    });
+    dom.catalogStack.addEventListener("pointerleave", () => {
+      dom.catalogStack.classList.remove("is-interacting");
+      setCatalogFolder(state.catalogCommitted, false);
+    });
+    dom.catalogStack.addEventListener("focusout", (event) => {
+      if (event.relatedTarget && dom.catalogStack.contains(event.relatedTarget)) return;
+      dom.catalogStack.classList.remove("is-interacting");
+      setCatalogFolder(state.catalogCommitted, false);
     });
   }
 
@@ -287,8 +564,8 @@
     $$('[data-deck-switch]').forEach((button) => {
       const active = Number(button.dataset.deckSwitch) === next;
       button.classList.toggle("is-active", active);
-      button.setAttribute("aria-selected", String(active));
-      button.tabIndex = active ? 0 : -1;
+      button.setAttribute("aria-pressed", String(active));
+      button.tabIndex = 0;
     });
 
     if (state.activeSection === "selected" || options.forceRail) syncProjectRail("deck", next);
@@ -365,45 +642,286 @@
     dom.rednoteTrack.style.transform = `translate3d(${translate}px, 0, 0)`;
   }
 
-  function setProcessStep(index) {
-    const next = clamp(Number(index) || 0, 0, PROCESS.length - 1);
-    const item = PROCESS[next];
-    $$('.process-node').forEach((node, nodeIndex) => node.classList.toggle("is-active", nodeIndex === next));
-    dom.processCode.textContent = `NODE—${pad(next + 1)} / ${item.code}`;
-    dom.processNumber.textContent = pad(next + 1);
+  function renderProcessReadout(index) {
+    const item = PROCESS[index];
+    dom.processCode.textContent = `NODE—${pad(index + 1)} / ${item.code}`;
+    dom.processNumber.textContent = pad(index + 1);
     dom.processTitle.textContent = item.title;
     dom.processCopy.textContent = item.copy;
+    dom.processEngineLabel.textContent = item.signal;
+    dom.processEngineOutput.textContent = `OUTPUT / ${item.output}`;
+    dom.processStatusOutput.textContent = `OUTPUT / ${item.output}`;
   }
 
-  function sceneProgress(section) {
-    const rect = section.getBoundingClientRect();
-    const travel = Math.max(1, section.offsetHeight - window.innerHeight);
-    return clamp(-rect.top / travel);
+  function setProcessStep(index, options = {}) {
+    const next = Math.round(clamp(Number(index) || 0, 0, PROCESS.length - 1));
+    const previous = state.activeProcess;
+    const item = PROCESS[next];
+    const animate = options.animate !== false && next !== previous && !reducedMotion.matches;
+    const direction = Math.sign(next - previous) || 1;
+    const token = ++state.processToken;
+
+    window.clearTimeout(state.processSwapTimer);
+    window.clearTimeout(state.processFinishTimer);
+    state.activeProcess = next;
+
+    dom.processConsole.classList.remove("is-routing");
+    dom.processConsole.dataset.processDirection = String(direction);
+    dom.processConsole.style.setProperty("--process-shift", `${direction * 18}px`);
+    dom.processConsole.style.setProperty("--process-angle", `${item.angle}deg`);
+    if (animate) void dom.processEngine.offsetWidth;
+    dom.processEngine.dataset.processState = item.scene;
+    dom.processEngine.style.setProperty("--process-route-offset", String(1 - item.route));
+
+    dom.processNodes.forEach((node, nodeIndex) => {
+      const active = nodeIndex === next;
+      node.classList.toggle("is-active", active);
+      node.classList.toggle("is-passed", nodeIndex < next);
+      node.querySelector("button")?.setAttribute("aria-pressed", String(active));
+    });
+    dom.processMeter.forEach((meter, meterIndex) => meter.classList.toggle("is-on", meterIndex <= next));
+
+    if (!animate) {
+      renderProcessReadout(next);
+      dom.processStatusState.textContent = "STATUS / ACTIVE";
+      return;
+    }
+
+    void dom.processConsole.offsetWidth;
+    dom.processConsole.classList.add("is-routing");
+    dom.processStatusState.textContent = "STATUS / ROUTING";
+    state.processSwapTimer = window.setTimeout(() => {
+      if (token !== state.processToken) return;
+      renderProcessReadout(next);
+    }, 210);
+    state.processFinishTimer = window.setTimeout(() => {
+      if (token !== state.processToken) return;
+      dom.processConsole.classList.remove("is-routing");
+      dom.processStatusState.textContent = "STATUS / ACTIVE";
+    }, 560);
+  }
+
+  function positionContinuityBus() {
+    if (!dom.continuityBusPath || !dom.continuityBusNodes?.length || !dom.sections?.length) return;
+    try {
+      state.continuityBusLength = dom.continuityBusPath.getTotalLength();
+    } catch (_) {
+      state.continuityBusLength = 0;
+    }
+    if (!state.continuityBusLength) return;
+
+    const viewport = window.innerHeight;
+    const chrome = state.chromeHeight;
+    const anchorOffset = chrome + Math.max(120, (viewport - chrome) * 0.38);
+    const maxScroll = Math.max(1, document.documentElement.scrollHeight - viewport);
+    state.continuityNodeProgresses = [];
+
+    dom.continuityBusNodes.forEach((node) => {
+      const sectionId = node.dataset.busSection;
+      const sectionTop = state.layoutMetrics[sectionId]?.top ?? 0;
+      const progress = clamp((sectionTop - anchorOffset) / maxScroll);
+      const point = dom.continuityBusPath.getPointAtLength(progress * state.continuityBusLength);
+      node.setAttribute("transform", `translate(${point.x.toFixed(2)} ${point.y.toFixed(2)})`);
+      state.continuityNodeProgresses.push(progress);
+    });
+  }
+
+  function updateContinuityBus(progress) {
+    if (!dom.continuityBusPath || !state.continuityBusLength) return;
+    const amount = clamp(progress);
+    dom.transitionField.style.setProperty("--bus-offset", String(1 - amount));
+    const point = dom.continuityBusPath.getPointAtLength(amount * state.continuityBusLength);
+    dom.continuityBusPulse.setAttribute("cx", point.x.toFixed(2));
+    dom.continuityBusPulse.setAttribute("cy", point.y.toFixed(2));
+  }
+
+  function carrierPath(points) {
+    return `M${points[0].toFixed(2)} ${points[1].toFixed(2)} C${points[2].toFixed(2)} ${points[3].toFixed(2)} ${points[4].toFixed(2)} ${points[5].toFixed(2)} ${points[6].toFixed(2)} ${points[7].toFixed(2)} C${points[8].toFixed(2)} ${points[9].toFixed(2)} ${points[10].toFixed(2)} ${points[11].toFixed(2)} ${points[12].toFixed(2)} ${points[13].toFixed(2)}`;
+  }
+
+  function cubicPoint(startX, startY, control1X, control1Y, control2X, control2Y, endX, endY, amount) {
+    const inverse = 1 - amount;
+    const inverse2 = inverse * inverse;
+    const amount2 = amount * amount;
+    return {
+      x: inverse2 * inverse * startX + 3 * inverse2 * amount * control1X + 3 * inverse * amount2 * control2X + amount2 * amount * endX,
+      y: inverse2 * inverse * startY + 3 * inverse2 * amount * control1Y + 3 * inverse * amount2 * control2Y + amount2 * amount * endY,
+    };
+  }
+
+  function carrierPoint(points, progress) {
+    if (progress <= 0.5) {
+      const amount = progress * 2;
+      return cubicPoint(points[0], points[1], points[2], points[3], points[4], points[5], points[6], points[7], amount);
+    }
+    const amount = (progress - 0.5) * 2;
+    return cubicPoint(points[6], points[7], points[8], points[9], points[10], points[11], points[12], points[13], amount);
+  }
+
+  function resolveChapterFrame(y = window.scrollY, viewport = window.innerHeight) {
+    const sections = dom.sections || [];
+    if (!sections.length) return null;
+
+    const chrome = state.chromeHeight;
+    const visibleHeight = Math.max(1, viewport - chrome);
+    const maxScroll = Math.max(0, document.documentElement.scrollHeight - viewport);
+    let baseSection = sections[0];
+
+    for (let index = 1; index < sections.length; index += 1) {
+      const target = sections[index];
+      const top = state.layoutMetrics[target.id]?.top;
+      if (top == null) continue;
+      const end = Math.min(Math.max(0, top - chrome), maxScroll);
+      const start = Math.max(0, end - visibleHeight);
+
+      if (y >= end - 0.5) {
+        baseSection = target;
+        continue;
+      }
+      if (y >= start) {
+        return {
+          from: baseSection,
+          to: target,
+          progress: smoothstep((y - start) / Math.max(1, end - start)),
+          transitioning: true,
+        };
+      }
+      break;
+    }
+
+    return { from: baseSection, to: baseSection, progress: 0, transitioning: false };
+  }
+
+  function updateArchiveCarrier(frame, globalProgress) {
+    if (!frame || !dom.archiveCarrierBody) return;
+    const fromState = CARRIER_STATES[frame.from.id] || CARRIER_STATES.overview;
+    const toState = CARRIER_STATES[frame.to.id] || fromState;
+    const amount = frame.transitioning ? frame.progress : 0;
+    const points = fromState.points.map((value, index) => mix(value, toState.points[index], amount));
+    const baseWidth = mix(fromState.width, toState.width, amount);
+    const waist = frame.transitioning ? 1 - Math.sin(Math.PI * amount) * 0.88 : 1;
+    const handoff = frame.transitioning ? Math.sin(Math.PI * amount) : 0;
+    const compactFactor = compactLayout.matches ? 0.58 : 1;
+    const width = Math.max(compactLayout.matches ? 7 : 10, baseWidth * waist * compactFactor);
+    const opacity = mix(fromState.opacity, toState.opacity, amount) * (frame.transitioning ? 0.9 + waist * 0.1 : 1);
+    const path = carrierPath(points);
+
+    dom.archiveCarrierHalo.setAttribute("d", path);
+    dom.archiveCarrierBody.setAttribute("d", path);
+    dom.archiveCarrierTrace.setAttribute("d", path);
+    dom.archiveCarrier.style.setProperty("--carrier-width", width.toFixed(2));
+    dom.archiveCarrier.style.setProperty("--carrier-halo-width", (width + Math.max(34, width * 0.2)).toFixed(2));
+    dom.archiveCarrier.style.setProperty("--carrier-opacity", opacity.toFixed(3));
+    dom.archiveCarrier.style.setProperty("--carrier-halo-opacity", (0.075 + handoff * 0.045).toFixed(3));
+    const traceBaseOpacity = compactLayout.matches ? 0.76 : 0.82;
+    const tracePeakOpacity = compactLayout.matches ? 0.9 : 0.96;
+    dom.archiveCarrier.style.setProperty("--carrier-trace-opacity", mix(traceBaseOpacity, tracePeakOpacity, handoff).toFixed(3));
+
+    const pulseProgress = 0.08 + clamp(globalProgress) * 0.84;
+    const pulse = carrierPoint(points, pulseProgress);
+    dom.archiveCarrierPulse.setAttribute("cx", pulse.x.toFixed(2));
+    dom.archiveCarrierPulse.setAttribute("cy", pulse.y.toFixed(2));
+    dom.archiveCarrierCode.textContent = frame.transitioning
+      ? `${fromState.code} → ${toState.code} / ${pad(Math.round(amount * 99))}`
+      : `${fromState.code} / ${pad(SECTION_META[frame.from.id]?.index ?? 0)}`;
+  }
+
+  function refreshLayoutMetrics() {
+    const resolvedChromeTop = parseFloat(getComputedStyle(dom.transitionField).top);
+    const measuredChromeTop = dom.transitionField.getBoundingClientRect().top;
+    state.chromeHeight = Number.isFinite(resolvedChromeTop) ? resolvedChromeTop : Math.max(0, measuredChromeTop);
+    state.layoutMetrics = Object.fromEntries((dom.sections || []).map((section) => [section.id, {
+      top: section.offsetTop,
+      height: section.offsetHeight,
+    }]));
+    positionContinuityBus();
+  }
+
+  function sceneProgress(section, scrollY, viewport) {
+    const metric = state.layoutMetrics[section.id];
+    if (!metric) return 0;
+    const travel = Math.max(1, metric.height - viewport);
+    return clamp((scrollY - metric.top) / travel);
+  }
+
+  function sceneIsNearby(section, scrollY, viewport) {
+    const metric = state.layoutMetrics[section.id];
+    if (!metric) return false;
+    return scrollY + viewport >= metric.top - viewport * 0.5 && scrollY <= metric.top + metric.height + viewport * 0.5;
+  }
+
+  function renderHeroLock() {
+    const value = Math.round(clamp(Math.max(state.heroScrollLock, state.heroProximityCurrent * 100), 0, 100));
+    dom.heroLockValue.textContent = `LOCK / ${String(value).padStart(3, "0")}%`;
+    dom.coordLock.textContent = String(value).padStart(3, "0");
+  }
+
+  function setHeroPhase(phase) {
+    if (phase === state.heroPhase) return;
+    state.heroPhase = phase;
+    dom.heroAcquisitionState.textContent = phase;
+    const identityState = phase === "SYSTEM WAKE" ? "ONLINE" : phase === "ACQUIRING" ? "SCANNING" : phase === "TARGET LOCK" ? "IDENTIFIED" : "ARCHIVED";
+    const telemetryState = phase === "SYSTEM WAKE" ? "STANDBY" : phase === "ACQUIRING" ? "ACQUIRE" : phase === "TARGET LOCK" ? "LOCKED" : "TRANSMIT";
+    dom.heroIdentityState.textContent = identityState;
+    dom.heroTelemetryState.textContent = telemetryState;
+    dom.heroStage.dataset.acquisition = phase.toLowerCase().replace(" ", "-");
   }
 
   function updateHeroScene(progress) {
     const stage = dom.heroStage;
-    const intro = clamp(progress / 0.3);
-    const inspect = clamp((progress - 0.15) / 0.48);
-    const exit = clamp((progress - 0.72) / 0.28);
-    stage.style.setProperty("--hero-copy-x", `${-34 * exit}px`);
-    stage.style.setProperty("--hero-copy-y", `${-22 * exit}px`);
-    stage.style.setProperty("--hero-copy-opacity", String(1 - exit * 0.82));
-    stage.style.setProperty("--hero-orbit-scale", String(0.82 + intro * 0.18 + inspect * 0.1 - exit * 0.08));
-    stage.style.setProperty("--hero-orbit-opacity", String(0.72 + intro * 0.28 - exit * 0.18));
-    stage.style.setProperty("--orbit-rotation", `${progress * 54 - 12}deg`);
-    stage.style.setProperty("--orbit-dash", String(0.22 - progress * 0.18));
-    stage.style.setProperty("--hero-beam-x", String(-11 + progress * 22));
-    stage.style.setProperty("--hero-beam-r", `${progress * 3 - 1.5}deg`);
-    stage.style.setProperty("--ghost-one-x", `${-24 + progress * 66}px`);
-    stage.style.setProperty("--ghost-one-y", `${14 - progress * 34}px`);
-    stage.style.setProperty("--ghost-two-x", `${26 - progress * 62}px`);
-    stage.style.setProperty("--ghost-two-y", `${-12 + progress * 30}px`);
-    stage.style.setProperty("--scroll-cue-opacity", String(1 - clamp(progress / 0.18)));
+    const wake = smoothstep(progress / 0.18);
+    const acquire = smoothstep((progress - 0.14) / 0.34);
+    const lock = smoothstep((progress - 0.44) / 0.28);
+    const handoff = smoothstep((progress - 0.72) / 0.28);
+    const phase = progress < 0.18 ? "SYSTEM WAKE" : progress < 0.48 ? "ACQUIRING" : progress < 0.74 ? "TARGET LOCK" : "SIGNAL HANDOFF";
+    const scanFocus = Math.sin(Math.PI * clamp((progress - 0.14) / 0.46));
+
+    setHeroPhase(phase);
+    state.heroScrollLock = clamp(progress / 0.68) * 100;
+    renderHeroLock();
+
+    stage.style.setProperty("--hero-wake", wake.toFixed(4));
+    stage.style.setProperty("--hero-acquire", acquire.toFixed(4));
+    stage.style.setProperty("--hero-lock", lock.toFixed(4));
+    stage.style.setProperty("--hero-handoff", handoff.toFixed(4));
+    stage.style.setProperty("--hero-copy-x", `${-42 * handoff}px`);
+    stage.style.setProperty("--hero-copy-y", `${-24 * handoff}px`);
+    stage.style.setProperty("--hero-copy-opacity", String(1 - handoff * 0.78));
+    stage.style.setProperty("--hero-orbit-scale", String(0.84 + wake * 0.16 + acquire * 0.06 - handoff * 0.1));
+    stage.style.setProperty("--hero-orbit-opacity", String(0.66 + wake * 0.34 - handoff * 0.16));
+    stage.style.setProperty("--orbit-lock-scale", String(1 - lock * 0.025));
+    stage.style.setProperty("--orbit-rotation", `${progress * 72 - 18 - lock * 12}deg`);
+    stage.style.setProperty("--orbit-dash", String(0.24 - acquire * 0.19 + handoff * 0.06));
+    stage.style.setProperty("--hero-card-x", `${handoff * 56}px`);
+    stage.style.setProperty("--hero-card-y", `${(1 - wake) * 18 + handoff * 18}px`);
+    stage.style.setProperty("--hero-card-z", `${24 + lock * 30 - handoff * 10}px`);
+    stage.style.setProperty("--hero-card-scale", String(0.9 + wake * 0.1 + lock * 0.035 - handoff * 0.14));
+    stage.style.setProperty("--hero-card-rx", `${(1 - wake) * -3.4 + handoff * 1.2}deg`);
+    stage.style.setProperty("--hero-card-ry", `${(1 - wake) * 7 - lock * 2.2 + handoff * 4}deg`);
+    stage.style.setProperty("--hero-lock-opacity", String(0.08 + acquire * 0.5 + lock * 0.4 - handoff * 0.58));
+    stage.style.setProperty("--hero-lock-scale", String(1.12 - acquire * 0.08 - lock * 0.04 + handoff * 0.16));
+    stage.style.setProperty("--hero-acquisition-progress", String(clamp(progress / 0.68)));
+    stage.style.setProperty("--hero-scan-opacity", String(scanFocus * (1 - handoff)));
+    stage.style.setProperty("--hero-scan-y", `${-4 + acquire * 280}px`);
+    stage.style.setProperty("--hero-beam-x", `${-15 + progress * 30}%`);
+    stage.style.setProperty("--hero-beam-r", `${progress * 3.8 - 1.9}deg`);
+    stage.style.setProperty("--hero-beam-opacity", String((0.11 + acquire * 0.13) * (1 - handoff)));
+    stage.style.setProperty("--ghost-one-x", `${6 - acquire * 22 - lock * 10 - handoff * 8}px`);
+    stage.style.setProperty("--ghost-one-y", `${4 - acquire * 12 - lock * 6}px`);
+    stage.style.setProperty("--ghost-two-x", `${-4 + acquire * 22 + lock * 10 + handoff * 8}px`);
+    stage.style.setProperty("--ghost-two-y", `${-2 + acquire * 12 + lock * 6}px`);
+    stage.style.setProperty("--hero-ghost-opacity", String(0.08 + wake * 0.07 + acquire * 0.06 - lock * 0.03 - handoff * 0.1));
+    stage.style.setProperty("--scroll-cue-opacity", String(1 - clamp(progress / 0.16)));
   }
 
   function updateFeatureScene(progress) {
+    const intro = clamp(progress / 0.12);
+    const exit = clamp((progress - 0.84) / 0.16);
     dom.featureStage.style.setProperty("--feature-beam-x", `${(progress - 0.5) * 92}px`);
+    dom.featureStage.style.setProperty("--feature-beam-opacity", String(0.18 * smoothstep(intro) * (1 - smoothstep(exit))));
+    dom.featureStage.style.setProperty("--feature-exit", String(exit));
+    dom.featureStage.style.setProperty("--feature-content-opacity", String(1 - exit * 0.46));
+    dom.featureStage.style.setProperty("--feature-content-y", `${exit * -18}px`);
     dom.featureStateProgress.style.transform = `scaleX(${progress})`;
 
     const desiredDeck = progress < 0.5 ? 0 : 1;
@@ -411,7 +929,7 @@
       setActiveDeck(desiredDeck);
     }
 
-    const fragments = $$('.deck-fragment', dom.deckFragments);
+    const fragments = dom.deckFragmentItems || [];
     fragments.forEach((fragment, index) => {
       const local = clamp((progress - index * 0.035) / 0.55);
       fragment.style.setProperty("--fragment-opacity", String(0.18 + local * 0.55));
@@ -420,24 +938,183 @@
   }
 
   function updateRednoteScene(progress) {
+    const intro = clamp(progress / 0.12);
+    const exit = clamp((progress - 0.86) / 0.14);
+    dom.rednoteStage.style.setProperty("--rednote-beam-opacity", String(0.16 * smoothstep(intro) * (1 - smoothstep(exit))));
+    dom.rednoteStage.style.setProperty("--rednote-exit", String(exit));
+    dom.rednoteStage.style.setProperty("--rednote-content-opacity", String(1 - exit * 0.42));
+    dom.rednoteStage.style.setProperty("--rednote-content-y", `${exit * -16}px`);
     if (performance.now() <= state.noteManualUntil) return;
     const desired = Math.round(progress * (NOTES.length - 1));
     if (desired !== state.activeNote) setActiveNote(desired);
   }
 
+  function updateCatalogScene(progress) {
+    const folders = dom.catalogFolders;
+    const intro = clamp(progress / 0.2);
+    const route = clamp((progress - 0.1) / 0.56);
+    const preview = clamp((progress - 0.26) / 0.34);
+    const exit = clamp((progress - 0.82) / 0.18);
+
+    folders.forEach((folder, index) => {
+      const unlock = clamp((progress - 0.055 - index * 0.045) / 0.24);
+      folder.style.setProperty("--catalog-row-x", `${(1 - unlock) * -4}px`);
+      folder.style.setProperty("--catalog-row-body-x", `${(1 - unlock) * 7}px`);
+      folder.style.setProperty("--catalog-row-line", String(0.16 + unlock * 0.84));
+    });
+
+    dom.catalogStage.style.setProperty("--catalog-chassis-y", `${(1 - intro) * 12}px`);
+    dom.catalogStage.style.setProperty("--catalog-chassis-rotate", `${2.8 - intro * 1.2}deg`);
+    dom.catalogStage.style.setProperty("--catalog-chassis-opacity", String(0.82 + intro * 0.18));
+    dom.catalogStage.style.setProperty("--catalog-route-fill", `${route * 100}%`);
+    dom.catalogStage.style.setProperty("--catalog-handoff", String(clamp((progress - 0.58) / 0.22)));
+    dom.catalogDisplay.style.setProperty("--catalog-preview-progress", String(preview));
+    dom.catalogDisplay.style.setProperty("--catalog-preview-opacity", String(0.48 + preview * 0.52));
+    dom.catalogDisplay.style.setProperty("--catalog-preview-y", `${(1 - preview) * 14}px`);
+    dom.catalogDisplay.style.setProperty("--catalog-preview-scale", String(0.96 + preview * 0.04));
+    dom.catalogDisplay.style.setProperty("--catalog-readout-opacity", String(0.56 + preview * 0.44));
+    dom.catalogDisplay.style.setProperty("--catalog-readout-y", `${(1 - preview) * 9}px`);
+    dom.catalogDisplay.style.opacity = String(0.74 + preview * 0.26 - exit * 0.12);
+    dom.catalogStage.style.setProperty("--catalog-content-opacity", String(1 - exit * 0.18));
+    dom.catalogStage.style.setProperty("--catalog-content-y", `${exit * -8}px`);
+  }
+
+  function updateActiveSection(scrollY = window.scrollY, viewport = window.innerHeight) {
+    const sections = dom.sections || [];
+    const chrome = state.chromeHeight;
+    const anchor = scrollY + chrome + Math.max(120, (viewport - chrome) * 0.38);
+    let active = sections[0];
+    sections.forEach((section) => {
+      if ((state.layoutMetrics[section.id]?.top ?? section.offsetTop) <= anchor) active = section;
+    });
+    setActiveSection(active);
+  }
+
+  function cancelContinuityCommit() {
+    if (!state.continuityCommitFrame && !state.continuityPendingId) return;
+    if (state.continuityCommitFrame) cancelAnimationFrame(state.continuityCommitFrame);
+    state.continuityCommitFrame = 0;
+    state.continuityPendingId = "";
+    state.continuityEpoch += 1;
+    dom.transitionField.classList.remove("is-committing");
+  }
+
+  function renderSettledContinuity(section, colorFor, instant = false) {
+    const id = section.id;
+    const color = colorFor(section);
+    const dark = SECTION_META[id]?.dark === true;
+    const transitionCode = dom.transitionFieldCode;
+
+    if (state.continuityPendingId === id) return;
+    if (instant || state.continuityBaseColor === color || state.continuityCommittedId === id) {
+      cancelContinuityCommit();
+      state.continuityCommittedId = id;
+      state.continuityBaseColor = color;
+      dom.transitionField.classList.remove("is-active", "is-committing");
+      dom.transitionField.classList.toggle("is-dark", dark);
+      dom.transitionField.style.setProperty("--continuity-base", color);
+      dom.transitionField.style.setProperty("--continuity-next", color);
+      dom.transitionField.style.setProperty("--transition-shift", "75%");
+      dom.transitionField.style.setProperty("--transition-signal-x", "34vw");
+      dom.transitionField.style.setProperty("--transition-grid-shift", "0px");
+      dom.transitionField.style.setProperty("--transition-glow", "0");
+      transitionCode.textContent = `ARCHIVE / ${SECTION_META[id]?.label || "OVERVIEW"}`;
+      return;
+    }
+
+    cancelContinuityCommit();
+    const epoch = state.continuityEpoch;
+    state.continuityPendingId = id;
+    state.continuityCommittedId = id;
+    state.continuityBaseColor = color;
+    dom.transitionField.classList.remove("is-active");
+    dom.transitionField.classList.add("is-committing");
+    dom.transitionField.classList.toggle("is-dark", dark);
+    dom.transitionField.style.setProperty("--continuity-base", color);
+    dom.transitionField.style.setProperty("--continuity-next", color);
+    dom.transitionField.style.setProperty("--transition-shift", "-15%");
+    dom.transitionField.style.setProperty("--transition-signal-x", "-34vw");
+    dom.transitionField.style.setProperty("--transition-grid-shift", "0px");
+    dom.transitionField.style.setProperty("--transition-glow", "0");
+    transitionCode.textContent = `ARCHIVE / ${SECTION_META[id]?.label || "OVERVIEW"}`;
+
+    state.continuityCommitFrame = requestAnimationFrame(() => {
+      if (epoch !== state.continuityEpoch || state.continuityPendingId !== id) return;
+      dom.transitionField.style.setProperty("--transition-shift", "75%");
+      dom.transitionField.style.setProperty("--transition-signal-x", "34vw");
+      dom.transitionField.classList.remove("is-committing");
+      state.continuityPendingId = "";
+      state.continuityCommitFrame = 0;
+    });
+  }
+
+  function updateContinuity(frame) {
+    if (!frame) return;
+    const colorFor = (section) => SECTION_META[section.id]?.dark ? "#151b22" : "#fbfbf8";
+
+    if (reducedMotion.matches) {
+      const settled = frame.transitioning && frame.progress >= 0.5 ? frame.to : frame.from;
+      renderSettledContinuity(settled, colorFor, true);
+      return;
+    }
+
+    if (!frame.transitioning) {
+      renderSettledContinuity(frame.from, colorFor);
+      return;
+    }
+
+    cancelContinuityCommit();
+    const p = frame.progress;
+    const fromDark = SECTION_META[frame.from.id]?.dark === true;
+    const toDark = SECTION_META[frame.to.id]?.dark === true;
+    const sameTone = fromDark === toDark;
+    const glow = Math.sin(Math.PI * p) * (sameTone ? 0.12 : 0.34);
+    const shift = 75 - p * 90;
+    const signalX = 34 - p * 68;
+
+    state.continuityCommittedId = frame.from.id;
+    state.continuityBaseColor = colorFor(frame.from);
+    dom.transitionField.classList.add("is-active");
+    dom.transitionField.classList.remove("is-committing");
+    dom.transitionField.classList.toggle("is-dark", p >= 0.52 ? toDark : fromDark);
+    dom.transitionField.style.setProperty("--continuity-base", colorFor(frame.from));
+    dom.transitionField.style.setProperty("--continuity-next", colorFor(frame.to));
+    dom.transitionField.style.setProperty("--transition-shift", `${shift}%`);
+    dom.transitionField.style.setProperty("--transition-signal-x", `${signalX}vw`);
+    dom.transitionField.style.setProperty("--transition-grid-shift", `${(p - 0.5) * 20}px`);
+    dom.transitionField.style.setProperty("--transition-glow", glow.toFixed(3));
+    dom.transitionFieldCode.textContent = `ARCHIVE / ${SECTION_META[frame.from.id]?.index ?? 0}→${SECTION_META[frame.to.id]?.index ?? 0} / ${pad(Math.round(p * 99))}`;
+  }
+
   function updateScrollScenes() {
     state.scrollQueued = false;
-    const maxScroll = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
-    const global = clamp(window.scrollY / maxScroll);
-    dom.globalProgress.style.transform = `scaleY(${global})`;
+    const scrollY = window.scrollY;
+    const viewport = window.innerHeight;
+    const maxScroll = Math.max(1, document.documentElement.scrollHeight - viewport);
+    const global = clamp(scrollY / maxScroll);
+    const chapterFrame = resolveChapterFrame(scrollY, viewport);
+    const compact = reducedMotion.matches || compactLayout.matches;
+    const sceneUpdates = compact ? [] : [
+      [dom.hero, updateHeroScene],
+      [dom.catalog, updateCatalogScene],
+      [dom.feature, updateFeatureScene],
+      [dom.rednote, updateRednoteScene],
+    ].filter(([section]) => sceneIsNearby(section, scrollY, viewport))
+      .map(([section, update]) => [update, sceneProgress(section, scrollY, viewport)]);
 
-    if (reducedMotion.matches || compactLayout.matches) return;
-    updateHeroScene(sceneProgress(dom.hero));
-    updateFeatureScene(sceneProgress(dom.feature));
-    updateRednoteScene(sceneProgress(dom.rednote));
+    dom.globalProgress.style.transform = `scaleY(${global})`;
+    dom.archiveSpine.style.setProperty("--spine-progress", `${global * 100}%`);
+    updateContinuityBus(global);
+    updateArchiveCarrier(chapterFrame, global);
+    updateActiveSection(scrollY, viewport);
+    updateContinuity(chapterFrame);
+    sceneUpdates.forEach(([update, progress]) => update(progress));
   }
 
   function queueScrollUpdate() {
+    dom.body.classList.add("is-scroll-scrubbing");
+    window.clearTimeout(state.scrollIdleTimer);
+    state.scrollIdleTimer = window.setTimeout(() => dom.body.classList.remove("is-scroll-scrubbing"), 96);
     if (state.scrollQueued) return;
     state.scrollQueued = true;
     requestAnimationFrame(updateScrollScenes);
@@ -445,37 +1122,62 @@
 
   function setActiveSection(section) {
     if (!section) return;
+    dom.heroStage.classList.toggle("is-orbit-live", section.id === "overview");
     if (section.id !== state.activeSection) {
       state.activeSection = section.id;
+      const meta = SECTION_META[section.id] || SECTION_META.overview;
       dom.systemPath.textContent = section.dataset.path || `ARCHIVE / ${section.id.toUpperCase()}`;
-      $$('.mode-dock__item').forEach((link) => link.classList.toggle("is-active", link.dataset.section === section.id));
+      $$('.mode-dock__item').forEach((link) => {
+        const active = link.dataset.section === section.id;
+        link.classList.toggle("is-active", active);
+        if (active) link.setAttribute("aria-current", "page");
+        else link.removeAttribute("aria-current");
+      });
+      $$('a', dom.mobileMenu).forEach((link) => {
+        if (link.getAttribute("href") === `#${section.id}`) link.setAttribute("aria-current", "page");
+        else link.removeAttribute("aria-current");
+      });
+      dom.modeDock.style.setProperty("--dock-y", `${meta.index * 68}px`);
+      dom.modeDock.style.setProperty("--dock-x", `${meta.index * 100}%`);
+      dom.projectContextCode.textContent = meta.context;
+      dom.continuityBusCode.textContent = `${meta.context} / ONLINE`;
+      dom.continuityBusNodes.forEach((node) => {
+        const nodeMeta = SECTION_META[node.dataset.busSection] || SECTION_META.overview;
+        node.classList.toggle("is-current", nodeMeta.index === meta.index);
+        node.classList.toggle("is-passed", nodeMeta.index < meta.index);
+      });
+      dom.archiveSpine.classList.toggle("is-dark", meta.dark);
+      if (section.id !== "overview") {
+        state.heroLocalTargetX = 0;
+        state.heroLocalTargetY = 0;
+        state.heroProximityTarget = 0;
+        dom.reticle.classList.remove("is-locking");
+        startPointerMotion();
+      }
+      dom.archiveSpine.classList.remove("is-updating");
+      void dom.archiveSpine.offsetWidth;
+      dom.archiveSpine.classList.add("is-updating");
+      window.clearTimeout(state.spineTimer);
+      state.spineTimer = window.setTimeout(() => {
+        dom.archiveSpineIndex.textContent = pad(meta.index);
+        dom.archiveSpineLabel.textContent = meta.label;
+      }, reducedMotion.matches ? 0 : 120);
+
+      if (section.id === "overview") syncProjectRail("deck", 1);
+      else if (section.id === "selected") syncProjectRail("deck", state.activeDeck);
+      else if (section.id === "rednote") syncProjectRail("note", state.activeNote);
     }
-    if (section.id === "overview") syncProjectRail("deck", 1);
-    else if (section.id === "selected") syncProjectRail("deck", state.activeDeck);
-    else if (section.id === "rednote") syncProjectRail("note", state.activeNote);
-    else syncProjectRail(null, -1);
   }
 
   function observeSections() {
-    const sections = $$('main > section[id]');
-    if (!("IntersectionObserver" in window)) return;
-
-    const ratios = new Map();
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => ratios.set(entry.target, entry.intersectionRatio));
-        const active = sections.reduce((best, section) =>
-          (ratios.get(section) || 0) > (ratios.get(best) || 0) ? section : best,
-        sections[0]);
-        setActiveSection(active);
-      },
-      { rootMargin: "-18% 0px -50% 0px", threshold: [0, 0.05, 0.15, 0.3, 0.55, 0.8] }
-    );
-    sections.forEach((section) => observer.observe(section));
+    dom.sections = $$('main > section[id]');
+    refreshLayoutMetrics();
+    state.activeSection = "";
+    updateActiveSection(window.scrollY, window.innerHeight);
   }
 
   function setupRevealObserver() {
-    const targets = $$('.catalog-folder, .catalog-display, .process-console, .about-copy, .contact-card');
+    const targets = $$('.process-console, .about-copy, .contact-card');
     targets.forEach((target) => target.setAttribute("data-reveal", ""));
     if (reducedMotion.matches || !("IntersectionObserver" in window)) {
       targets.forEach((target) => target.classList.add("is-visible"));
@@ -494,56 +1196,237 @@
     targets.forEach((target) => observer.observe(target));
   }
 
-  function updatePointer() {
-    state.pointerQueued = false;
-    const width = Math.max(1, window.innerWidth);
-    const height = Math.max(1, window.innerHeight);
-    const mx = clamp((state.pointerX / width - 0.5) * 2, -1, 1);
-    const my = clamp((state.pointerY / height - 0.5) * 2, -1, 1);
+  function applyPointerDeadZone(value, zone = 0.05) {
+    const amount = Math.abs(value);
+    if (amount <= zone) return 0;
+    return Math.sign(value) * ((amount - zone) / (1 - zone));
+  }
 
-    dom.root.style.setProperty("--mx", mx.toFixed(3));
-    dom.root.style.setProperty("--my", my.toFixed(3));
-    dom.reticle.style.left = `${state.pointerX}px`;
-    dom.reticle.style.top = `${state.pointerY}px`;
+  function updateSpatialTransforms(x, y, farX, farY, microX, microY) {
+    const fixed = (value) => Number(value.toFixed(3));
+    const heroLocalX = state.heroLocalCurrentX;
+    const heroLocalY = state.heroLocalCurrentY;
+    const heroProximity = state.heroProximityCurrent;
+    dom.root.style.setProperty("--spatial-bg-x", `${fixed(farX * -3)}px`);
+    dom.root.style.setProperty("--spatial-bg-y", `${fixed(farY * -2)}px`);
+    dom.root.style.setProperty("--spatial-decor-x", `${fixed(x * 9)}px`);
+    dom.root.style.setProperty("--spatial-decor-y", `${fixed(y * 7)}px`);
+    dom.root.style.setProperty("--spatial-decor-reverse-x", `${fixed(x * -8)}px`);
+    dom.root.style.setProperty("--spatial-decor-reverse-y", `${fixed(y * -6)}px`);
+    dom.root.style.setProperty("--spatial-copy-x", `${fixed(farX * 4)}px`);
+    dom.root.style.setProperty("--spatial-copy-y", `${fixed(farY * 3)}px`);
+    dom.root.style.setProperty("--spatial-micro-x", `${fixed(microX * 3)}px`);
+    dom.root.style.setProperty("--spatial-micro-y", `${fixed(microY * 2.4)}px`);
+    dom.root.style.setProperty("--spatial-micro-reverse-x", `${fixed(microX * -3)}px`);
+    dom.root.style.setProperty("--spatial-micro-reverse-y", `${fixed(microY * -2.4)}px`);
+    dom.root.style.setProperty("--specimen-pointer-x", `${fixed(x * 6 + heroLocalX * heroProximity * 4)}px`);
+    dom.root.style.setProperty("--specimen-pointer-y", `${fixed(y * 5 + heroLocalY * heroProximity * 3)}px`);
+    dom.root.style.setProperty("--specimen-pointer-rx", `${fixed(y * -1.5 + heroLocalY * heroProximity * -4.5)}deg`);
+    dom.root.style.setProperty("--specimen-pointer-ry", `${fixed(x * 2.2 + heroLocalX * heroProximity * 6.5)}deg`);
+    dom.root.style.setProperty("--hero-ghost-avoid-x", `${fixed(heroProximity * 18)}px`);
+    dom.root.style.setProperty("--hero-ghost-avoid-y", `${fixed(heroProximity * 10)}px`);
+    dom.root.style.setProperty("--hero-lock-proximity", fixed(heroProximity * 0.035));
+    dom.root.style.setProperty("--hero-identity-transform", `translate3d(${fixed(x * 12)}px, ${fixed(y * 8)}px, 24px) rotateY(${fixed(5 + x * 3)}deg) rotateX(${fixed(y * -2.4)}deg)`);
+    dom.root.style.setProperty("--hero-metrics-transform", `translate3d(${fixed(x * 16)}px, ${fixed(y * 10)}px, 32px) rotateY(${fixed(-6 + x * 3.2)}deg) rotateX(${fixed(y * -2.6)}deg)`);
+    dom.root.style.setProperty("--catalog-display-transform", `translate3d(${fixed(x * -12)}px, ${fixed(y * -8)}px, 24px) rotateY(${fixed(-6 + x * 2.5)}deg) rotateX(${fixed(y * -2)}deg)`);
+    dom.root.style.setProperty("--deck-console-transform", `translate3d(${fixed(x * 15)}px, ${fixed(y * 10)}px, 38px) rotateX(${fixed(y * -2.6)}deg) rotateY(${fixed(-5 + x * 3.5)}deg)`);
+    dom.root.style.setProperty("--rednote-info-transform", `translate3d(${fixed(x * 11)}px, ${fixed(y * 7)}px, 28px) rotateY(${fixed(6 + x * 2.4)}deg) rotateX(${fixed(y * -2)}deg)`);
+    dom.root.style.setProperty("--process-readout-transform", `translate3d(${fixed(x * 13)}px, calc(-50% + ${fixed(y * 8)}px), 30px) rotateY(${fixed(-6 + x * 2.7)}deg) rotateX(${fixed(y * -2.1)}deg)`);
+    dom.root.style.setProperty("--identity-card-transform", `translate3d(${fixed(x * 14)}px, ${fixed(y * 9)}px, 30px) rotateY(${fixed(-6 + x * 3)}deg) rotateX(${fixed(y * -2.2)}deg)`);
+  }
+
+  function updatePointer(time) {
+    if (!state.pointerEnabled || reducedMotion.matches) {
+      state.pointerFrame = 0;
+      state.pointerTime = 0;
+      return;
+    }
+    const delta = state.pointerTime ? Math.min(32, time - state.pointerTime) : 16;
+    state.pointerTime = time;
+    const blend = 1 - Math.exp(-delta / 118);
+    const farBlend = 1 - Math.exp(-delta / 190);
+    const microBlend = 1 - Math.exp(-delta / 76);
+    const heroBlend = 1 - Math.exp(-delta / 92);
+    state.pointerCurrentX += (state.pointerTargetX - state.pointerCurrentX) * blend;
+    state.pointerCurrentY += (state.pointerTargetY - state.pointerCurrentY) * blend;
+    state.pointerFarX += (state.pointerTargetX - state.pointerFarX) * farBlend;
+    state.pointerFarY += (state.pointerTargetY - state.pointerFarY) * farBlend;
+    state.pointerMicroX += (state.pointerTargetX - state.pointerMicroX) * microBlend;
+    state.pointerMicroY += (state.pointerTargetY - state.pointerMicroY) * microBlend;
+    state.heroLocalCurrentX += (state.heroLocalTargetX - state.heroLocalCurrentX) * heroBlend;
+    state.heroLocalCurrentY += (state.heroLocalTargetY - state.heroLocalCurrentY) * heroBlend;
+    state.heroProximityCurrent += (state.heroProximityTarget - state.heroProximityCurrent) * heroBlend;
+
+    dom.root.style.setProperty("--mx", state.pointerCurrentX.toFixed(4));
+    dom.root.style.setProperty("--my", state.pointerCurrentY.toFixed(4));
+    updateSpatialTransforms(state.pointerCurrentX, state.pointerCurrentY, state.pointerFarX, state.pointerFarY, state.pointerMicroX, state.pointerMicroY);
+    dom.reticle.style.transform = `translate3d(${state.pointerX}px, ${state.pointerY}px, 0) translate(-50%, -50%)`;
     dom.coordX.textContent = String(Math.round(state.pointerX)).padStart(4, "0");
     dom.coordY.textContent = String(Math.round(state.pointerY)).padStart(4, "0");
+    dom.reticle.classList.toggle("is-locking", state.activeSection === "overview" && state.heroProximityCurrent > 0.42);
+    renderHeroLock();
+    if (state.tiltCard?.isConnected) {
+      state.tiltCard.style.setProperty("--rednote-card-transform", `scale(1) perspective(1000px) rotateX(${(state.tiltY * -1.2).toFixed(3)}deg) rotateY(${(state.tiltX * 1.7).toFixed(3)}deg)`);
+    }
+
+    const moving = Math.abs(state.pointerTargetX - state.pointerFarX) > 0.001
+      || Math.abs(state.pointerTargetY - state.pointerFarY) > 0.001
+      || Math.abs(state.pointerTargetX - state.pointerMicroX) > 0.001
+      || Math.abs(state.pointerTargetY - state.pointerMicroY) > 0.001
+      || Math.abs(state.heroLocalTargetX - state.heroLocalCurrentX) > 0.001
+      || Math.abs(state.heroLocalTargetY - state.heroLocalCurrentY) > 0.001
+      || Math.abs(state.heroProximityTarget - state.heroProximityCurrent) > 0.001;
+    if (moving) state.pointerFrame = requestAnimationFrame(updatePointer);
+    else {
+      state.pointerFrame = 0;
+      state.pointerTime = 0;
+    }
+  }
+
+  function startPointerMotion() {
+    if (!state.pointerEnabled || reducedMotion.matches) return;
+    if (!state.pointerFrame) state.pointerFrame = requestAnimationFrame(updatePointer);
   }
 
   function queuePointerUpdate(event) {
+    if (!state.pointerEnabled || reducedMotion.matches) return;
     state.pointerX = event.clientX;
     state.pointerY = event.clientY;
+    const width = Math.max(1, window.innerWidth);
+    const height = Math.max(1, window.innerHeight);
+    state.pointerTargetX = applyPointerDeadZone(clamp((state.pointerX / width - 0.5) * 2, -1, 1));
+    state.pointerTargetY = applyPointerDeadZone(clamp((state.pointerY / height - 0.5) * 2, -1, 1));
+    if (state.activeSection === "overview" && dom.heroSpecimen?.isConnected) {
+      const specimen = dom.heroSpecimen.getBoundingClientRect();
+      const centerX = specimen.left + specimen.width / 2;
+      const centerY = specimen.top + specimen.height / 2;
+      const localX = clamp((event.clientX - centerX) / Math.max(1, specimen.width * 0.55), -1, 1);
+      const localY = clamp((event.clientY - centerY) / Math.max(1, specimen.height * 0.72), -1, 1);
+      const distance = Math.hypot(
+        (event.clientX - centerX) / Math.max(1, specimen.width * 0.9),
+        (event.clientY - centerY) / Math.max(1, specimen.height * 1.35)
+      );
+      state.heroProximityTarget = smoothstep(1 - clamp(distance));
+      state.heroLocalTargetX = localX;
+      state.heroLocalTargetY = localY;
+    } else {
+      state.heroProximityTarget = 0;
+      state.heroLocalTargetX = 0;
+      state.heroLocalTargetY = 0;
+    }
+    const card = event.target.closest?.(".rednote-card") || null;
+    if (state.tiltCard && state.tiltCard !== card) state.tiltCard.style.setProperty("--rednote-card-transform", "scale(1) perspective(1000px) rotateX(0deg) rotateY(0deg)");
+    state.tiltCard = card;
+    if (card) {
+      const rect = card.getBoundingClientRect();
+      state.tiltX = ((event.clientX - rect.left) / rect.width - 0.5) * 2;
+      state.tiltY = ((event.clientY - rect.top) / rect.height - 0.5) * 2;
+    }
     dom.reticle.classList.add("is-visible");
-    if (state.pointerQueued) return;
-    state.pointerQueued = true;
-    requestAnimationFrame(updatePointer);
+    startPointerMotion();
+  }
+
+  function resetPointerMotion() {
+    if (state.pointerFrame) cancelAnimationFrame(state.pointerFrame);
+    state.pointerFrame = 0;
+    state.pointerTime = 0;
+    state.pointerTargetX = 0;
+    state.pointerTargetY = 0;
+    state.pointerCurrentX = 0;
+    state.pointerCurrentY = 0;
+    state.pointerFarX = 0;
+    state.pointerFarY = 0;
+    state.pointerMicroX = 0;
+    state.pointerMicroY = 0;
+    state.heroLocalTargetX = 0;
+    state.heroLocalTargetY = 0;
+    state.heroLocalCurrentX = 0;
+    state.heroLocalCurrentY = 0;
+    state.heroProximityTarget = 0;
+    state.heroProximityCurrent = 0;
+    if (state.tiltCard?.isConnected) {
+      state.tiltCard.style.setProperty("--rednote-card-transform", "scale(1) perspective(1000px) rotateX(0deg) rotateY(0deg)");
+    }
+    state.tiltCard = null;
+    state.tiltX = 0;
+    state.tiltY = 0;
+    dom.reticle.classList.remove("is-visible", "is-hovering", "is-locking");
+    dom.root.style.setProperty("--mx", "0");
+    dom.root.style.setProperty("--my", "0");
+    updateSpatialTransforms(0, 0, 0, 0, 0, 0);
+    renderHeroLock();
+  }
+
+  function handlePointerEnter() {
+    if (state.pointerEnabled) dom.reticle.classList.add("is-visible");
+  }
+
+  function handlePointerLeave() {
+    if (!state.pointerEnabled) return;
+    dom.reticle.classList.remove("is-visible");
+    state.pointerTargetX = 0;
+    state.pointerTargetY = 0;
+    if (state.tiltCard?.isConnected) {
+      state.tiltCard.style.setProperty("--rednote-card-transform", "scale(1) perspective(1000px) rotateX(0deg) rotateY(0deg)");
+    }
+    state.tiltCard = null;
+    startPointerMotion();
+  }
+
+  function handleInteractivePointerOver(event) {
+    if (state.pointerEnabled && event.target.closest("a, button, [data-interactive]")) {
+      dom.reticle.classList.add("is-hovering");
+    }
+  }
+
+  function handleInteractivePointerOut(event) {
+    if (!state.pointerEnabled) return;
+    const next = event.relatedTarget;
+    if (!next || !next.closest || !next.closest("a, button, [data-interactive]")) {
+      dom.reticle.classList.remove("is-hovering");
+    }
+  }
+
+  function handleRednotePointerOut(event) {
+    const card = event.target.closest(".rednote-card");
+    if (!card || card.contains(event.relatedTarget)) return;
+    card.style.setProperty("--rednote-card-transform", "scale(1) perspective(1000px) rotateX(0deg) rotateY(0deg)");
+    if (state.tiltCard === card) state.tiltCard = null;
+  }
+
+  function enablePointerSystem() {
+    if (state.pointerEnabled) return;
+    state.pointerEnabled = true;
+    window.addEventListener("pointermove", queuePointerUpdate, { passive: true });
+    window.addEventListener("pointerenter", handlePointerEnter);
+    window.addEventListener("pointerleave", handlePointerLeave);
+    document.addEventListener("pointerover", handleInteractivePointerOver);
+    document.addEventListener("pointerout", handleInteractivePointerOut);
+    dom.rednoteTrack.addEventListener("pointerout", handleRednotePointerOut);
+  }
+
+  function disablePointerSystem() {
+    if (state.pointerEnabled) {
+      window.removeEventListener("pointermove", queuePointerUpdate);
+      window.removeEventListener("pointerenter", handlePointerEnter);
+      window.removeEventListener("pointerleave", handlePointerLeave);
+      document.removeEventListener("pointerover", handleInteractivePointerOver);
+      document.removeEventListener("pointerout", handleInteractivePointerOut);
+      dom.rednoteTrack.removeEventListener("pointerout", handleRednotePointerOut);
+    }
+    state.pointerEnabled = false;
+    resetPointerMotion();
+  }
+
+  function syncPointerSystem() {
+    const enabled = finePointer.matches && !compactLayout.matches && !reducedMotion.matches;
+    if (enabled) enablePointerSystem();
+    else disablePointerSystem();
   }
 
   function setupPointerSystem() {
-    dom.root.style.setProperty("--mx", "0");
-    dom.root.style.setProperty("--my", "0");
-    if (!finePointer.matches || reducedMotion.matches) return;
-
-    window.addEventListener("pointermove", queuePointerUpdate, { passive: true });
-    window.addEventListener("pointerenter", () => dom.reticle.classList.add("is-visible"));
-    window.addEventListener("pointerleave", () => dom.reticle.classList.remove("is-visible"));
-
-    document.addEventListener("pointerover", (event) => {
-      if (event.target.closest("a, button, [data-interactive]")) dom.reticle.classList.add("is-hovering");
-    });
-    document.addEventListener("pointerout", (event) => {
-      const next = event.relatedTarget;
-      if (!next || !next.closest || !next.closest("a, button, [data-interactive]")) {
-        dom.reticle.classList.remove("is-hovering");
-      }
-    });
-
-    dom.rednoteTrack.addEventListener("pointermove", (event) => {
-      const card = event.target.closest(".rednote-card");
-      if (!card) return;
-      const rect = card.getBoundingClientRect();
-      card.style.setProperty("--card-mx", ((event.clientX - rect.left) / rect.width - 0.5) * 2);
-      card.style.setProperty("--card-my", ((event.clientY - rect.top) / rect.height - 0.5) * 2);
-    });
+    resetPointerMotion();
+    syncPointerSystem();
   }
 
   function scrollToFeatureDeck(index) {
@@ -556,10 +1439,24 @@
     window.scrollTo({ top: dom.feature.offsetTop + travel * progress, behavior: "smooth" });
   }
 
+  function setupCatalogNavigation() {
+    $$('a[href="#catalog"]').forEach((link) => {
+      link.addEventListener("click", (event) => {
+        if (compactLayout.matches || reducedMotion.matches) return;
+        event.preventDefault();
+        const metric = state.layoutMetrics.catalog || { top: dom.catalog.offsetTop, height: dom.catalog.offsetHeight };
+        const travel = Math.max(1, metric.height - window.innerHeight);
+        try { window.history.pushState(null, "", "#catalog"); } catch (_) {}
+        window.scrollTo({ top: metric.top + travel * 0.42, behavior: "smooth" });
+      });
+    });
+  }
+
   function scrollToNote(index) {
     if (compactLayout.matches || reducedMotion.matches) {
-      dom.rednote.scrollIntoView({ behavior: reducedMotion.matches ? "auto" : "smooth" });
-      window.setTimeout(() => dom.rednoteTrack.children[index]?.scrollIntoView({ behavior: "smooth", inline: "center", block: "nearest" }), 450);
+      const behavior = reducedMotion.matches ? "auto" : "smooth";
+      dom.rednote.scrollIntoView({ behavior });
+      window.setTimeout(() => dom.rednoteTrack.children[index]?.scrollIntoView({ behavior, inline: "center", block: "nearest" }), reducedMotion.matches ? 0 : 450);
       return;
     }
     const travel = Math.max(0, dom.rednote.offsetHeight - window.innerHeight);
@@ -567,7 +1464,7 @@
   }
 
   function setupProjectControls() {
-    $$('.project-chip').forEach((chip) => {
+    $$('.project-chip, .archive-drawer__item').forEach((chip) => {
       chip.addEventListener("click", () => {
         if (chip.dataset.target) {
           $(chip.dataset.target)?.scrollIntoView({ behavior: reducedMotion.matches ? "auto" : "smooth" });
@@ -585,6 +1482,7 @@
           setActiveNote(index);
           scrollToNote(index);
         }
+        if (state.drawerOpen) setArchiveDrawer(false);
       });
     });
 
@@ -610,8 +1508,22 @@
       scrollToNote(index);
     });
 
-    $$('.process-node').forEach((node) => {
-      node.querySelector("button")?.addEventListener("click", () => setProcessStep(Number(node.dataset.node)));
+    const processButtons = dom.processNodes.map((node) => node.querySelector("button"));
+    dom.processNodes.forEach((node, nodeIndex) => {
+      const button = processButtons[nodeIndex];
+      if (!button) return;
+      button.addEventListener("click", () => setProcessStep(Number(node.dataset.node)));
+      button.addEventListener("keydown", (event) => {
+        let target = null;
+        if (event.key === "ArrowRight" || event.key === "ArrowDown") target = Math.min(PROCESS.length - 1, nodeIndex + 1);
+        else if (event.key === "ArrowLeft" || event.key === "ArrowUp") target = Math.max(0, nodeIndex - 1);
+        else if (event.key === "Home") target = 0;
+        else if (event.key === "End") target = PROCESS.length - 1;
+        if (target == null) return;
+        event.preventDefault();
+        processButtons[target]?.focus();
+        setProcessStep(target);
+      });
     });
   }
 
@@ -817,29 +1729,71 @@
   }
 
   function setupMenu() {
-    dom.menuToggle.addEventListener("click", () => {
-      const open = dom.menuToggle.getAttribute("aria-expanded") === "true";
-      dom.menuToggle.setAttribute("aria-expanded", String(!open));
-      dom.menuToggle.setAttribute("aria-label", open ? "打开导航" : "关闭导航");
-      dom.mobileMenu.hidden = open;
-    });
+    const setMenuOpen = (open, options = {}) => {
+      window.clearTimeout(state.mobileMenuTimer);
+      dom.menuToggle.setAttribute("aria-expanded", String(open));
+      dom.menuToggle.setAttribute("aria-label", open ? "关闭导航" : "打开导航");
+      dom.mobileMenu.hidden = !open;
+
+      if (open) {
+        const firstLink = $("a", dom.mobileMenu);
+        state.mobileMenuTimer = window.setTimeout(() => {
+          if (!dom.mobileMenu.hidden) firstLink?.focus({ preventScroll: true });
+        }, reducedMotion.matches ? 0 : 120);
+        return;
+      }
+
+      const target = options.focusTarget;
+      if (target) {
+        const focusTarget = $("h1, h2", target) || target;
+        focusTarget.setAttribute("tabindex", "-1");
+        requestAnimationFrame(() => {
+          focusTarget.focus({ preventScroll: true });
+          focusTarget.addEventListener("blur", () => focusTarget.removeAttribute("tabindex"), { once: true });
+        });
+      } else if (options.restoreFocus || dom.mobileMenu.contains(document.activeElement)) {
+        dom.menuToggle.focus({ preventScroll: true });
+      }
+    };
+
+    dom.menuToggle.addEventListener("click", () => setMenuOpen(dom.menuToggle.getAttribute("aria-expanded") !== "true"));
     $$('a', dom.mobileMenu).forEach((link) => {
       link.addEventListener("click", () => {
-        dom.mobileMenu.hidden = true;
-        dom.menuToggle.setAttribute("aria-expanded", "false");
-        dom.menuToggle.setAttribute("aria-label", "打开导航");
+        setMenuOpen(false, { focusTarget: $(link.getAttribute("href")) });
       });
+    });
+    document.addEventListener("keydown", (event) => {
+      if (event.key !== "Escape" || dom.mobileMenu.hidden) return;
+      event.preventDefault();
+      setMenuOpen(false, { restoreFocus: true });
+    });
+  }
+
+  function setupModeDockFocus() {
+    dom.modeDock.addEventListener("click", (event) => {
+      if (event.detail === 0) return;
+      const link = event.target.closest(".mode-dock__item");
+      if (link) requestAnimationFrame(() => link.blur());
     });
   }
 
   function setupResponsiveMotion() {
     const refresh = () => {
+      refreshLayoutMetrics();
       positionRednoteTrack(false);
       queueScrollUpdate();
     };
-    compactLayout.addEventListener?.("change", refresh);
-    reducedMotion.addEventListener?.("change", refresh);
+    const refreshMotionMode = () => {
+      syncPointerSystem();
+      if (reducedMotion.matches || compactLayout.matches) updateHeroScene(0.68);
+      refresh();
+    };
+    compactLayout.addEventListener?.("change", refreshMotionMode);
+    reducedMotion.addEventListener?.("change", refreshMotionMode);
+    finePointer.addEventListener?.("change", refreshMotionMode);
     window.addEventListener("resize", refresh, { passive: true });
+    window.addEventListener("load", refresh, { once: true });
+    if (document.fonts?.ready) document.fonts.ready.then(refresh).catch(() => {});
   }
 
   function init() {
@@ -851,17 +1805,24 @@
     setActiveDeck(0, { force: true });
     setActiveNote(0, { animate: false });
     syncProjectRail("deck", 1);
-    setProcessStep(0);
+    setProcessStep(0, { animate: false });
+    updateHeroScene(reducedMotion.matches || compactLayout.matches ? 0.68 : 0);
+    setCatalogFolder(0, false);
+    setupArchiveDrawer();
+    setupCatalogInteraction();
     setupProjectControls();
+    setupCatalogNavigation();
     setupDeckScrubber();
     setupViewer();
     setupPointerSystem();
     setupMenu();
+    setupModeDockFocus();
     setupResponsiveMotion();
     setupRevealObserver();
     observeSections();
     dom.copyEmail.addEventListener("click", copyEmail);
     window.addEventListener("scroll", queueScrollUpdate, { passive: true });
+    dom.root.classList.add("continuity-ready");
     queueScrollUpdate();
   }
 

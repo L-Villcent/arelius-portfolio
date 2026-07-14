@@ -53,29 +53,50 @@
     </a>
 
     <nav class="project-rail" aria-label="作品快速选择">
-      <span class="project-rail__label mono">SELECT FILE</span>
-      <button class="project-chip is-active" data-project-type="deck" data-project-index="1" aria-label="查看 UMA 协议与乐观预言机">
-        <img src="images/previews/ppt-02/01.webp" alt="" width="160" height="90" decoding="async">
-        <span>UMA</span>
-      </button>
-      <button class="project-chip" data-project-type="deck" data-project-index="0" aria-label="查看国泰逸旅航司介绍">
-        <img src="images/previews/ppt-01/01.webp" alt="" width="160" height="90" decoding="async">
-        <span>ODYSSEY</span>
-      </button>
-      <button class="project-chip" data-project-type="note" data-project-index="0" aria-label="查看边狱巴士游戏简评">
-        <img src="images/previews/xiaohongshu/cover-01.webp" alt="" width="90" height="120" decoding="async">
-        <span>RED-01</span>
-      </button>
-      <button class="project-chip" data-project-type="note" data-project-index="1" aria-label="查看终末地游戏简评">
-        <img src="images/previews/xiaohongshu/cover-02.webp" alt="" width="90" height="120" decoding="async">
-        <span>RED-02</span>
-      </button>
-      <button class="project-chip" data-project-type="note" data-project-index="2" aria-label="查看浣熊推币机游戏简评">
-        <img src="images/previews/xiaohongshu/cover-03.webp" alt="" width="90" height="120" decoding="async">
-        <span>RED-03</span>
-      </button>
-      <button class="project-chip project-chip--more" data-target="#rednote" aria-label="查看全部小红书封面">
-        <span>+02</span>
+      <div class="project-context" aria-hidden="true">
+        <span class="project-context__code mono" id="project-context-code">SEC_00 / OVERVIEW</span>
+        <span class="project-context__scan"><i></i></span>
+      </div>
+
+      <div class="project-nodes" id="project-nodes" style="--node-x:48px">
+        <button class="project-chip" data-project-type="deck" data-project-index="0" data-project-code="PPT—001" data-project-name="ODYSSEY" data-project-image="images/previews/ppt-01/01.webp" aria-label="查看国泰逸旅航司介绍">
+          <span class="project-chip__visual"><img src="images/previews/ppt-01/01.webp" alt="" width="160" height="90" decoding="async"></span>
+          <span class="project-chip__index mono">01</span>
+        </button>
+        <button class="project-chip is-active" data-project-type="deck" data-project-index="1" data-project-code="PPT—002" data-project-name="UMA / OO" data-project-image="images/previews/ppt-02/01.webp" aria-label="查看 UMA 协议与乐观预言机">
+          <span class="project-chip__visual"><img src="images/previews/ppt-02/01.webp" alt="" width="160" height="90" decoding="async"></span>
+          <span class="project-chip__index mono">02</span>
+        </button>
+        <button class="project-chip" data-project-type="note" data-project-index="0" data-project-code="RED—001" data-project-name="LIMBUS" data-project-image="images/previews/xiaohongshu/cover-01.webp" aria-label="查看边狱巴士游戏简评">
+          <span class="project-chip__visual"><img src="images/previews/xiaohongshu/cover-01.webp" alt="" width="90" height="120" decoding="async"></span>
+          <span class="project-chip__index mono">03</span>
+        </button>
+        <button class="project-chip" data-project-type="note" data-project-index="1" data-project-code="RED—002" data-project-name="ENDFIELD" data-project-image="images/previews/xiaohongshu/cover-02.webp" aria-label="查看终末地游戏简评">
+          <span class="project-chip__visual"><img src="images/previews/xiaohongshu/cover-02.webp" alt="" width="90" height="120" decoding="async"></span>
+          <span class="project-chip__index mono">04</span>
+        </button>
+        <button class="project-chip" data-project-type="note" data-project-index="2" data-project-code="RED—003" data-project-name="RACCOIN" data-project-image="images/previews/xiaohongshu/cover-03.webp" aria-label="查看浣熊推币机游戏简评">
+          <span class="project-chip__visual"><img src="images/previews/xiaohongshu/cover-03.webp" alt="" width="90" height="120" decoding="async"></span>
+          <span class="project-chip__index mono">05</span>
+        </button>
+        <button class="project-chip" data-project-type="note" data-project-index="3" data-project-code="RED—004" data-project-name="RIVALS" data-project-image="images/previews/xiaohongshu/cover-04.webp" aria-label="查看漫威争锋游戏简评">
+          <span class="project-chip__visual"><img src="images/previews/xiaohongshu/cover-04.webp" alt="" width="90" height="120" decoding="async"></span>
+          <span class="project-chip__index mono">06</span>
+        </button>
+        <button class="project-chip" data-project-type="note" data-project-index="4" data-project-code="RED—005" data-project-name="ANANTA" data-project-image="images/previews/xiaohongshu/cover-05.webp" aria-label="查看异环游戏简评">
+          <span class="project-chip__visual"><img src="images/previews/xiaohongshu/cover-05.webp" alt="" width="90" height="120" decoding="async"></span>
+          <span class="project-chip__index mono">07</span>
+        </button>
+      </div>
+
+      <div class="project-status" aria-live="polite">
+        <span class="project-status__preview"><img id="project-status-image" src="images/previews/ppt-02/01.webp" alt="" width="96" height="54" decoding="async"></span>
+        <span class="project-status__copy"><small class="mono" id="project-status-code">PPT—002</small><strong id="project-status-name">UMA / OO</strong></span>
+        <span class="project-status__count mono" id="project-status-count">02 / 07</span>
+      </div>
+
+      <button class="archive-drawer-toggle" id="archive-drawer-toggle" type="button" aria-expanded="false" aria-controls="archive-drawer" aria-label="打开完整档案目录">
+        <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
       </button>
     </nav>
 
@@ -84,8 +105,25 @@
     </button>
   </header>
 
+  <aside class="archive-drawer" id="archive-drawer" aria-hidden="true">
+    <div class="archive-drawer__header">
+      <div><span class="mono">ARCHIVE NODE ARRAY</span><strong>选择作品标本</strong></div>
+      <span class="mono">07 FILES / READY</span>
+    </div>
+    <div class="archive-drawer__grid">
+      <button class="archive-drawer__item" data-project-type="deck" data-project-index="0" data-project-code="PPT—001" data-project-name="ODYSSEY" data-project-image="images/previews/ppt-01/01.webp"><span><img src="images/previews/ppt-01/01.webp" alt="" width="320" height="180" loading="lazy" decoding="async"></span><b>01 / ODYSSEY</b><small class="mono">PRESENTATION / 19</small></button>
+      <button class="archive-drawer__item is-active" data-project-type="deck" data-project-index="1" data-project-code="PPT—002" data-project-name="UMA / OO" data-project-image="images/previews/ppt-02/01.webp"><span><img src="images/previews/ppt-02/01.webp" alt="" width="320" height="180" loading="lazy" decoding="async"></span><b>02 / UMA / OO</b><small class="mono">PRESENTATION / 14</small></button>
+      <button class="archive-drawer__item" data-project-type="note" data-project-index="0" data-project-code="RED—001" data-project-name="LIMBUS" data-project-image="images/previews/xiaohongshu/cover-01.webp"><span><img src="images/previews/xiaohongshu/cover-01.webp" alt="" width="180" height="240" loading="lazy" decoding="async"></span><b>03 / LIMBUS</b><small class="mono">REDNOTE COVER</small></button>
+      <button class="archive-drawer__item" data-project-type="note" data-project-index="1" data-project-code="RED—002" data-project-name="ENDFIELD" data-project-image="images/previews/xiaohongshu/cover-02.webp"><span><img src="images/previews/xiaohongshu/cover-02.webp" alt="" width="180" height="240" loading="lazy" decoding="async"></span><b>04 / ENDFIELD</b><small class="mono">REDNOTE COVER</small></button>
+      <button class="archive-drawer__item" data-project-type="note" data-project-index="2" data-project-code="RED—003" data-project-name="RACCOIN" data-project-image="images/previews/xiaohongshu/cover-03.webp"><span><img src="images/previews/xiaohongshu/cover-03.webp" alt="" width="180" height="240" loading="lazy" decoding="async"></span><b>05 / RACCOIN</b><small class="mono">REDNOTE COVER</small></button>
+      <button class="archive-drawer__item" data-project-type="note" data-project-index="3" data-project-code="RED—004" data-project-name="RIVALS" data-project-image="images/previews/xiaohongshu/cover-04.webp"><span><img src="images/previews/xiaohongshu/cover-04.webp" alt="" width="180" height="240" loading="lazy" decoding="async"></span><b>06 / RIVALS</b><small class="mono">REDNOTE COVER</small></button>
+      <button class="archive-drawer__item" data-project-type="note" data-project-index="4" data-project-code="RED—005" data-project-name="ANANTA" data-project-image="images/previews/xiaohongshu/cover-05.webp"><span><img src="images/previews/xiaohongshu/cover-05.webp" alt="" width="180" height="240" loading="lazy" decoding="async"></span><b>07 / ANANTA</b><small class="mono">REDNOTE COVER</small></button>
+    </div>
+  </aside>
+
   <nav class="mode-dock" id="mode-dock" aria-label="章节导航">
-    <a href="#overview" class="mode-dock__item is-active" data-section="overview" data-magnetic>
+    <span class="mode-dock__cursor" aria-hidden="true"><i></i></span>
+    <a href="#overview" class="mode-dock__item is-active" data-section="overview" aria-current="page" data-magnetic>
       <span class="mode-dock__index">00</span><span class="mode-dock__name">OVERVIEW</span>
     </a>
     <a href="#catalog" class="mode-dock__item" data-section="catalog" data-magnetic>
@@ -105,8 +143,14 @@
     </a>
   </nav>
 
+  <div class="archive-spine" id="archive-spine" aria-hidden="true">
+    <span class="archive-spine__index mono" id="archive-spine-index">00</span>
+    <i></i>
+    <b class="mono" id="archive-spine-label">OVERVIEW</b>
+  </div>
+
   <nav class="mobile-menu" id="mobile-menu" aria-label="移动端导航" hidden>
-    <a href="#overview">00 / OVERVIEW</a>
+    <a href="#overview" aria-current="page">00 / OVERVIEW</a>
     <a href="#catalog">01 / INDEX</a>
     <a href="#selected">02 / DECKS</a>
     <a href="#rednote">03 / NOTES</a>
@@ -115,6 +159,44 @@
   </nav>
 
   <main id="main">
+    <div class="transition-field" id="transition-field" aria-hidden="true">
+      <div class="transition-field__tone"></div>
+      <div class="archive-carrier" id="archive-carrier">
+        <svg viewBox="0 0 1000 1000" preserveAspectRatio="none" role="presentation">
+          <path class="archive-carrier__halo" id="archive-carrier-halo" d="M1150 -180 C900 80 780 300 650 520 C510 760 270 930 -130 1160"></path>
+          <path class="archive-carrier__body" id="archive-carrier-body" d="M1150 -180 C900 80 780 300 650 520 C510 760 270 930 -130 1160"></path>
+          <path class="archive-carrier__trace" id="archive-carrier-trace" d="M1150 -180 C900 80 780 300 650 520 C510 760 270 930 -130 1160" pathLength="1"></path>
+          <circle class="archive-carrier__pulse" id="archive-carrier-pulse" cx="944" cy="42" r="7"></circle>
+        </svg>
+        <div class="archive-carrier__label mono">
+          <span>ARCHIVE CARRIER</span>
+          <b id="archive-carrier-code">ACQ / 00</b>
+        </div>
+      </div>
+      <div class="transition-field__grid"></div>
+      <div class="continuity-bus" id="continuity-bus">
+        <svg viewBox="0 0 1000 110" preserveAspectRatio="none" role="presentation">
+          <path class="continuity-bus__track" d="M8 72 C118 72 126 30 222 30 S342 82 440 82 S560 36 660 36 S790 74 992 52" pathLength="1"></path>
+          <path class="continuity-bus__progress" d="M8 72 C118 72 126 30 222 30 S342 82 440 82 S560 36 660 36 S790 74 992 52" pathLength="1"></path>
+          <path class="continuity-bus__ticks" d="M8 79V65 M222 37V23 M440 89V75 M660 43V29 M820 70V56 M992 59V45" pathLength="1"></path>
+          <g class="continuity-bus__nodes">
+            <g data-bus-section="overview"><circle r="4"></circle><text x="8" y="-8">00</text></g>
+            <g data-bus-section="catalog"><circle r="4"></circle><text x="8" y="-8">01</text></g>
+            <g data-bus-section="selected"><circle r="4"></circle><text x="8" y="-8">02</text></g>
+            <g data-bus-section="rednote"><circle r="4"></circle><text x="8" y="-8">03</text></g>
+            <g data-bus-section="process"><circle r="4"></circle><text x="8" y="-8">04</text></g>
+            <g data-bus-section="about"><circle r="4"></circle><text x="8" y="-8">05</text></g>
+          </g>
+          <circle class="continuity-bus__pulse" id="continuity-bus-pulse" r="5"></circle>
+        </svg>
+        <div class="continuity-bus__label mono">
+          <span>ARCHIVE DATA BUS</span>
+          <b id="continuity-bus-code">SEC_00 / ONLINE</b>
+        </div>
+      </div>
+      <div class="transition-field__signal"></div>
+      <span class="transition-field__code mono" id="transition-field-code">ARCHIVE / SIGNAL HANDOFF</span>
+    </div>
     <section class="hero-sequence scroll-sequence" id="overview" data-path="ARCHIVE / OVERVIEW">
       <div class="scene-sticky hero-stage" id="hero-stage">
         <div class="scene-grid" aria-hidden="true"></div>
@@ -140,17 +222,38 @@
           </a>
         </div>
 
-        <div class="specimen-orbit" id="specimen-orbit" data-depth="2" aria-label="精选作品预览">
-          <svg class="orbit-wire" viewBox="0 0 620 620" aria-hidden="true">
-            <circle cx="310" cy="310" r="238" pathLength="1"></circle>
-            <circle cx="310" cy="310" r="188" pathLength="1"></circle>
-            <ellipse cx="310" cy="310" rx="272" ry="106" pathLength="1"></ellipse>
-            <path d="M72 310H548M310 72V548" pathLength="1"></path>
-            <path d="M138 138L482 482M482 138L138 482" pathLength="1"></path>
-          </svg>
+        <div class="specimen-orbit" id="specimen-orbit" data-depth="2" role="group" aria-label="精选作品预览">
+          <div class="orbit-wire-frame" aria-hidden="true">
+            <svg class="orbit-wire" viewBox="0 0 620 620">
+              <g class="orbit-wire__rings">
+                <circle cx="310" cy="310" r="238" pathLength="1"></circle>
+                <circle cx="310" cy="310" r="188" pathLength="1"></circle>
+                <ellipse cx="310" cy="310" rx="272" ry="106" pathLength="1"></ellipse>
+              </g>
+              <g class="orbit-wire__axes">
+                <path d="M72 310H548M310 72V548" pathLength="1"></path>
+                <path d="M138 138L482 482M482 138L138 482" pathLength="1"></path>
+              </g>
+            </svg>
+          </div>
           <div class="orbit-node orbit-node--a"></div>
           <div class="orbit-node orbit-node--b"></div>
           <div class="orbit-node orbit-node--c"></div>
+          <div class="specimen-ghost specimen-ghost--one" aria-hidden="true">
+              <img src="images/previews/xiaohongshu/cover-02.webp" alt="" width="810" height="1080" loading="lazy" decoding="async">
+          </div>
+          <div class="specimen-ghost specimen-ghost--two" aria-hidden="true">
+              <img src="images/previews/ppt-01/01.webp" alt="" width="1440" height="810" loading="lazy" decoding="async">
+          </div>
+          <div class="specimen-lock" id="specimen-lock" aria-hidden="true">
+            <i></i><i></i><i></i><i></i>
+            <span class="mono"><b id="hero-acquisition-state">SYSTEM WAKE</b><em id="hero-lock-value">LOCK / 000%</em></span>
+          </div>
+          <div class="specimen-acquisition mono" aria-hidden="true">
+            <span>SPECIMEN ACQUISITION</span>
+            <i><b id="hero-acquisition-bar"></b></i>
+            <em>AV / PRIMARY</em>
+          </div>
           <button class="specimen-card" id="hero-specimen" data-open-deck="1" aria-label="打开 UMA 协议与乐观预言机幻灯片" data-interactive>
             <span class="specimen-card__shadow"></span>
             <span class="specimen-card__frame">
@@ -159,17 +262,12 @@
             <span class="specimen-card__tag mono">PRIMARY SPECIMEN / PPT—002</span>
             <span class="scan-line"></span>
           </button>
-          <div class="specimen-ghost specimen-ghost--one">
-              <img src="images/previews/xiaohongshu/cover-02.webp" alt="" width="810" height="1080" loading="lazy" decoding="async">
-          </div>
-          <div class="specimen-ghost specimen-ghost--two">
-              <img src="images/previews/ppt-01/01.webp" alt="" width="1440" height="810" loading="lazy" decoding="async">
-          </div>
         </div>
 
         <aside class="hero-identity hud-panel" data-depth="1">
+          <span class="hud-panel__side mono" aria-hidden="true">AV / ID—01</span>
           <div class="hud-panel__head">
-            <span class="mono">IDENTITY / ACTIVE</span><span class="status-dot"></span>
+            <span class="mono">IDENTITY NODE</span><span class="hud-state mono"><b id="hero-identity-state">ONLINE</b> <i class="status-dot"></i></span>
           </div>
           <div class="identity-name"><strong>ARELIUS</strong><span>VILLCENT</span></div>
           <dl class="identity-spec">
@@ -180,9 +278,13 @@
         </aside>
 
         <aside class="hero-metrics hud-panel" data-depth="3">
+          <span class="hud-panel__side mono" aria-hidden="true">SYS / TELEMETRY</span>
+          <div class="hud-panel__head">
+            <span class="mono">ARCHIVE TELEMETRY</span><span class="hud-state mono"><b id="hero-telemetry-state">STANDBY</b> <i class="status-dot"></i></span>
+          </div>
           <div class="metric metric--primary"><span>05</span><small>REDNOTE<br>FILES</small></div>
-          <div class="metric"><span>02</span><small>PRESENTATION<br>DECKS</small></div>
-          <div class="metric"><span>33</span><small>TOTAL<br>SLIDES</small></div>
+          <div class="metric metric--secondary"><span>02</span><small>PRESENTATION<br>DECKS</small></div>
+          <div class="metric metric--tertiary"><span>33</span><small>TOTAL<br>SLIDES</small></div>
           <div class="metric-bar"><i></i><i></i><i></i><i></i><i></i><i></i></div>
           <div class="metric-foot mono">ARCHIVE STATUS / 2026</div>
         </aside>
@@ -190,6 +292,7 @@
         <div class="hero-coordinate mono" aria-hidden="true">
           <span>X <b id="coord-x">000</b></span>
           <span>Y <b id="coord-y">000</b></span>
+          <span>LOCK <b id="coord-lock">000</b>%</span>
         </div>
 
         <div class="scroll-cue mono">
@@ -199,49 +302,87 @@
       </div>
     </section>
 
-    <section class="catalog-section section-pad" id="catalog" data-path="ARCHIVE / DIRECTORY">
-      <div class="section-rail" aria-hidden="true"><span>01</span><b>ARCHIVE DIRECTORY</b></div>
-      <div class="section-heading">
-        <div>
-          <p class="eyebrow mono"><span></span> DIRECTORY / QUICK ACCESS</p>
-          <h2 class="highlight-swipe">档案目录</h2>
-        </div>
-        <div class="heading-chrome">
-          <div class="barcode"></div><span class="mono">CATALOG_05</span>
-        </div>
-      </div>
-
-      <div class="catalog-layout">
-        <div class="catalog-stack">
-          <a class="catalog-folder" href="#selected" style="--folder-index:0" data-magnetic>
-            <span class="catalog-folder__accent accent-yellow"></span>
-            <strong>01</strong><div><h3>精选演示作品</h3><p>PRESENTATION DECKS / 02 FILES</p></div>
-            <span class="catalog-folder__code"><i class="barcode"></i><b>SEC—02</b></span>
-          </a>
-          <a class="catalog-folder" href="#rednote" style="--folder-index:1" data-magnetic>
-            <span class="catalog-folder__accent accent-cyan"></span>
-            <strong>02</strong><div><h3>小红书封面</h3><p>REDNOTE COVERS / 05 FILES</p></div>
-            <span class="catalog-folder__code"><i class="barcode"></i><b>SEC—03</b></span>
-          </a>
-          <a class="catalog-folder" href="#process" style="--folder-index:2" data-magnetic>
-            <span class="catalog-folder__accent accent-magenta"></span>
-            <strong>03</strong><div><h3>设计流程</h3><p>PROCESS MODULE / 05 NODES</p></div>
-            <span class="catalog-folder__code"><i class="barcode"></i><b>SEC—04</b></span>
-          </a>
-          <a class="catalog-folder" href="#about" style="--folder-index:3" data-magnetic>
-            <span class="catalog-folder__accent accent-mint"></span>
-            <strong>04</strong><div><h3>身份与联系</h3><p>IDENTITY / CONTACT CHANNEL</p></div>
-            <span class="catalog-folder__code"><i class="barcode"></i><b>SEC—05</b></span>
-          </a>
-        </div>
-
-        <div class="catalog-display" aria-hidden="true">
-          <span class="ghost-word">CATALOG</span>
-          <div class="catalog-radar">
-            <i></i><i></i><i></i><i></i><b></b>
+    <section class="catalog-section" id="catalog" data-path="ARCHIVE / DIRECTORY">
+      <div class="catalog-stage section-pad" id="catalog-stage">
+        <div class="section-rail" aria-hidden="true"><span>01</span><b>ARCHIVE DIRECTORY</b></div>
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow mono"><span></span> DIRECTORY / QUICK ACCESS</p>
+            <h2 class="highlight-swipe">档案目录</h2>
           </div>
-          <div class="dot-matrix"></div>
-          <p class="mono">SELECT A DIRECTORY<br>TO ACCESS ARCHIVE NODE</p>
+          <div class="heading-chrome">
+            <div class="barcode"></div><span class="mono">CATALOG_05</span>
+          </div>
+        </div>
+
+        <div class="catalog-layout">
+          <div class="catalog-router">
+            <div class="catalog-router__top mono">
+              <span>ROUTING MATRIX / 04 CHANNELS</span>
+              <b><i></i> SYSTEM NOMINAL</b>
+            </div>
+            <div class="catalog-stack" id="catalog-stack">
+              <span class="catalog-bus" aria-hidden="true">
+                <i id="catalog-bus-fill"></i><b id="catalog-bus-pulse"></b>
+              </span>
+              <a class="catalog-folder is-catalog-active" href="#selected" data-catalog-index="0" data-magnetic aria-current="true">
+                <span class="catalog-folder__accent accent-yellow"></span>
+                <strong>01</strong>
+                <div class="catalog-folder__body"><span class="mono">CHANNEL / A–01</span><h3>精选演示作品</h3><p>PRESENTATION DECKS / 02 FILES</p></div>
+                <span class="catalog-folder__code"><i class="barcode"></i><b>SEC—02</b></span>
+                <span class="catalog-folder__arrow" aria-hidden="true">↗</span>
+              </a>
+              <a class="catalog-folder" href="#rednote" data-catalog-index="1" data-magnetic>
+                <span class="catalog-folder__accent accent-cyan"></span>
+                <strong>02</strong>
+                <div class="catalog-folder__body"><span class="mono">CHANNEL / B–02</span><h3>小红书封面</h3><p>REDNOTE COVERS / 05 FILES</p></div>
+                <span class="catalog-folder__code"><i class="barcode"></i><b>SEC—03</b></span>
+                <span class="catalog-folder__arrow" aria-hidden="true">↗</span>
+              </a>
+              <a class="catalog-folder" href="#process" data-catalog-index="2" data-magnetic>
+                <span class="catalog-folder__accent accent-magenta"></span>
+                <strong>03</strong>
+                <div class="catalog-folder__body"><span class="mono">CHANNEL / C–03</span><h3>设计流程</h3><p>PROCESS MODULE / 05 NODES</p></div>
+                <span class="catalog-folder__code"><i class="barcode"></i><b>SEC—04</b></span>
+                <span class="catalog-folder__arrow" aria-hidden="true">↗</span>
+              </a>
+              <a class="catalog-folder" href="#about" data-catalog-index="3" data-magnetic>
+                <span class="catalog-folder__accent accent-mint"></span>
+                <strong>04</strong>
+                <div class="catalog-folder__body"><span class="mono">CHANNEL / D–04</span><h3>身份与联系</h3><p>IDENTITY / CONTACT CHANNEL</p></div>
+                <span class="catalog-folder__code"><i class="barcode"></i><b>SEC—05</b></span>
+                <span class="catalog-folder__arrow" aria-hidden="true">↗</span>
+              </a>
+            </div>
+            <div class="catalog-router__foot mono">
+              <span>INPUT / POINTER + FOCUS</span><b id="catalog-router-counter">NODE 01 / 04</b>
+            </div>
+          </div>
+
+          <aside class="catalog-display" id="catalog-display" data-node="0">
+            <header class="catalog-display__head mono">
+              <span>ARCHIVE ROUTING CONSOLE</span><b><i></i> LINKED</b>
+            </header>
+            <span class="ghost-word" aria-hidden="true">ROUTE</span>
+            <div class="catalog-radar" id="catalog-radar" aria-hidden="true">
+              <div class="catalog-radar__rail"><i></i><i></i><i></i><i></i></div>
+              <div class="catalog-radar__map">
+                <span>ARCHIVE<br>CORE</span><i></i><b></b><em></em>
+              </div>
+              <strong id="catalog-preview-number">01</strong>
+              <small class="mono">TARGET NODE</small>
+            </div>
+            <div class="catalog-display__telemetry mono" aria-hidden="true">
+              <span>LAT 035.42</span><span>LON 139.41</span><span>BUS / 100%</span>
+            </div>
+            <div class="dot-matrix" aria-hidden="true"></div>
+            <div class="catalog-readout" aria-live="polite" aria-atomic="true">
+              <span class="mono" id="catalog-readout-code">SEC—02 / LOCKED</span>
+              <strong id="catalog-readout-title">PRESENTATION DECKS</strong>
+              <p class="mono" id="catalog-readout-meta">02 FILES / ACTIVE NODE</p>
+            </div>
+            <footer class="catalog-display__foot mono"><span>ROUTE VERIFIED</span><b>AV–CAT / 01</b></footer>
+          </aside>
         </div>
       </div>
     </section>
@@ -291,9 +432,9 @@
 
         <div class="deck-fragments" id="deck-fragments" aria-hidden="true"></div>
 
-        <div class="feature-switch" role="tablist" aria-label="选择演示作品">
-          <button class="is-active" role="tab" aria-selected="true" data-deck-switch="0"><span>01</span>ODYSSEY</button>
-          <button role="tab" aria-selected="false" data-deck-switch="1"><span>02</span>UMA / OO</button>
+        <div class="feature-switch" role="group" aria-label="选择演示作品">
+          <button class="is-active" type="button" aria-pressed="true" data-deck-switch="0"><span>01</span>ODYSSEY</button>
+          <button type="button" aria-pressed="false" data-deck-switch="1"><span>02</span>UMA / OO</button>
         </div>
 
         <div class="feature-scroll-state mono">
@@ -315,10 +456,11 @@
         </div>
 
         <div class="rednote-info hud-panel">
-          <div class="hud-panel__head"><span class="mono" id="rednote-id">RED—001</span><span class="status-dot"></span></div>
+          <span class="hud-panel__side mono" aria-hidden="true">SEC_03 / RECORD</span>
+          <div class="hud-panel__head"><span class="mono" id="rednote-id">RED—001</span><span class="hud-state mono">LIVE <i class="status-dot"></i></span></div>
           <strong id="rednote-title">边狱巴士游戏简评</strong>
-          <div class="rednote-info__meta mono"><span>FORMAT / 3:4</span><span id="rednote-index">01 / 05</span></div>
-          <a id="rednote-link" href="https://www.xiaohongshu.com/" target="_blank" rel="noopener noreferrer" data-magnetic>OPEN SOURCE ↗</a>
+          <div class="rednote-info__meta mono"><span>FORMAT / 3:4</span><i class="barcode" aria-hidden="true"></i><span id="rednote-index">01 / 05</span></div>
+          <a id="rednote-link" href="https://www.xiaohongshu.com/" target="_blank" rel="noopener noreferrer" data-magnetic><span>OPEN SOURCE</span><i>↗</i></a>
         </div>
 
         <div class="rednote-track" id="rednote-track" aria-label="小红书封面作品"></div>
@@ -342,26 +484,72 @@
 
       <div class="process-console" id="process-console">
         <div class="process-orbit" aria-hidden="true"><i></i><i></i><i></i><span></span></div>
-        <ol class="process-nodes">
+        <div class="process-engine" id="process-engine" data-process-state="observe" aria-hidden="true">
+          <span class="process-engine__tone" data-tone="observe"></span>
+          <span class="process-engine__tone" data-tone="structure"></span>
+          <span class="process-engine__tone" data-tone="design"></span>
+          <span class="process-engine__tone" data-tone="review"></span>
+          <span class="process-engine__tone" data-tone="archive"></span>
+          <svg class="process-engine__svg" viewBox="0 0 1000 650" preserveAspectRatio="none" role="presentation">
+            <path class="process-engine__route" d="M52 470 C206 120 530 82 920 324" pathLength="1"></path>
+            <path class="process-engine__route-live" d="M52 470 C206 120 530 82 920 324" pathLength="1"></path>
+            <g class="process-scene process-scene--observe" data-process-scene="observe">
+              <path d="M46 206 C170 202 224 246 350 248 M38 294 C168 292 226 270 350 270 M62 382 C182 374 232 294 350 286"></path>
+              <circle cx="76" cy="202" r="4"></circle><circle cx="112" cy="216" r="3"></circle><circle cx="154" cy="232" r="5"></circle>
+              <circle cx="80" cy="294" r="3"></circle><circle cx="128" cy="288" r="5"></circle><circle cx="182" cy="280" r="3"></circle>
+              <circle cx="96" cy="374" r="4"></circle><circle cx="148" cy="354" r="3"></circle><circle cx="208" cy="322" r="5"></circle>
+              <circle class="process-scene__core" cx="374" cy="267" r="36"></circle>
+            </g>
+            <g class="process-scene process-scene--structure" data-process-scene="structure">
+              <path d="M230 168V476 M230 224H396 M230 322H396 M230 420H396"></path>
+              <rect x="146" y="144" width="168" height="52"></rect><rect x="340" y="198" width="180" height="52"></rect>
+              <rect x="340" y="296" width="220" height="52"></rect><rect x="340" y="394" width="152" height="52"></rect>
+              <circle class="process-scene__core" cx="230" cy="322" r="12"></circle>
+            </g>
+            <g class="process-scene process-scene--design" data-process-scene="design">
+              <rect class="process-scene__frame" x="122" y="132" width="482" height="342"></rect>
+              <rect x="154" y="164" width="178" height="116"></rect><rect x="350" y="164" width="222" height="54"></rect>
+              <rect x="350" y="234" width="222" height="148"></rect><rect x="154" y="300" width="178" height="142"></rect>
+              <path d="M154 398H572 M382 164V442 M154 250H572"></path>
+            </g>
+            <g class="process-scene process-scene--review" data-process-scene="review">
+              <rect class="process-scene__frame" x="138" y="118" width="464" height="360"></rect>
+              <rect x="162" y="144" width="416" height="306"></rect><rect x="222" y="190" width="206" height="134"></rect>
+              <path d="M118 118H186 M138 98V164 M554 478H622 M602 432V498 M162 370H578"></path>
+              <circle cx="498" cy="236" r="32"></circle><path d="M482 236L494 248L516 222"></path>
+            </g>
+            <g class="process-scene process-scene--archive" data-process-scene="archive">
+              <path d="M164 176H510L566 232V450H164Z"></path><path d="M510 176V232H566"></path>
+              <rect x="198" y="224" width="264" height="34"></rect><rect x="198" y="280" width="320" height="104"></rect>
+              <path class="process-scene__barcode" d="M206 410V438 M216 410V438 M232 410V438 M238 410V438 M254 410V438 M272 410V438 M280 410V438 M300 410V438 M310 410V438 M326 410V438"></path>
+              <path d="M184 158H530 M180 142H500"></path>
+            </g>
+          </svg>
+          <span class="process-engine__sector"></span>
+          <span class="process-engine__packet"></span>
+          <div class="process-engine__label mono"><span id="process-engine-label">RAW SIGNAL / CONTEXT</span><b id="process-engine-output">OUTPUT / CONTEXT MAP</b></div>
+        </div>
+        <ol class="process-nodes" aria-label="设计流程步骤">
           <li class="process-node is-active" style="--node-angle:-66deg" data-node="0">
-            <button data-magnetic><span>01</span><b>OBSERVE</b><small>观察</small></button>
+            <button type="button" aria-pressed="true" data-magnetic><span>01</span><b>OBSERVE</b><small>观察</small></button>
           </li>
           <li class="process-node" style="--node-angle:-28deg" data-node="1">
-            <button data-magnetic><span>02</span><b>STRUCTURE</b><small>整理</small></button>
+            <button type="button" aria-pressed="false" data-magnetic><span>02</span><b>STRUCTURE</b><small>整理</small></button>
           </li>
           <li class="process-node" style="--node-angle:10deg" data-node="2">
-            <button data-magnetic><span>03</span><b>DESIGN</b><small>设计</small></button>
+            <button type="button" aria-pressed="false" data-magnetic><span>03</span><b>DESIGN</b><small>设计</small></button>
           </li>
           <li class="process-node" style="--node-angle:48deg" data-node="3">
-            <button data-magnetic><span>04</span><b>REVIEW</b><small>复查</small></button>
+            <button type="button" aria-pressed="false" data-magnetic><span>04</span><b>REVIEW</b><small>复查</small></button>
           </li>
           <li class="process-node" style="--node-angle:86deg" data-node="4">
-            <button data-magnetic><span>05</span><b>ARCHIVE</b><small>归档</small></button>
+            <button type="button" aria-pressed="false" data-magnetic><span>05</span><b>ARCHIVE</b><small>归档</small></button>
           </li>
         </ol>
 
-        <div class="process-readout hud-panel">
-          <div class="hud-panel__head"><span class="mono" id="process-code">NODE—01 / OBSERVE</span><span class="status-dot"></span></div>
+        <div class="process-readout hud-panel" id="process-readout" aria-live="polite" aria-atomic="true">
+          <span class="hud-panel__side mono" aria-hidden="true">SEC_04 / DIAGNOSTIC</span>
+          <div class="hud-panel__head"><span class="mono" id="process-code">NODE—01 / OBSERVE</span><span class="hud-state mono">ACTIVE <i class="status-dot"></i></span></div>
           <span class="process-readout__number" id="process-number">01</span>
           <h3 id="process-title">观察内容与语境</h3>
           <p id="process-copy">先理解主题、受众和内容密度，再决定视觉方向。风格从信息出发，而不是先套模板。</p>
@@ -369,7 +557,7 @@
         </div>
 
         <div class="process-status mono">
-          <span>METHOD / ITERATIVE</span><span>OUTPUT / VISUAL SYSTEM</span><span>STATUS / CONTINUOUS</span>
+          <span>METHOD / ITERATIVE</span><span id="process-status-output">OUTPUT / CONTEXT MAP</span><span id="process-status-state">STATUS / ACTIVE</span>
         </div>
       </div>
     </section>
@@ -385,7 +573,8 @@
         <p><strong>一个兴趣使然的非专业设计爱好者。</strong><br>这里收录日常设计练习。没有商业项目，只有自己想做的东西。</p>
       </div>
 
-      <div class="identity-card">
+      <div class="identity-card hud-panel hud-panel--dark">
+        <span class="hud-panel__side mono" aria-hidden="true">SEC_05 / CREDENTIAL</span>
         <div class="identity-card__head"><span>ARELIUS VILLCENT</span><b class="mono">AV—0001</b></div>
         <dl>
           <div><dt>// NAME</dt><dd>Arelius Villcent</dd></div>
