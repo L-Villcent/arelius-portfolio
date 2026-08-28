@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="1024" height="1024" role="img" aria-labelledby="title desc" shape-rendering="geometricPrecision">
+  <title id="title">Arelius AR-02 Archive Stack Mark — SITE YELLOW</title>
+  <desc id="desc">Three separated cut-corner archive carriers form a non-letter symbol for indexed design records and specimen transfer.</desc>
+  <path d="M0 0H800L1024 224V1024H224L0 800Z" fill="#101216"/>
+  <g fill="#E8FF00">
+    <path d="M176 256H624L752 384V416H224L176 368Z"/>
+    <path d="M272 432H720L848 560V592H320L272 544Z M480 496H560V544H480Z" fill-rule="evenodd" clip-rule="evenodd"/>
+    <path d="M176 608H624L752 736V768H224L176 720Z"/>
+  </g>
+  <rect x="756" y="178" width="68" height="68" fill="#E8FF00"/>
+</svg>
