@@ -1,0 +1,136 @@
+/* Reference-target phone UI. Supplied sunlit bamboo asset, original interactions. */
+.workspace{background:#eeebe3;padding:26px 20px 30px;border-radius:8px;gap:20px}
+.phone{width:350px;filter:drop-shadow(0 12px 16px #26302919)}
+.role-heading{padding-bottom:12px;margin-bottom:12px;border-color:#dbdcd5;gap:13px}
+.role-heading .role-number{font-family:Arial,sans-serif;font-size:34px;font-weight:600;letter-spacing:-1px;color:#303a3a}
+.role-heading h2{font-size:18px;color:#101916}.role-heading p{font-size:12px;color:#707a78}
+.role-heading .role-chip{font-family:inherit;font-size:9px;color:#a9afaa;max-width:115px;display:block}
+.connection{margin-top:151px;width:54px}.connection small,.flow-mini{display:none}
+.connection>span{width:40px;height:40px;color:#6f7d7d;border-color:#cbd0cd;background:#eeebe3}
+.connection-line{border-color:#c6ceca}.connection strong{font-size:10px;color:#858f8b}
+.screen{border-radius:46px;background:#f7f8f7;color:#122e29}
+/* Preserve the upper leaves; fade their shadows out behind the lower text. */
+#older-phone .screen{background:linear-gradient(to bottom,rgba(255,255,255,.34) 0%,rgba(255,255,255,.42) 25%,rgba(253,252,248,.68) 48%,rgba(253,252,248,.91) 68%,#fdfcf8 88%,#fdfcf8 100%),url("assets/bamboo-light.png") center top/cover no-repeat #fdfcf8}
+.statusbar{background:transparent;height:67px;padding:19px 25px 0;font-size:12px;color:#101614}
+.system-status{display:block;width:64px;height:16px;object-fit:contain}
+.island{width:99px;height:29px;top:10px}
+.homebar{background:#101411;width:109px;margin:5px auto 7px}
+.phone-scroll{padding:0 18px 15px}
+.ui-icon{width:21px;height:21px;display:inline-block;object-fit:contain}
+.elder-welcome{position:relative;margin:13px 0 26px}
+.older-content .greeting{font-size:29px;line-height:1.24;font-weight:650;letter-spacing:-.6px;margin:0 0 6px}
+.greeting>span{display:block;font-size:27px;font-weight:400;letter-spacing:0;margin-bottom:4px}
+.older-content .date{font-size:13px;line-height:1.5;margin:0;color:#6d7979}
+.weather{position:absolute;right:0;top:48px;display:flex;align-items:center;gap:4px;color:#85918a;font-size:10px;text-align:right;line-height:1.5}
+.weather .ui-icon{width:21px;height:21px;filter:invert(63%) sepia(85%) saturate(862%) hue-rotate(354deg)}
+.med-card{width:calc(100% - 36px);aspect-ratio:1;margin:0 auto 10px;border-radius:50%;border:0;background:#ffffffdc;box-shadow:none;display:flex;align-items:center;flex-direction:column;text-align:center;padding:12px 12px 21px}
+.pill-icon{width:36px;height:36px;border-radius:50%;background:#e6eff3;display:grid;place-items:center;margin-bottom:8px}
+.pill-icon .ui-icon{width:25px;height:25px;filter:invert(35%) sepia(26%) saturate(1498%) hue-rotate(159deg)}
+.card-overline{font-size:17px;line-height:1.5;font-weight:400;display:block;color:#16332f}
+.med-time{font-family:Arial,sans-serif;font-size:48px;line-height:1.16;font-weight:700;letter-spacing:-2px;margin:6px 0 8px;color:#10362d}
+.med-detail{font-size:18px;line-height:1.4;color:#1e3430}
+.med-detail small{display:block;font-size:13px;color:#74807d;margin-top:1px}
+.med-bottom{font-size:13px;color:#74807d;font-weight:400;margin-top:13px;line-height:1.5}
+.elder-button{width:calc(100% - 28px);margin-left:auto;margin-right:auto;border:0;min-height:69px;border-radius:50px;padding:14px 8px;font-size:21px;gap:10px}
+.confirm-button{background:#21846b;color:#fff;box-shadow:0 8px 16px #21846b25}
+.confirm-button .ui-icon{filter:invert(1)}
+.help-button{width:calc(100% - 68px);margin-top:12px;min-height:52px;border:0;background:#ffffffaa;color:#b14f47;font-size:16px;font-weight:600}
+.help-button .ui-icon{filter:invert(39%) sepia(29%) saturate(1058%) hue-rotate(318deg)}
+.elder-hint{font-size:13px;color:#818b89;line-height:1.7;text-align:center;margin:23px 0 6px}
+.elder-contact{background:none;padding:10px 0 0;text-align:center;border-radius:0}
+.elder-contact button{font-size:12px;min-height:32px;justify-content:center;margin:0 auto;color:#70827a}
+.elder-contact .ui-icon{width:15px;height:15px}
+.family-person{margin:0 0 19px;gap:10px;min-height:59px}
+.person-avatar{width:48px;height:48px;border:0;border-radius:50%;font-size:24px;color:#276989;background:#dce9f0}
+.person-copy{flex:1;min-width:0}.family-person strong{font-size:17px;font-weight:650;display:flex;align-items:center;gap:4px;color:#16312c}
+.person-copy .ui-icon{width:13px;height:13px}.family-person small{font-size:12px;color:#7b8583;margin-top:4px}
+.person-status{display:flex;flex-direction:column;align-items:flex-end;gap:4px;font-size:11px;color:#607570}
+.person-status small{font-size:8px;white-space:nowrap;margin:0}.person-status i{display:inline-block;width:7px;height:7px;background:#2ca764;border-radius:50%;margin-right:3px}
+.more-button{width:28px;height:28px;border:0;border-radius:50%;background:#e9edeb;display:grid;place-items:center;padding:5px}.more-button .ui-icon{width:18px;height:18px}
+.period-tabs{display:flex;border-radius:30px;background:#ebeeec;padding:3px;margin-bottom:15px}
+.period-tabs button{flex:1;border:0;background:none;color:#8a9290;border-radius:25px;min-height:30px;font-size:13px;padding:5px}
+.period-tabs button.selected{background:#fff;color:#21372f;box-shadow:0 2px 5px #20362909}
+.state-card{border:1px solid var(--card-line);border-radius:20px;padding:15px;min-height:200px;background:var(--card-bg);box-shadow:none}
+.state-top{gap:8px;font-size:13px;letter-spacing:0;font-weight:400}
+.state-symbol{background:#f6eddc;width:30px;height:30px}
+.state-symbol .ui-icon{width:22px;height:22px;filter:invert(50%) sepia(78%) saturate(1729%) hue-rotate(8deg)}
+.reminder-name{flex:1;color:#263b35;white-space:nowrap;font-size:13px}
+.status-badge{display:inline-block;border-radius:20px;background:#faeed8;color:#b77e2a;white-space:nowrap;font-size:10px;padding:4px 8px}
+.state-card h3{font-size:18px;line-height:1.4;margin:8px 0 4px;letter-spacing:-.3px;color:#152c26;font-weight:700}
+.state-card p{font-size:12px;line-height:1.7;color:#808782}
+.status-steps{list-style:none;padding:0 0 0 5px;margin:14px 0 0;color:#929892;font-size:12px;line-height:1.65}
+.status-steps li{position:relative;padding:0 0 10px 20px}
+.status-steps li:before{content:"";position:absolute;left:0;top:5px;width:8px;height:8px;border-radius:50%;background:#dddfd9}
+.status-steps li:after{content:"";position:absolute;left:3.5px;top:14px;bottom:-4px;width:1px;background:#e1e1d8}
+.status-steps li.reached:before{background:#df9e35}.status-steps li:last-child{padding-bottom:0}.status-steps li:last-child:after{display:none}
+.contact-card{width:100%;border:0;border-radius:20px;background:#16775f;color:#fff;display:flex;align-items:center;text-align:left;gap:12px;min-height:70px;padding:13px 15px;margin:15px 0;box-shadow:0 4px 10px #156b5610}
+.call-icon{width:41px;height:41px;border-radius:50%;background:#ffffff14;display:grid;place-items:center}
+.contact-card .ui-icon{filter:invert(1);width:23px;height:23px}.contact-card>span:nth-child(2){flex:1}.contact-card>.ui-icon{width:15px;height:15px}
+.contact-card strong{font-size:17px;font-weight:500;display:block}.contact-card small{font-size:11px;color:#c4e1d5;display:block;margin-top:4px}
+.family-actions{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0;border:1px solid #e4e9e5;border-radius:20px;margin:0;overflow:visible;padding:7px 0}
+.family-actions button{background:none;border:0;border-radius:15px;box-shadow:none;min-height:56px;font-size:11px;font-weight:400;color:#697b74;gap:8px;padding:5px 2px}
+.family-actions button:disabled{background:none;border:0;color:#a1aaa5;opacity:.6}
+.family-actions .ui-icon{width:22px;height:22px;opacity:.65}
+.timeline-head{margin:19px 0 10px}.timeline-head h4{font-size:16px}.timeline-head button{font-size:12px;color:#7c8983;min-height:28px}
+.medication-summary{display:flex;align-items:center;gap:9px;padding:14px;border:1px solid #e4e9e5;border-radius:20px}
+.summary-icon{width:21px;height:21px;border-radius:50%;background:#168061;display:grid;place-items:center;flex-shrink:0}
+.summary-icon .ui-icon{width:15px;height:15px;filter:invert(1)}.medication-summary>div{flex:1}
+.medication-summary strong{font-size:13px;white-space:nowrap}.medication-summary time{font-weight:400;color:#74817a;margin-right:4px}
+.medication-summary small{display:block;font-size:9px;color:#8c9690;margin-top:3px}.medication-summary .status-badge{font-size:9px;padding:3px 6px}
+.timeline{margin-top:14px;background:transparent;border:0;padding:8px}
+.timeline li{font-size:12px}.timeline time{font-size:11px}.family-foot,.period-note{font-size:10px;line-height:1.7;color:#839189}
+.success-panel{border-radius:18px;padding:12px;font-size:13px;line-height:1.6;margin:0 0 12px}.success-panel strong{font-size:18px}
+@media(min-width:1001px) and (max-width:1399px){main{grid-template-columns:215px minmax(0,1fr);gap:0 18px;padding-left:22px;padding-right:22px}.workspace{gap:10px;padding:20px 10px}.phone{width:310px}.connection{width:40px}.role-heading .role-chip{display:none}.screen{border-radius:42px}.older-content .greeting{font-size:27px}.greeting>span{font-size:24px}.weather{font-size:8px}.med-card{width:calc(100% - 10px)}.med-time{font-size:45px}.med-bottom{margin-top:8px}.phone-scroll{padding-left:14px;padding-right:14px}.family-person strong{font-size:15px}.reminder-name{font-size:11px}.state-card{padding:12px}.state-top{gap:5px}.state-card h3{font-size:17px}.status-steps{font-size:11px}.contact-card{padding:10px;gap:8px}.contact-card strong{font-size:15px}}
+@media(max-width:1000px){.workspace{gap:18px}.phone{width:340px}.role-heading .role-chip{display:none}}
+@media(max-width:780px){.workspace{padding:22px 8px;gap:20px}.phone{width:min(350px,calc(100vw - 64px))}.connection{margin:0;width:180px}.connection strong{font-size:12px}.role-heading .role-chip{display:block}.weather{font-size:9px}.screen{border-radius:45px}}
+
+/* Reference proportions: 540px source bezel → 350px live bezel.
+   Keep this typography scoped to phones; the editorial shell is unchanged. */
+.screen{font-family:-apple-system,BlinkMacSystemFont,"Helvetica Neue",Arial,"PingFang SC","Microsoft YaHei",sans-serif}
+.screen button{font-family:inherit}
+.older-content .greeting{font-size:29px;font-weight:600;letter-spacing:-.45px;line-height:1.24}
+.greeting>span{font-size:27px;font-weight:400;letter-spacing:.2px}
+.older-content .date{font-size:13px;letter-spacing:.1px}
+.weather{font-size:10px;line-height:1.45;top:49px}
+.med-card{background:#fffffff0;padding-top:12px;padding-bottom:19px}
+.card-overline{font-size:17px;line-height:1.5}
+.med-time{font-family:-apple-system,BlinkMacSystemFont,"Helvetica Neue",Arial,sans-serif;font-size:54px;font-weight:600;letter-spacing:-2.5px;line-height:1.05;margin:7px 0 9px}
+.med-detail{font-size:18px;line-height:1.35}
+.med-detail small,.med-bottom{font-size:14px}
+.med-bottom{margin-top:14px}
+.confirm-button{font-size:21px;font-weight:600;background:linear-gradient(115deg,#308e76,#25866c);box-shadow:0 9px 17px #1b806c2b}
+.help-button{font-size:16px;font-weight:600;background:#ffffffbd}
+.elder-hint{font-size:14px;line-height:1.55;letter-spacing:.1px;margin-top:23px}
+.family-person{margin-bottom:7px;min-height:59px}
+.family-person strong{font-size:17px;font-weight:600;line-height:1.4}
+.person-avatar{font-weight:500}
+.family-person small{font-size:12px}
+.family-person .person-status small{font-size:8px}
+.period-tabs{margin-bottom:15px}
+.period-tabs button{font-size:13px}
+.state-card{padding:15px;min-height:202px}
+.state-top{gap:8px}
+.reminder-name{font-size:14px;letter-spacing:-.2px}
+.status-badge{font-size:11px;padding:4px 7px}
+.state-card h3{font-size:18px;font-weight:600;letter-spacing:0;margin:9px 0 5px}
+.state-card p{font-size:13px;line-height:1.6;letter-spacing:-.3px}
+.status-steps{font-size:13px;line-height:1.6;margin-top:16px;letter-spacing:-.2px}
+.status-steps li{padding-left:22px;padding-bottom:9px}
+.contact-card{margin:15px 0 14px;border-radius:20px;background:linear-gradient(110deg,#167960,#16735d);gap:12px}
+.contact-card strong{font-size:18px;font-weight:400;letter-spacing:0}
+.contact-card strong b{font-weight:600}
+.contact-card small{font-size:12px;margin-top:4px}
+.family-actions button{font-size:12px;gap:9px}
+.timeline-head{margin-top:20px;margin-bottom:8px}
+.timeline-head h4{font-size:16px;font-weight:600}
+.medication-summary{padding:12px}
+.medication-summary strong{font-size:14px;font-weight:600}
+.medication-summary small{font-size:10px}
+@media(min-width:1001px) and (max-width:1399px){
+ .older-content .greeting{font-size:27px}.greeting>span{font-size:24px}
+ .weather{font-size:8px}.med-time{font-size:46px}.med-bottom{font-size:13px;margin-top:10px}
+ .state-card{padding:12px}.state-top{gap:5px}.reminder-name{font-size:12px}
+ .status-badge{font-size:10px;padding:4px 6px}.family-person strong{font-size:15px}
+ .state-card p,.status-steps{font-size:11px}.contact-card strong{font-size:16px}
+ .contact-card small{font-size:10px}.medication-summary strong{font-size:12px}
+}

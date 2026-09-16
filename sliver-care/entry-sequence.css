@@ -1,0 +1,54 @@
+/* A short editorial opening, not a simulated network-loading meter. */
+dialog.care-entry {
+  position: fixed; inset: 0; width: 100%; max-width: none; height: 100%; height: 100dvh;
+  max-height: none; margin: 0; padding: clamp(20px,5vw,80px); border: 0; border-radius: 0;
+  background: #e8e5dc; color: #111315; overflow: auto; box-shadow: none;
+  font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+}
+dialog.care-entry:not([open]) { display: none; }
+dialog.care-entry[open] { display: grid; place-items: center; }
+dialog.care-entry::backdrop { background: #e8e5dc; backdrop-filter: none; }
+body.care-entry-open { overflow: hidden; }
+.care-entry__frame { width: min(1120px,100%); margin: auto; }
+.care-entry__top, .care-entry__status, .care-entry__foot {
+  display: flex; align-items: center; justify-content: space-between; gap: 16px;
+  font: 12px/1.5 Consolas, monospace; letter-spacing: .7px; color: #555b57;
+}
+.care-entry__top { padding-bottom: 18px; border-bottom: 1px solid #b9bcb4; }
+.care-entry__body { display: grid; grid-template-columns: 34px minmax(0,1fr) 150px; gap: clamp(18px,3vw,48px); align-items: center; padding: clamp(36px,8vh,90px) 0; }
+.care-entry__rail { writing-mode: vertical-rl; transform: rotate(180deg); border-left: 1px solid #b9bcb4; padding-left: 12px; font: 11px/1.5 Consolas, monospace; letter-spacing: 1.2px; color: #666b66; }
+.care-entry__eyebrow { display: flex; align-items: center; gap: 12px; margin: 0 0 22px; font: 600 13px/1.5 Consolas, monospace; letter-spacing: 2px; }
+.care-entry__eyebrow::before { content: ""; width: 42px; height: 8px; background: #a63b36; }
+.care-entry h2 { margin: 0; font: 900 clamp(38px,7.3vw,100px)/.95 "Arial Black", "Segoe UI", sans-serif; letter-spacing: -.065em; }
+.care-entry h2 span { display: block; animation: care-type-lock 420ms cubic-bezier(.2,.8,.2,1) both; }
+.care-entry h2 span:last-child { color: #a63b36; animation-delay: 150ms; }
+#care-entry-note { margin: 24px 0 0; font-size: 16px; line-height: 1.6; color: #555b57; }
+.care-entry__index { border-left: 1px solid #b9bcb4; padding-left: 24px; align-self: end; }
+.care-entry__index > span { display: block; font: 300 clamp(70px,10vw,136px)/.9 "Segoe UI", sans-serif; letter-spacing: -.08em; color: #a3a79f; }
+.care-entry__index small { display: block; margin-top: 16px; font: 11px/1.6 Consolas, monospace; color: #626861; }
+.care-entry__status { margin-bottom: 12px; }
+#care-entry-counter { color: #111315; font-variant-numeric: tabular-nums; }
+.care-entry__track { height: 5px; background: #cdd0c7; overflow: hidden; }
+.care-entry__track i { display: block; width: 100%; height: 100%; background: #a63b36; transform: scaleX(0); transform-origin: left; transition: transform 110ms linear; }
+.care-entry__foot { margin-top: 18px; flex-wrap: wrap; }
+.care-entry #care-entry-skip { color: #111315; border: 1px solid #8f968c; border-radius: 0; background: transparent; padding: 10px 14px; min-height: 42px; font: 13px/1.5 "Segoe UI", sans-serif; }
+.care-entry #care-entry-skip:hover { background: #dadcd3; }
+.care-entry #care-entry-skip:focus-visible { outline: 2px solid #a63b36; outline-offset: 4px; }
+dialog.care-entry.is-leaving { animation: care-entry-out 260ms cubic-bezier(.6,0,.8,.3) both; pointer-events: none; }
+@keyframes care-type-lock { from { opacity: 0; transform: translateY(18px); clip-path: inset(0 0 100% 0); } to { opacity: 1; transform: none; clip-path: inset(0); } }
+@keyframes care-entry-out { to { opacity: 0; transform: translateY(-18px); } }
+@media(max-width:650px) {
+  .care-entry__top { font-size: 10px; letter-spacing: 0; }
+  .care-entry__body { grid-template-columns: minmax(0,1fr); gap: 24px; padding: 44px 0; }
+  .care-entry__rail { display: none; }
+  .care-entry__index { display: flex; align-items: center; gap: 18px; padding-left: 12px; }
+  .care-entry__index > span { font-size: 48px; }
+  .care-entry__index small { margin: 0; }
+  .care-entry h2 { font-size: clamp(30px,9vw,58px); }
+  .care-entry__eyebrow { margin-bottom: 16px; }
+  .care-entry__foot { font-size: 10px; }
+}
+@media(prefers-reduced-motion:reduce) {
+  .care-entry h2 span, dialog.care-entry.is-leaving { animation: none; }
+  .care-entry__track i { transition: none; }
+}

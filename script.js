@@ -147,6 +147,7 @@
   };
 
   const CATALOG_NODES = [
+    { code: "WEB—001 / INTERACTIVE", title: "SLIVER CARE", meta: "CARE TOGETHER / 03 DEMO SCENARIOS" },
     { code: "SEC—02 / LOCKED", title: "PRESENTATION DECKS", meta: "02 FILES / ACTIVE NODE" },
     { code: "SEC—03 / LOCKED", title: "REDNOTE COVER ARRAY", meta: "05 FILES / ACTIVE NODE" },
     { code: "SEC—04 / LOCKED", title: "PROCESS MODULE", meta: "05 NODES / ACTIVE NODE" },
@@ -502,6 +503,12 @@
     });
   }
 
+  function renderCatalogRadar() {
+    const rail = $(".catalog-radar__rail", dom.catalogRadar);
+    rail.style.setProperty("--catalog-node-count", String(CATALOG_NODES.length));
+    rail.replaceChildren(...CATALOG_NODES.map(() => document.createElement("i")));
+  }
+
   function setCatalogFolder(index, scan = true) {
     const next = clamp(Number(index) || 0, 0, CATALOG_NODES.length - 1);
     const node = CATALOG_NODES[next];
@@ -518,6 +525,9 @@
     dom.catalogReadoutTitle.textContent = node.title;
     dom.catalogReadoutMeta.textContent = node.meta;
     dom.catalogDisplay.dataset.node = String(next);
+    $$(".catalog-radar__rail i", dom.catalogRadar).forEach((card, cardIndex) => {
+      card.classList.toggle("is-active", cardIndex === next);
+    });
     dom.catalogPreviewNumber.textContent = pad(next + 1);
     dom.catalogRouterCounter.textContent = `NODE ${pad(next + 1)} / ${pad(CATALOG_NODES.length)}`;
     dom.catalogStack.style.setProperty("--catalog-bus-progress", `${(next / Math.max(1, CATALOG_NODES.length - 1)) * 100}%`);
@@ -1858,7 +1868,8 @@
     dom.menuToggle.addEventListener("click", () => setMenuOpen(dom.menuToggle.getAttribute("aria-expanded") !== "true"));
     $$('a', dom.mobileMenu).forEach((link) => {
       link.addEventListener("click", () => {
-        setMenuOpen(false, { focusTarget: $(link.getAttribute("href")) });
+        const href = link.getAttribute("href");
+        setMenuOpen(false, { focusTarget: href?.startsWith("#") ? $(href) : null });
       });
     });
     document.addEventListener("keydown", (event) => {
@@ -1924,6 +1935,7 @@
     syncProjectRail("deck", 1);
     setProcessStep(0, { animate: false });
     updateHeroScene(reducedMotion.matches || compactLayout.matches ? 0.68 : 0);
+    renderCatalogRadar();
     setCatalogFolder(0, false);
     setupArchiveDrawer();
     setupCatalogInteraction();

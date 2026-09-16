@@ -1,0 +1,17 @@
+/* Independent prototype entries; existing chapters and their animation remain intact. */
+.catalog-stack { grid-template-rows: repeat(5, minmax(0, 1fr)); }
+.care-folder { border-color: #9a9a9a; background: #fafafa; }
+.care-folder .catalog-folder__body > span { color: #5a5a5a; }
+.care-folder .catalog-folder__body p { font-family: "JetBrains Mono", "Noto Sans SC", monospace; }
+.care-folder__launch { font-size: 14px; font-weight: 800; text-align: center; color: #0e0e0e; background: #e8ff00; padding: 8px 4px; }
+.care-folder .catalog-folder__body h3 { display: inline; font-size: clamp(16px, 1.35vw, 22px); font-weight: 900; background: linear-gradient(transparent 52%, #e8ff00 52%); }
+.archive-drawer__grid { grid-template-columns: repeat(4, minmax(100px, 1fr)); }
+.care-archive-link { color: #fafafa; text-decoration: none; }
+.care-archive-link > .care-archive-cover { position: relative; overflow: hidden; background: #ededed; border-bottom: 5px solid #e8ff00; }
+.care-archive-cover em { position: absolute; inset: 0; display: flex; align-items: center; padding: 16px; color: #0e0e0e; font: 900 clamp(16px, 2vw, 26px)/.95 Archivo, sans-serif; font-style: normal; }
+.care-mobile-link { border-left: 3px solid #e8ff00; }
+.care-archive-link:focus-visible { outline: 3px solid var(--yellow); outline-offset: 3px; }
+@media (max-width: 760px) {
+  .care-folder__launch { font-size: 12px; }
+  .archive-drawer__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}

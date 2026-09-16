@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Care Together · Medication & Family Support</title>
+<meta name="description" content="An interactive two-phone demo of medication reminders, check-ins and family follow-up.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='9' fill='%23156b56'/%3E%3Cpath d='M8 16h16M16 8v16' stroke='white' stroke-width='4' stroke-linecap='round'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="director.css">
+<link rel="stylesheet" href="constructivism.css">
+<link rel="stylesheet" href="phone-polish.css">
+<link rel="stylesheet" href="reference-ui.css">
+<link rel="stylesheet" href="editorial-shell.css">
+<link rel="stylesheet" href="entry-sequence.css">
+</head>
+<body>
+<dialog class="care-entry" id="care-entry" aria-labelledby="care-entry-title" aria-describedby="care-entry-note">
+  <div class="care-entry__frame">
+    <div class="care-entry__top"><span>// ARELIUS ARCHIVE</span><span>WEB—001 / V2.4</span></div>
+    <div class="care-entry__body">
+      <div class="care-entry__rail" aria-hidden="true">FAMILY CARE / INTERACTIVE STUDY</div>
+      <div class="care-entry__copy">
+        <p class="care-entry__eyebrow">SLIVER CARE</p>
+        <h2 id="care-entry-title"><span>CARE,</span><span>CONNECTED.</span></h2>
+        <p id="care-entry-note">One check-in. A little peace of mind.</p>
+      </div>
+      <div class="care-entry__index" aria-hidden="true"><span>02</span><small>SCREENS<br>ONE CARE FLOW</small></div>
+    </div>
+    <div class="care-entry__bottom">
+      <div class="care-entry__status"><span id="care-entry-phase" aria-hidden="true">INTRO / 01</span><span aria-hidden="true" id="care-entry-counter">000</span></div>
+      <div class="care-entry__track" aria-hidden="true"><i id="care-entry-fill"></i></div>
+      <div class="care-entry__foot"><span>INTERACTIVE PROTOTYPE · SIMULATED DATA</span><button type="button" id="care-entry-skip">Skip intro / 跳过 ↗</button></div>
+    </div>
+  </div>
+</dialog>
+<script src="entry-sequence.js"></script>
+<header class="masthead"><a class="brand" href="./"><span class="brand-icon" aria-hidden="true">✚</span><span>Care Together<small>SLIVER CARE / FAMILY SUPPORT</small></span></a><nav class="header-right" aria-label="Project navigation"><a class="archive-return" href="../#catalog"><span class="archive-return__name">// ARELIUS ARCHIVE</span><span class="archive-return__path"><span lang="zh-CN">← 返回设计档案</span><span>WEB—001</span></span></a><button class="text-button" data-action="about">About this demo ↗</button><span class="prototype">Interactive prototype</span></nav></header>
+<main>
+<section class="intro"><div><p class="eyebrow archive-project"><span class="archive-project__title">SLIVER CARE</span><span class="archive-project__meta">WEB—001 / INTERACTIVE STUDY</span></p><h1>One check-in.<br> <span>A little peace of mind.</span></h1></div><div class="mode-badge"><span class="edition-number">V2.4</span><strong>Medication reminders · Family follow-up</strong><small>Simulated times, notifications &amp; calls.<br>No real services are connected.</small></div></section>
+<nav class="view-tabs" aria-label="Role views"><button class="active" data-view="both">Both screens</button><button data-view="older">Older adult</button><button data-view="family">Family</button><button data-action="demo-focus">Demo controls</button></nav>
+<section class="director" aria-label="Audience guide">
+<div class="director-caption" role="status" aria-live="polite"><span id="step-number">Guide</span><div><strong id="step-title">Follow every step. See every response.</strong><p id="step-description">Choose a scenario. Highlights show where to look; rings show where a tap happens.</p></div><span id="step-actor">Ready to start</span></div>
+<div class="director-bottom"><ol id="step-track" aria-label="Demo steps"></ol><div class="playback"><label>Speed <select id="playback-speed" aria-label="Playback speed"><option value="1.5">Slow</option><option value="1" selected>Normal</option><option value="0.6">Fast</option></select></label><button id="play-pause" disabled>Pause</button><button id="step-next" disabled>Next →</button><button id="step-replay" disabled>↻ Replay</button></div></div>
+</section>
+<section class="workspace" data-view="both">
+<div class="phone-column older-column"><div class="role-heading"><span class="role-number">01</span><div><h2>Older adult</h2><p>One small step. Peace of mind.</p></div><span class="role-chip">Margaret</span></div>
+<div class="phone" id="older-phone"><img class="phone-frame" src="assets/iphone.png" alt="" aria-hidden="true"><div class="screen"><div class="statusbar"><span class="clock">08:00</span><span class="island"></span><span>▮▮ ▰</span></div><div class="phone-scroll older-content" id="older-content"></div><div class="homebar"></div></div></div></div>
+<div class="connection"><div class="connection-line"></div><span id="sync-icon">↔</span><strong id="sync-label" aria-live="polite">Connected</strong><small>Live updates within this demo</small><div class="flow-mini"><span>Reminder</span><i>↓</i><span>Check-in</span><i>↓</i><span>Family follow-up</span></div></div>
+<div class="phone-column family-column"><div class="role-heading"><span class="role-number">02</span><div><h2>Family</h2><p>Stay informed. Stay close.</p></div><span class="role-chip">Alex</span></div>
+<div class="phone" id="family-phone"><img class="phone-frame" src="assets/iphone.png" alt="" aria-hidden="true"><div class="screen"><div class="statusbar"><span class="clock">08:00</span><span class="island"></span><span>▮▮ ▰</span></div><div class="notification" id="notification" role="status"></div><div class="phone-scroll family-content" id="family-content"></div><div class="homebar"></div></div></div>
+</section>
+<section class="demo-panel" id="demo-panel" tabindex="-1"><div class="demo-title"><div><p class="eyebrow">DEMO CONTROLLER</p><h2>See care in action</h2></div><span id="demo-status" aria-live="polite">Choose a scenario to begin</span></div><div class="scenario-grid"><button data-action="normal"><span class="scenario-icon green">✓</span><span><strong>Daily check-in</strong><small>Remind → Confirm → Sync</small></span><b>↗</b></button><button data-action="no-response"><span class="scenario-icon amber">◷</span><span><strong>No response</strong><small>Wait → Remind → Follow up</small></span><b>↗</b></button><button data-action="emergency"><span class="scenario-icon red">!</span><span><strong>Request help</strong><small>Request help → Family follow-up</small></span><b>↗</b></button></div><div class="demo-footer"><span>Demo time <strong id="demo-clock">08:00</strong> <small>· No real notifications or calls</small></span><div><button data-action="advance">Time +30 min</button><button data-action="clear">Clear history</button><button data-action="reset" class="reset">↻ Reset demo</button></div></div></section>
+<footer><span class="archive-signature"><span class="archive-signature__heading"><span class="archive-swatch" aria-hidden="true"><i></i><i></i><i></i><i></i></span><span>// ARELIUS DESIGN ARCHIVE</span></span><span class="archive-signature__record">WEB—001 / SLIVER CARE</span><span>Medication &amp; Family Safety Check-in</span></span><span>For coursework only. Do not enter real health or personal information.<br>A check-in does not verify medication was taken. Not a substitute for medical or emergency care.</span></footer>
+</main>
+<dialog id="modal"><form method="dialog"><button class="modal-close" aria-label="Close">×</button></form><div id="modal-body"></div></dialog>
+<script src="director.js"></script>
+<script src="app.js"></script>
+<script src="reference-ui.js"></script>
+<script src="presentation-shell.js"></script>
+</body></html>

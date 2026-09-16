@@ -1133,19 +1133,17 @@ section { position: relative; scroll-margin-top: 0; background: transparent; }
 .catalog-radar::after { content: ""; position: absolute; left: -20%; right: -20%; top: -5px; height: 2px; background: linear-gradient(90deg,transparent,var(--yellow),transparent); opacity: 0; transform: translateY(0); }
 .catalog-radar.is-scanning::after { animation: catalogScan .68s var(--ease-io) both; }
 @keyframes catalogScan { 0% { opacity: 0; transform: translateY(0); } 15% { opacity: .85; } 100% { opacity: 0; transform: translateY(220px); } }
-.catalog-radar__rail { position: absolute; left: 14%; right: 12%; top: 23%; bottom: 24%; display: grid; grid-template-columns: repeat(4,1fr); gap: 7px; transform: perspective(500px) rotateX(56deg) rotateZ(-8deg); transform-origin: center bottom; }
+.catalog-radar__rail { position: absolute; left: 10%; right: 8%; top: 23%; bottom: 24%; display: grid; grid-template-columns: repeat(var(--catalog-node-count,5),minmax(0,1fr)); gap: 6px; transform: perspective(500px) rotateX(56deg) rotateZ(-8deg); transform-origin: center bottom; }
 .catalog-radar__rail i { position: relative; border: 1px solid rgba(16,18,22,.15); background: rgba(231,231,227,.54); transition: background .4s, border-color .4s, transform .5s var(--ease-out); }
 .catalog-radar__rail i::after { content: ""; position: absolute; left: 8px; right: 8px; bottom: 8px; height: 3px; background: rgba(16,18,22,.18); }
-.catalog-display[data-node="0"] .catalog-radar__rail i:nth-child(1),
-.catalog-display[data-node="1"] .catalog-radar__rail i:nth-child(2),
-.catalog-display[data-node="2"] .catalog-radar__rail i:nth-child(3),
-.catalog-display[data-node="3"] .catalog-radar__rail i:nth-child(4) { background: rgba(232,255,0,.72); border-color: rgba(16,18,22,.38); transform: translateY(-10px); }
+.catalog-radar__rail i.is-active { background: rgba(232,255,0,.72); border-color: rgba(16,18,22,.38); transform: translateY(-10px); }
 .catalog-radar__map { position: absolute; left: 50%; top: 50%; width: 76px; height: 76px; border: 1px solid rgba(16,18,22,.25); transform: translate(-50%,-50%) rotate(45deg); }
 .catalog-radar__map::before, .catalog-radar__map::after { content: ""; position: absolute; background: rgba(16,18,22,.18); }
 .catalog-radar__map::before { left: 50%; top: -90px; bottom: -90px; width: 1px; }
 .catalog-radar__map::after { top: 50%; left: -130px; right: -130px; height: 1px; }
 .catalog-radar__map span { position: absolute; inset: 8px; display: grid; place-items: center; background: rgba(16,18,22,.86); color: white; font: 600 6px/1.4 "JetBrains Mono",monospace; letter-spacing: .08em; text-align: center; }
-.catalog-radar__map i, .catalog-radar__map b, .catalog-radar__map em { position: absolute; width: 7px; height: 7px; background: var(--yellow); box-shadow: 0 0 0 4px rgba(232,255,0,.14); transition: transform .48s var(--ease-out); }
+.catalog-radar__map i, .catalog-radar__map b, .catalog-radar__map em, .catalog-radar__extra-node { position: absolute; width: 7px; height: 7px; background: var(--yellow); box-shadow: 0 0 0 4px rgba(232,255,0,.14); transition: transform .48s var(--ease-out); }
+.catalog-radar__extra-node { left: 50%; top: -66px; }
 .catalog-radar__map i { left: -82px; top: 50%; }
 .catalog-radar__map b { right: -82px; top: 50%; }
 .catalog-radar__map em { left: 50%; bottom: -66px; }
@@ -1153,6 +1151,7 @@ section { position: relative; scroll-margin-top: 0; background: transparent; }
 .catalog-display[data-node="1"] .catalog-radar__map b { transform: scale(1.8); }
 .catalog-display[data-node="2"] .catalog-radar__map em { transform: scale(1.8); }
 .catalog-display[data-node="3"] .catalog-radar__map span { background: var(--yellow); color: var(--ink); }
+.catalog-display[data-node="4"] .catalog-radar__extra-node { transform: scale(1.8); }
 .catalog-radar > strong { position: absolute; left: 12px; bottom: 10px; color: rgba(16,18,22,.14); font-size: clamp(54px,5vw,86px); line-height: .8; letter-spacing: -.08em; }
 .catalog-radar > small { position: absolute; right: 12px; bottom: 12px; color: var(--grey-600); font-size: 6px; letter-spacing: .14em; }
 .catalog-display__telemetry { display: flex; justify-content: space-between; gap: 8px; padding: 0 16px 8px; color: var(--grey-400); font-size: 6px; letter-spacing: .1em; opacity: var(--catalog-preview-progress,1); }

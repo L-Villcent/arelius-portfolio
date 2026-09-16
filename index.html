@@ -16,6 +16,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&family=Noto+Sans+SC:wght@400;500;700;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="care-entry.css">
   <script>document.documentElement.classList.remove('no-js');</script>
 </head>
 <body>
@@ -114,9 +115,10 @@
   <aside class="archive-drawer" id="archive-drawer" aria-hidden="true">
     <div class="archive-drawer__header">
       <div><span class="mono">ARCHIVE NODE ARRAY</span><strong>选择作品标本</strong></div>
-      <span class="mono">07 FILES / READY</span>
+      <span class="mono">08 FILES / READY</span>
     </div>
     <div class="archive-drawer__grid">
+      <a class="archive-drawer__item care-archive-link" href="sliver-care/"><span class="care-archive-cover"><em>// SLIVER<br>CARE</em></span><b>08 / SLIVER CARE</b><small class="mono">INTERACTIVE DEMO / OPEN ↗</small></a>
       <button class="archive-drawer__item" data-project-type="deck" data-project-index="0" data-project-code="PPT—001" data-project-name="ODYSSEY" data-project-image="images/previews/ppt-01/01.webp"><span><img src="images/previews/ppt-01/01.webp" alt="" width="320" height="180" loading="lazy" decoding="async"></span><b>01 / ODYSSEY</b><small class="mono">PRESENTATION / 19</small></button>
       <button class="archive-drawer__item is-active" data-project-type="deck" data-project-index="1" data-project-code="PPT—002" data-project-name="UMA / OO" data-project-image="images/previews/ppt-02/01.webp"><span><img src="images/previews/ppt-02/01.webp" alt="" width="320" height="180" loading="lazy" decoding="async"></span><b>02 / UMA / OO</b><small class="mono">PRESENTATION / 14</small></button>
       <button class="archive-drawer__item" data-project-type="note" data-project-index="0" data-project-code="RED—001" data-project-name="LIMBUS" data-project-image="images/previews/xiaohongshu/cover-01.webp"><span><img src="images/previews/xiaohongshu/cover-01.webp" alt="" width="180" height="240" loading="lazy" decoding="async"></span><b>03 / LIMBUS</b><small class="mono">REDNOTE COVER</small></button>
@@ -156,6 +158,7 @@
   </div>
 
   <nav class="mobile-menu" id="mobile-menu" aria-label="移动端导航" hidden>
+    <a href="sliver-care/" class="care-mobile-link">在线演示 / SLIVER CARE ↗</a>
     <a href="#overview" aria-current="page">00 / OVERVIEW</a>
     <a href="#catalog">01 / INDEX</a>
     <a href="#selected">02 / DECKS</a>
@@ -324,44 +327,51 @@
         <div class="catalog-layout">
           <div class="catalog-router">
             <div class="catalog-router__top mono">
-              <span>ROUTING MATRIX / 04 CHANNELS</span>
+              <span>ROUTING MATRIX / 05 CHANNELS</span>
               <b><i></i> SYSTEM NOMINAL</b>
             </div>
             <div class="catalog-stack" id="catalog-stack">
               <span class="catalog-bus" aria-hidden="true">
                 <i id="catalog-bus-fill"></i><b id="catalog-bus-pulse"></b>
               </span>
-              <a class="catalog-folder is-catalog-active" href="#selected" data-catalog-index="0" data-magnetic aria-current="true">
+              <a class="catalog-folder care-folder is-catalog-active" href="sliver-care/" data-catalog-index="0" data-magnetic aria-current="location">
                 <span class="catalog-folder__accent accent-yellow"></span>
                 <strong>01</strong>
+                <div class="catalog-folder__body"><span class="mono">INTERACTIVE PROTOTYPE / WEB—001</span><h3>// SLIVER CARE</h3><p>用药提醒与家庭关怀 · 双屏互动演示</p></div>
+                <span class="care-folder__launch">在线体验</span>
+                <span class="catalog-folder__arrow" aria-hidden="true">↗</span>
+              </a>
+              <a class="catalog-folder" href="#selected" data-catalog-index="1" data-magnetic>
+                <span class="catalog-folder__accent accent-yellow"></span>
+                <strong>02</strong>
                 <div class="catalog-folder__body"><span class="mono">CHANNEL / A–01</span><h3>精选演示作品</h3><p>PRESENTATION DECKS / 02 FILES</p></div>
                 <span class="catalog-folder__code"><i class="barcode"></i><b>SEC—02</b></span>
                 <span class="catalog-folder__arrow" aria-hidden="true">↗</span>
               </a>
-              <a class="catalog-folder" href="#rednote" data-catalog-index="1" data-magnetic>
+              <a class="catalog-folder" href="#rednote" data-catalog-index="2" data-magnetic>
                 <span class="catalog-folder__accent accent-cyan"></span>
-                <strong>02</strong>
+                <strong>03</strong>
                 <div class="catalog-folder__body"><span class="mono">CHANNEL / B–02</span><h3>小红书封面</h3><p>REDNOTE COVERS / 05 FILES</p></div>
                 <span class="catalog-folder__code"><i class="barcode"></i><b>SEC—03</b></span>
                 <span class="catalog-folder__arrow" aria-hidden="true">↗</span>
               </a>
-              <a class="catalog-folder" href="#process" data-catalog-index="2" data-magnetic>
+              <a class="catalog-folder" href="#process" data-catalog-index="3" data-magnetic>
                 <span class="catalog-folder__accent accent-magenta"></span>
-                <strong>03</strong>
+                <strong>04</strong>
                 <div class="catalog-folder__body"><span class="mono">CHANNEL / C–03</span><h3>设计流程</h3><p>PROCESS MODULE / 05 NODES</p></div>
                 <span class="catalog-folder__code"><i class="barcode"></i><b>SEC—04</b></span>
                 <span class="catalog-folder__arrow" aria-hidden="true">↗</span>
               </a>
-              <a class="catalog-folder" href="#about" data-catalog-index="3" data-magnetic>
+              <a class="catalog-folder" href="#about" data-catalog-index="4" data-magnetic>
                 <span class="catalog-folder__accent accent-mint"></span>
-                <strong>04</strong>
+                <strong>05</strong>
                 <div class="catalog-folder__body"><span class="mono">CHANNEL / D–04</span><h3>身份与联系</h3><p>IDENTITY / CONTACT CHANNEL</p></div>
                 <span class="catalog-folder__code"><i class="barcode"></i><b>SEC—05</b></span>
                 <span class="catalog-folder__arrow" aria-hidden="true">↗</span>
               </a>
             </div>
             <div class="catalog-router__foot mono">
-              <span>INPUT / POINTER + FOCUS</span><b id="catalog-router-counter">NODE 01 / 04</b>
+              <span>INPUT / POINTER + FOCUS</span><b id="catalog-router-counter">NODE 01 / 05</b>
             </div>
           </div>
 
@@ -371,9 +381,9 @@
             </header>
             <span class="ghost-word" aria-hidden="true">ROUTE</span>
             <div class="catalog-radar" id="catalog-radar" aria-hidden="true">
-              <div class="catalog-radar__rail"><i></i><i></i><i></i><i></i></div>
+              <div class="catalog-radar__rail" style="--catalog-node-count:5"><i class="is-active"></i><i></i><i></i><i></i><i></i></div>
               <div class="catalog-radar__map">
-                <span>ARCHIVE<br>CORE</span><i></i><b></b><em></em>
+                <span>ARCHIVE<br>CORE</span><i></i><b></b><em></em><u class="catalog-radar__extra-node"></u>
               </div>
               <strong id="catalog-preview-number">01</strong>
               <small class="mono">TARGET NODE</small>
@@ -383,9 +393,9 @@
             </div>
             <div class="dot-matrix" aria-hidden="true"></div>
             <div class="catalog-readout" aria-live="polite" aria-atomic="true">
-              <span class="mono" id="catalog-readout-code">SEC—02 / LOCKED</span>
-              <strong id="catalog-readout-title">PRESENTATION DECKS</strong>
-              <p class="mono" id="catalog-readout-meta">02 FILES / ACTIVE NODE</p>
+              <span class="mono" id="catalog-readout-code">WEB—001 / INTERACTIVE</span>
+              <strong id="catalog-readout-title">SLIVER CARE</strong>
+              <p class="mono" id="catalog-readout-meta">CARE TOGETHER / 03 DEMO SCENARIOS</p>
             </div>
             <footer class="catalog-display__foot mono"><span>ROUTE VERIFIED</span><b>AV–CAT / 01</b></footer>
           </aside>
