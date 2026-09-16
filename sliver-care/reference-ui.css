@@ -1,4 +1,12 @@
 /* Reference-target phone UI. Supplied sunlit bamboo asset, original interactions. */
+/* Calibrated to the 1758 x 3664 bezel. Percentage geometry scales with the
+   phone rather than switching between unrelated fixed-radius breakpoints.
+   Keep the SVG definition in the document (not display:none) for WebKit. */
+.phone-clip-definitions{position:absolute;overflow:hidden;pointer-events:none}
+.phone > .screen{border-radius:18.5% / 8.5%}
+@supports (clip-path:url("#care-screen-clip")){
+ .phone > .screen{border-radius:0;clip-path:url("#care-screen-clip")}
+}
 .workspace{background:#eeebe3;padding:26px 20px 30px;border-radius:8px;gap:20px}
 .phone{width:350px;filter:drop-shadow(0 12px 16px #26302919)}
 .role-heading{padding-bottom:12px;margin-bottom:12px;border-color:#dbdcd5;gap:13px}
