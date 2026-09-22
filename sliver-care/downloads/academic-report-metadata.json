@@ -1,0 +1,18 @@
+{
+  "totalPages": 25,
+  "mainPages": 8,
+  "appendixPages": 17,
+  "membersOnPageOne": 8,
+  "bodySections": 8,
+  "claims": 33,
+  "sources": 24,
+  "mode": "Faithful Typesetting",
+  "layout": "lai-academic-paper / A4 / Latin Modern / 11pt",
+  "compiledWith": "XeLaTeX and Biber",
+  "overfullBoxes": 0,
+  "undefinedReferences": 0,
+  "missingGlyphs": 0,
+  "pdfSha256": "6cd6900a4032d38477f1c21d448c1dba708516e209677b204d2118feb69be3b2",
+  "sourceZipSha256": "5697a28162c29aea871efda84f28c268bef634d1e5e2704a9e49427e3c24097f",
+  "sourceFiles": 38
+}

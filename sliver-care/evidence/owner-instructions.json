@@ -1,0 +1,68 @@
+{
+  "source": "Project owner supplied in this conversation on 2026-09-20",
+  "team": "Group6",
+  "members": [
+    [
+      "XINYU LAI",
+      "2023362046"
+    ],
+    [
+      "ZHENGYUAN QIU",
+      "2023362027"
+    ],
+    [
+      "MINXUAN LI",
+      "2023362005"
+    ],
+    [
+      "JINGHAO YU",
+      "2023362059"
+    ],
+    [
+      "RUI ZHOU",
+      "2023362052"
+    ],
+    [
+      "YIYANG FENG",
+      "2023362038"
+    ],
+    [
+      "SHENGWEI HUANG",
+      "2023362024"
+    ],
+    [
+      "TIANYI LI",
+      "2023362026"
+    ]
+  ],
+  "decision": "Stop",
+  "decisionScope": "Stop after the course; no scheduled reopening.",
+  "realOutreach": "Updated 22 September: eight individual consultations and ten organisational invitations. See S23–S24; prior simulated records are excluded.",
+  "quiz": "Excluded from the current goal by the owner.",
+  "pricingRMB": {
+    "source": "Pricing confirmed by the owner in the earlier messages of this conversation",
+    "Free": {
+      "month": 0,
+      "year": 0
+    },
+    "Plus": {
+      "month": 39,
+      "year": 390
+    },
+    "Pro 5x": {
+      "month": 79,
+      "year": 790
+    },
+    "Pro 20x": {
+      "month": 99,
+      "year": 990
+    }
+  },
+  "simulationContext": {
+    "suppliedBy": "Project owner in this conversation on 20 September 2026",
+    "statement": "The owner confirms that the teacher permits the ten constructed outreach entries to serve as formal evidence within the course business simulation.",
+    "treatment": "Present the entries as the course outreach register, using ordinary commercial language. Retain the simulation premise in the method and provenance. The exercise timeline is not a record of external communication."
+  },
+  "decisionReason": "The main reason is the team’s time and future resource commitments: the team cannot commit to ongoing development, maintenance and user support after the course.",
+  "decisionReasonSource": "Project owner clarified the reason in the presentation-preparation conversation."
+}

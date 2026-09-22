@@ -1,0 +1,48 @@
+SLIVER CARE · LOCAL CARE REPORT
+Fictional classroom data · not a medical record
+Demo clock: 2026-09-15 08:15
+Activity period: last 7 demo days
+Open items include all saved dates, including earlier reminders.
+Scope: All saved demo profiles
+Plan: Pro 5x
+
+Reminders started: 2
+Self-reported check-ins: 0
+Family follow-ups recorded: 1
+Currently open (all saved dates): 1
+Help requests recorded: 1
+
+CARE ITEMS STARTED IN THIS PERIOD
+Margaret | Morning check-in | Follow-up recorded | Responsible: Alex
+Robert | Lunch check-in | Family follow-up needed | Responsible: Alex
+
+FOLLOW-UP NOTES AND EVENTS IN THIS PERIOD
+2026-09-15 08:00 | Margaret | Morning check-in | Reminder started: Morning check-in
+2026-09-15 08:00 | Margaret | Morning check-in | Help requested in this local demo. No message was sent.
+2026-09-15 08:00 | Margaret | Morning check-in | Fictional demo: Alex called Margaret, recorded her request and agreed to follow up after lunch.
+2026-09-15 08:00 | Robert | Reminder plan saved: Lunch check-in
+2026-09-15 08:00 | Robert | Lunch check-in | Reminder started: Lunch check-in
+2026-09-15 08:15 | Robert | Lunch check-in | A follow-up reminder is shown locally.
+2026-09-15 08:15 | Robert | Lunch check-in | No response recorded; family follow-up is needed.
+2026-09-15 08:15 | Robert | Lunch check-in | Fictional demo: Alex will contact Robert after the planned follow-up.
+
+PRO · RECIPIENT OVERVIEW
+Margaret: 1 started, 0 check-ins, 1 follow-up outcomes in this period; 0 currently open across all saved dates.
+Robert: 1 started, 0 check-ins, 0 follow-up outcomes in this period; 1 currently open across all saved dates.
+
+PRO · HANDOVERS IN THIS PERIOD
+Jamie → Alex: Fictional demo: Alex will contact Robert after the planned follow-up.
+
+PRO · DAILY ACTIVITY IN THIS ROLLING PERIOD
+Date | reminders started | check-in events | follow-up outcomes
+2026-09-08 | 0 | 0 | 0
+2026-09-09 | 0 | 0 | 0
+2026-09-10 | 0 | 0 | 0
+2026-09-11 | 0 | 0 | 0
+2026-09-12 | 0 | 0 | 0
+2026-09-13 | 0 | 0 | 0
+2026-09-14 | 0 | 0 | 0
+2026-09-15 | 2 | 0 | 1
+Boundary dates can be partial days. Events reflect activity dates, not a clinical adherence rate.
+
+A check-in is a self-report, not verified medication intake. A resolved item records a family action, not clinical safety. No real notification, call, payment or AI service is connected.

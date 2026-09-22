@@ -1,0 +1,233 @@
+[
+  {
+    "id": "C01",
+    "claim": "Group6 has decided to stop advancing the venture after the course. The main reason is the team’s time and future resource commitments: the team cannot commit to ongoing development, maintenance and user support after the course.",
+    "classification": "Owner decision",
+    "basis": "S02",
+    "locator": "decision and decisionScope"
+  },
+  {
+    "id": "C02",
+    "claim": "The package provides an operating local family-care workflow. Twelve recorded automated functional experiments passed using controlled scenario data, with no external customer participants.",
+    "classification": "Observed fact",
+    "basis": "S04; S05",
+    "locator": "experimentCount, passed, scope and E01–E12"
+  },
+  {
+    "id": "C03",
+    "claim": "The report combines feedback from eight individuals consulted on 20–22 September 2026, ten organisational emails sent on 20 September as confirmed by the team, supplied screenshots, and dated local product experiments. Representative evidence is identified for each displayed example.",
+    "classification": "Observed feedback and team confirmation",
+    "basis": "S17; S18; S19; S20; S21; S22; S23; S24",
+    "locator": "Feedback document, four chat images, email list and team confirmation"
+  },
+  {
+    "id": "C04",
+    "claim": "Our initial problem hypothesis is that family members can lose track of who should follow up after a reminder and what happened after contact. The proposed customer is the adult child coordinating care for an independently living parent who can use a simple response interface.",
+    "classification": "Problem hypothesis informed by feedback",
+    "basis": "S17; S18; S21",
+    "locator": "Problem hypothesis and qualitative comments about responsibility and intended households"
+  },
+  {
+    "id": "C05",
+    "claim": "Early feedback supports exploring family responsibility and follow-up as a problem. One chat prioritises named responsibility, and another identifies parents living alone, distant children and several relatives sharing care. These qualitative comments do not establish how widespread the need is.",
+    "classification": "Observed feedback and team confirmation",
+    "basis": "S18; S21; S23",
+    "locator": "Two supplied chat screenshots and consultation context"
+  },
+  {
+    "id": "C06",
+    "claim": "A user receives a local browser application, sample care profiles, reminder plans, responsibility records and downloadable reports. It runs through a local server; the original two-phone example and the working household have separate histories.",
+    "classification": "Observed fact",
+    "basis": "S05; S06",
+    "locator": "newState, saveSchedule, report; browser workspace observation"
+  },
+  {
+    "id": "C07",
+    "claim": "The working sequence is to choose a recipient and responsible family member, start a reminder, record a self-reported response or help request, record a family outcome or handover, and generate a report from those saved actions.",
+    "classification": "Observed fact",
+    "basis": "S04",
+    "locator": "E01, E02, E06"
+  },
+  {
+    "id": "C08",
+    "claim": "The confirmed proposed family prices are Free ¥0, Plus ¥39/month or ¥390/year, Pro 5x ¥79/month or ¥790/year, and Pro 20x ¥99/month or ¥990/year. Annual totals are paid upfront in the proposal; the current offline evaluation costs ¥0.",
+    "classification": "Observed fact",
+    "basis": "S02; S05; S04",
+    "locator": "Prior owner pricing carried in PLANS; E04 totals. Prices are proposals for a future service."
+  },
+  {
+    "id": "C09",
+    "claim": "The table capacities are offline product defaults. The Pro options have identical care features; 5x and 20x describe the monthly AI allowance relative to Plus. The assistant generates local templates rather than calling a live model.",
+    "classification": "Observed fact",
+    "basis": "S05",
+    "locator": "PLANS and generate"
+  },
+  {
+    "id": "C10",
+    "claim": "Checkout is simulated and the actual charge is zero. Failure or cancellation does not activate a plan. A successful local activation enables paid-tier features, while quota exhaustion does not block the core care response.",
+    "classification": "Observed fact",
+    "basis": "S04",
+    "locator": "E02–E05"
+  },
+  {
+    "id": "C11",
+    "claim": "For the cost model, one unit means one active paying family for one month. Its assumed variable cost is ¥18.19 in the base scenario. Actual development hours, staff costs and supplier quotations have not been recorded, so no measured cost to build the first app or serve a real family is claimed.",
+    "classification": "Calculation with unvalidated inputs",
+    "basis": "S10",
+    "locator": "assumptions, calculated.variableCost and excluded"
+  },
+  {
+    "id": "C12",
+    "claim": "The version comparison below uses the earliest retained screenshot available for this report and the current working household. The earlier picture shows one older-adult and family pair. The current view shows saved care items, named responsibility and distinct open and recorded-outcome states.",
+    "classification": "Observed fact",
+    "basis": "S03; S07; S14",
+    "locator": "Earlier retained prototype, original workspace capture and fresh full-resolution source S14; the report enlarges the open care-item detail."
+  },
+  {
+    "id": "C13",
+    "claim": "The verified report file contains the entered follow-up note and a handover, with 2,322 decoded characters and 2,329 UTF-8 bytes. Its content matches the report preview used in the download check.",
+    "classification": "Observed fact",
+    "basis": "S06; S09",
+    "locator": "download observation, character count and SHA-256"
+  },
+  {
+    "id": "C14",
+    "claim": "On 20 September 2026, the coding assistant ran twelve automated functional experiments against a saved snapshot of the product rules. The evidence records each belief, procedure and result. These are implementation tests, not observations of market demand.",
+    "classification": "Observed fact",
+    "basis": "S04; S12",
+    "locator": "recordedAt, executor, results and reproduction script"
+  },
+  {
+    "id": "C15",
+    "claim": "A reconstructed period-only open-item rule counted zero open reminders after eight days even though one remained unresolved. The current all-date rule counted one and included it in the report. This experiment demonstrates why the reporting window must not hide open work.",
+    "classification": "Observed fact",
+    "basis": "S04",
+    "locator": "E08. The rejected rule is explicitly a reconstruction."
+  },
+  {
+    "id": "C16",
+    "claim": "A reconstructed full replacement reset retained zero outreach fixtures. The current care-only reset retained the one fixture and its unsent request. The fixture was synthetic and never entered the real outreach log.",
+    "classification": "Observed fact",
+    "basis": "S04",
+    "locator": "E10. Reconstructed rejected rule compared with current reset."
+  },
+  {
+    "id": "C17",
+    "claim": "The revenue hypothesis is an optional subscription paid per family. The model assumes 70% Plus, 20% Pro 5x and 10% Pro 20x; within each plan, 60% pay monthly and 40% annually. Annual revenue is divided by 12 for monthly comparison.",
+    "classification": "Scenario assumption",
+    "basis": "S10",
+    "locator": "assumptions; formula in S12"
+  },
+  {
+    "id": "C18",
+    "claim": "The calculated monthly revenue per paid family is ¥49.47. Variable cost including replacement acquisition is ¥18.19, leaving contribution of ¥31.27. With ¥30,000 fixed monthly operations, break-even is 960 paid families; at 800 families the monthly result is a loss of ¥4,982.40.",
+    "classification": "Calculation with unvalidated inputs",
+    "basis": "S10",
+    "locator": "calculated values"
+  },
+  {
+    "id": "C19",
+    "claim": "Allocating fixed costs over 800 assumed paying families gives a total monthly cost of ¥55.69 per family. The model excludes initial development, launch costs, growth acquisition, financing and taxes. It does not establish the cost or time needed to acquire 800 families.",
+    "classification": "Calculation with unvalidated inputs",
+    "basis": "S10",
+    "locator": "calculated.costIncludingFixedAt800 and excluded"
+  },
+  {
+    "id": "C20",
+    "claim": "The team confirms eight individual consultations on 20–22 September 2026 and product-experience invitations emailed to ten organisations on 20 September. Those emails included an MVP demonstration video and product introduction PDF. No organisational reply had been received as of the team update on 22 September.",
+    "classification": "Team-confirmed outreach with selected supporting screenshots",
+    "basis": "S22; S23; S24",
+    "locator": "Team count/date/attachment confirmation; six visible email rows"
+  },
+  {
+    "id": "C21",
+    "claim": "The supplied chats show interest in trying the product, a preference for named responsibility, conditional acceptance of RMB39/month, and requests for automatic notifications and shared updates. The materials contain no completed purchase, deposit, agreed pilot or observed product trial. No-reply institutional contacts remain pending rather than classified as rejections.",
+    "classification": "Observed feedback and team confirmation",
+    "basis": "S18; S19; S20; S21; S23",
+    "locator": "Visible chat responses and owner-reported institutional outcome"
+  },
+  {
+    "id": "C22",
+    "claim": "For the requirement to make at least ten commercial offers, the team reports ten organisational product-experience invitations. The report presents a selected email-list screenshot rather than reproducing all correspondence. The eight individual consultations are recorded separately and are not automatically counted as eight additional commercial offers.",
+    "classification": "Outreach scope and selected evidence",
+    "basis": "S13; S22; S23; S24",
+    "locator": "Course requirement compared with invitation content and available proof"
+  },
+  {
+    "id": "C23",
+    "claim": "The functional evidence covers controlled local scenarios and a local browser. It does not establish cross-device delivery, real accounts, reliability in service, clinical effects or live billing.",
+    "classification": "Evidence limitation",
+    "basis": "S04; S05; S06",
+    "locator": "Experiment scope and local implementation boundary"
+  },
+  {
+    "id": "C24",
+    "claim": "The course requires one team submission, a report of no more than 20 pages excluding the appendix, and a seven-minute presentation in four prescribed parts. The supplied final instructions do not state a calendar deadline.",
+    "classification": "Observed fact",
+    "basis": "S01",
+    "locator": "Report and presentation requirements"
+  },
+  {
+    "id": "C25",
+    "claim": "The page-one team roster is Group6 with the eight names and student numbers shown.",
+    "classification": "Owner-provided identity information",
+    "basis": "S02",
+    "locator": "members array. Supplied by the project owner; not independently verified against university records."
+  },
+  {
+    "id": "C26",
+    "claim": "The model input table uses service/support/AI 12, five free families at 0.50, processing 1%, churn 4%, acquisition 80, fixed operations 30000 and 800 paying families.",
+    "classification": "Scenario assumptions",
+    "basis": "S10",
+    "locator": "assumptions object. These are not measured customer data or supplier quotations."
+  },
+  {
+    "id": "C27",
+    "claim": "No completed outside-user task observation or timed speaking rehearsal is included in the report evidence. The six-minute-thirty-second presentation schedule is a plan.",
+    "classification": "Evidence limitation",
+    "basis": "S04; S06",
+    "locator": "Scope of experiment and browser records. The speaker schedule is a future rehearsal aid, not a measured result."
+  },
+  {
+    "id": "C28",
+    "classification": "Observed feedback and team confirmation",
+    "basis": "S05; S15; S19",
+    "locator": "Plan rules and conditional price response",
+    "claim": "The proposed tiers address different needs. Plus at RMB 39/month supports everyday responsibility, multiple plans and report export. Pro 5x at RMB 79/month adds rota, backups, handovers and adjustable follow-up. Pro 20x at RMB 99/month retains the same Pro care features and adds 300 generations for RMB 20 more per month. One contact conditionally accepts RMB39/month if the service is reliable and used regularly; this does not establish a paid conversion."
+  },
+  {
+    "id": "C29",
+    "classification": "Verified local allowance rules",
+    "basis": "S05; S15; S16",
+    "locator": "generate, nextCycle, activate and resetPurchase; Q01-Q06 in value-checks.json",
+    "claim": "Plus provides 20 successful local generations per monthly cycle, Pro 5x 100 and Pro 20x 400. All roles and recipients in a household share the counter. Each new successful generation, including regeneration, costs one use; failed, cancelled or invalid requests cost zero. Reading or saving an existing draft and exporting a care report cost zero. Unused allowance does not roll over. Plan changes preserve usage, while a new monthly demo cycle resets it and retains past drafts. Annual totals equal ten monthly fees but do not multiply the monthly allowance."
+  },
+  {
+    "id": "C30",
+    "classification": "Recorded implementation experiment",
+    "basis": "S15; S16",
+    "locator": "15 results and source hashes in value-checks.json",
+    "claim": "Fifteen additional automated checks recorded on 20 September 2026 cover nine scenario steps and six allowance contracts. All passed. The examples execute the same local product rules in isolated sample households. These checks supplement the original twelve experiments; they are not customer participants or evidence of willingness to pay."
+  },
+  {
+    "id": "C31",
+    "claim": "The team-prepared feedback document contains eight bilingual question-and-answer themes, not a response-by-person dataset. It covers willingness to try, responsibility, ease of use, price, free evaluation, privacy, target households and proposed features. Four chat screenshots support selected themes; individual-level percentages cannot be calculated from this material.",
+    "basis": "S17; S18; S19; S20; S21",
+    "locator": "Eight numbered topics and four screenshots",
+    "classification": "Thematic summary with limited attribution"
+  },
+  {
+    "id": "C32",
+    "claim": "Earlier ten-record course simulations, including the four-interested, four-declined and two-pending split, are archived separately. They contribute zero contacts, responses or commitments to this updated actual-outreach account.",
+    "basis": "S11; S24",
+    "locator": "Archived content file and current register",
+    "classification": "Method and exclusion rule"
+  },
+  {
+    "id": "C33",
+    "classification": "Visible email greeting examples",
+    "claim": "The email-list preview includes greetings to Taikang Home, Xinrong Linbang and Xiaode Zhineng. These examples identify the intended addressee in the message greeting; the screenshot does not independently establish the mailbox’s organisational ownership, delivery or a partnership. All ten institutional contacts remain without a reported reply as of 22 September.",
+    "basis": "S22; S24",
+    "locator": "Email-list rows 4–6; named examples in the current register"
+  }
+]

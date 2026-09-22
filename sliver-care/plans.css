@@ -1,0 +1,186 @@
+/* Scoped editorial and pricing styles; phone UI retains its existing tokens. */
+.care-presentation{--care-paper:#e8e5dc;--care-white:#f4f4f0;--care-ink:#111315;--care-red:#a63b36;--care-muted:#5c605d;--care-line:#bcbeb6;--care-space:clamp(22px,3vw,44px);--care-speed:180ms;grid-column:1/-1;min-width:0;color:var(--care-ink);font-family:var(--shell-type);margin-top:90px}
+.care-section-nav{max-width:1440px;margin:0 auto;padding:12px 34px 0;display:flex;gap:28px;flex-wrap:wrap}
+.care-section-nav a{font:12px/1.5 var(--shell-mono);color:var(--shell-muted);text-decoration:none;padding:7px 0}
+.care-section-nav a:hover{color:var(--shell-red)}
+.care-value{max-width:540px;margin:18px 0 0;font:16px/1.6 var(--shell-type);color:var(--shell-muted)}
+.care-intro-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:20px}
+.care-intro-actions a{border:1px solid var(--shell-ink);padding:11px 15px;text-decoration:none;color:var(--shell-ink);font:600 13px/1.4 var(--shell-type)}
+.care-intro-actions a:first-child{background:var(--shell-ink);color:var(--shell-surface)}
+.care-presentation *,.care-presentation *::before,.care-presentation *::after{box-sizing:border-box}
+.care-presentation h2,.care-presentation h3,.care-presentation p{margin:0}
+.care-presentation a{color:inherit}
+.care-presentation button{font-family:inherit;border-radius:0;box-shadow:none}
+.care-presentation :focus-visible,.care-intro-actions a:focus-visible,.care-section-nav a:focus-visible{outline:3px solid var(--shell-red);outline-offset:5px}
+#care-demo,#care-plans,#care-comparison,#care-business{scroll-margin-top:24px}
+.care-kicker{display:flex;align-items:center;gap:16px;font:11px/1.5 var(--shell-mono);letter-spacing:1.4px;padding-top:16px;border-top:2px solid var(--care-ink)}
+.care-kicker [lang]{letter-spacing:1px;font-family:var(--shell-type)}
+.care-kicker>:last-child:not(:nth-child(2)){margin-left:auto}
+.care-pricing-heading{display:flex;align-items:flex-end;justify-content:space-between;gap:30px;padding:32px 0 30px}
+.care-pricing-heading h2{font:900 clamp(40px,5.5vw,78px)/.98 var(--shell-type);letter-spacing:-3.5px}
+.care-pricing-heading h2>span{color:var(--care-red)}
+.care-heading-aside{flex:0 0 215px;padding:0 0 4px 22px;border-left:3px solid var(--care-red)}
+.care-heading-aside p{font-size:24px;font-weight:700;line-height:1.18;letter-spacing:-.7px}
+.care-heading-aside>span{display:block;margin-top:14px;color:var(--care-muted);font-size:12px}
+.care-pricing-toolbar{display:flex;align-items:center;justify-content:space-between;gap:24px;padding:22px 0;border-top:1px solid var(--care-line)}
+.care-pricing-toolbar>p{max-width:460px;color:var(--care-muted);font-size:15px;line-height:1.5}
+.care-segment{display:inline-flex;gap:3px;padding:4px;border:1px solid var(--care-line);flex-shrink:0;background:transparent}
+.care-segment button{min-height:42px;padding:9px 23px;border:0;background:transparent;color:var(--care-ink);font-size:13px;font-weight:650;cursor:pointer;transition:background var(--care-speed),color var(--care-speed)}
+.care-segment button[aria-pressed="true"]{background:var(--care-ink);color:var(--care-white)}
+.care-segment button:hover:not([aria-pressed="true"]){background:#d8d8cf}
+.care-plan-grid{display:grid;grid-template-columns:3fr 4fr 3fr;align-items:stretch;border:1px solid var(--care-line)}
+.care-plan{min-width:0;background:var(--care-white)}
+.care-plan--free{background:transparent}
+.care-plan--plus{background:var(--care-ink);color:var(--care-white)}
+.care-plan-banner{height:48px;display:flex;justify-content:space-between;align-items:center;padding:10px var(--care-space);border-top:5px solid var(--care-line);font:10px/1.35 var(--shell-mono);letter-spacing:1px}
+.care-plan--plus .care-plan-banner{border-top-color:var(--care-red);background:var(--care-red);font-size:11px;color:#fff}
+.care-plan--pro .care-plan-banner{border-top-color:var(--care-red)}
+.care-plan-body{display:grid;grid-template-rows:120px 144px 64px minmax(150px,auto) 65px 52px;padding:26px var(--care-space) 32px}
+.care-plan-identity h3{display:flex;align-items:center;justify-content:space-between;font-size:44px;font-weight:850;letter-spacing:-2px;line-height:1.1}
+.care-plan-identity h3>span{font-size:54px;font-weight:400;line-height:.8;color:#d3736c}
+.care-plan-identity p{margin-top:12px;font-size:15px;line-height:1.5;max-width:245px}
+.care-price-block{padding-top:4px}
+.care-price{display:flex;align-items:baseline;white-space:nowrap;gap:3px;line-height:1}
+.care-price strong{font:800 clamp(80px,7.2vw,104px)/1 var(--shell-type);letter-spacing:-7px;font-variant-numeric:tabular-nums}
+.care-plan--plus .care-price strong{font-size:clamp(88px,8vw,112px)}
+.care-price>span{font-size:13px}
+.care-price .care-currency{align-self:flex-start;padding-top:15px;font-size:25px;font-weight:600}
+.care-price--pending{flex-wrap:wrap;gap:5px 12px}
+.care-price--pending strong{font-size:76px;letter-spacing:-5px}
+.care-price-note{font-size:12px;line-height:1.5;color:var(--care-muted);padding-top:8px;max-width:290px}
+.care-plan--plus .care-price-note{color:#c1c4bd}
+.care-plan-options{display:flex;align-items:center;border-bottom:1px solid var(--care-line)}
+.care-plan-status{font:11px/1.5 var(--shell-mono);color:var(--care-muted)}
+.care-plan--plus .care-plan-status{color:#c1c4bd}
+.care-plan--plus .care-plan-options{border-color:#444945}
+.care-pro-options{display:flex;width:100%;padding:2px;gap:0}
+.care-pro-options button{padding:7px 6px;font-size:11px;flex:1;min-height:36px}
+.care-benefits{padding:16px 0 8px;margin:0;list-style:none}
+.care-benefits li{position:relative;padding:7px 0 7px 17px;font-size:14px;line-height:1.5}
+.care-benefits li::before{content:'+';position:absolute;left:0;color:var(--care-red);font-weight:700}
+.care-plan--plus .care-benefits li::before{color:#d3736c}
+.care-ai-note{font-size:11px;line-height:1.6;color:var(--care-muted);padding:7px 0 12px}
+.care-plan--plus .care-ai-note{color:#c1c4bd}
+.care-plan-action{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 14px;border:1px solid var(--care-ink);text-decoration:none;font-size:13px;font-weight:700;transition:background var(--care-speed),color var(--care-speed)}
+.care-plan-action:hover{background:var(--care-ink);color:var(--care-white)}
+.care-plan--plus .care-plan-action{background:var(--care-white);color:var(--care-ink);border-color:var(--care-white)}
+.care-plan--plus .care-plan-action:hover{background:#d9ddd3}
+.care-plan-action>span{font-size:20px}
+.care-pricing-footnote{display:flex;justify-content:space-between;gap:40px;padding:20px 0;border-bottom:1px solid var(--care-line)}
+.care-pricing-footnote>span{font:10px/1.7 var(--shell-mono);letter-spacing:1px;max-width:220px}
+.care-pricing-footnote>p{max-width:630px;font-size:12px;line-height:1.6;color:var(--care-muted)}
+.care-comparison,.care-business{margin-top:90px}
+.care-section-heading{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;padding:28px 0 30px}
+.care-section-heading h2{font-size:clamp(30px,3.5vw,48px);font-weight:800;line-height:1.08;letter-spacing:-1.8px}
+.care-section-heading>p{font-size:14px;line-height:1.6;color:var(--care-muted);max-width:340px}
+.care-table-wrap{overflow-x:auto;border-top:1px solid var(--care-line)}
+.care-comparison-table{width:100%;border-collapse:collapse;table-layout:fixed;min-width:680px;font-size:13px;line-height:1.55}
+.care-comparison-table th,.care-comparison-table td{padding:20px 18px;border-bottom:1px solid var(--care-line);text-align:left;vertical-align:top}
+.care-comparison-table thead th{font-size:23px;letter-spacing:-.6px}
+.care-comparison-table thead th:first-child{font-size:13px;letter-spacing:0;width:23%;padding-left:0}
+.care-comparison-table tbody th{font-weight:600;padding-left:0}
+.care-comparison-table thead small{display:block;font-size:11px;letter-spacing:0;font-weight:400;margin-top:4px;color:var(--care-muted)}
+.care-comparison-table tr>:nth-child(3){background:#f4f4f080}
+[data-selected-plan="plus"] .care-comparison-table tr>:nth-child(3),[data-selected-plan="pro"] .care-comparison-table tr>:nth-child(4){background:#f4f4f0;box-shadow:inset 3px 0 var(--care-red)}
+.care-small-note{margin-top:15px!important;font-size:12px;line-height:1.7;color:var(--care-muted);max-width:880px}
+.care-business-flow{display:grid;grid-template-columns:repeat(3,1fr);list-style:none;padding:0;margin:5px 0 30px;border-top:1px solid var(--care-line);border-bottom:1px solid var(--care-line)}
+.care-business-flow li{padding:30px 28px;border-left:1px solid var(--care-line)}
+.care-business-flow li:first-child{padding-left:0;border-left:0}
+.care-flow-index{font:11px/1.5 var(--shell-mono);color:var(--care-red);letter-spacing:1px}
+.care-business-flow h3{font-size:23px;line-height:1.2;letter-spacing:-.7px;margin:22px 0 12px}
+.care-business-flow p{font-size:14px;color:var(--care-muted);line-height:1.7}
+.care-presentation summary{cursor:pointer;min-height:52px}
+.care-business-details{border:1px solid var(--care-line);background:var(--care-white)}
+.care-business-details>summary{display:flex;align-items:center;justify-content:space-between;padding:22px 26px;font-weight:650;list-style:none}
+.care-business-details>summary::-webkit-details-marker{display:none}
+.care-business-details summary small{margin-left:12px;font-weight:400;color:var(--care-muted)}
+.care-details-mark{font-size:25px;transition:transform var(--care-speed)}
+.care-business-details[open] .care-details-mark{transform:rotate(45deg)}
+.care-model-grid{display:grid;grid-template-columns:1fr 1fr;gap:28px 40px;padding:8px 26px 30px}
+.care-model-grid h3{font-size:15px;margin-bottom:8px}
+.care-model-grid p{font-size:13px;line-height:1.7;color:var(--care-muted)}
+.care-faq{display:grid;grid-template-columns:1fr 1.5fr;gap:70px;margin-top:90px}
+.care-faq h2{margin-top:24px;font-size:36px;line-height:1.1;letter-spacing:-1px}
+.care-faq h2 small{display:block;margin-top:14px;font-size:15px;color:var(--care-muted);font-weight:400;letter-spacing:0}
+.care-faq-list{border-top:2px solid var(--care-ink)}
+.care-faq-list details{border-bottom:1px solid var(--care-line);padding:0 4px}
+.care-faq-list summary{padding:20px 0;font-size:15px;font-weight:650;line-height:1.5}
+.care-faq-list p{padding:0 0 20px;font-size:14px;line-height:1.7;color:var(--care-muted)}
+.care-faq-list a{display:inline-block;margin-bottom:20px;font-size:13px}
+.care-closing{display:flex;align-items:center;justify-content:space-between;gap:24px;margin:80px 0 36px;padding:32px 0;border-top:1px solid var(--care-line)}
+.care-closing p{font-size:24px;line-height:1.35;letter-spacing:-.7px}
+.care-closing a{display:flex;gap:40px;align-items:center;padding:16px 20px;background:var(--care-ink);color:var(--care-white);text-decoration:none;font-size:14px}
+.care-sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap;border:0}
+@keyframes care-enter{from{transform:translateY(14px);opacity:.5}to{transform:translateY(0);opacity:1}}
+.care-arrived{animation:care-enter 420ms ease-out both}
+@media(max-width:1199px){
+ .care-presentation{--care-space:22px}
+ .care-plan-body{grid-template-rows:125px 145px 70px minmax(165px,auto) 78px 58px}
+ .care-price strong{font-size:88px;letter-spacing:-6px}.care-plan--plus .care-price strong{font-size:98px}
+ .care-heading-aside{flex-basis:185px}.care-plan-banner{font-size:9px;letter-spacing:.5px}
+}
+@media(max-width:1000px) and (min-width:781px){
+ .care-presentation{--care-space:15px}.care-pricing-heading h2{font-size:46px;letter-spacing:-2px}
+ .care-price strong{font-size:76px;letter-spacing:-5px}.care-plan--plus .care-price strong{font-size:88px}
+ .care-price .care-currency{font-size:20px}.care-plan-action{font-size:12px;padding:10px}
+}
+@media(max-width:780px){
+ .care-section-nav{padding:8px 18px 0;gap:20px}.care-section-nav a{font-size:11px}
+ .care-presentation{margin-top:60px;--care-space:26px}.care-kicker{font-size:10px;gap:10px;letter-spacing:.8px}
+ .care-pricing-heading{display:block;padding-top:26px}.care-pricing-heading h2{font-size:clamp(34px,7.4vw,56px);letter-spacing:-1.8px}
+ .care-heading-aside{margin-top:24px;padding-left:16px}.care-heading-aside p{font-size:20px}.care-heading-aside p br{display:none}.care-heading-aside>span{margin-top:8px}
+ .care-pricing-toolbar{align-items:flex-start;flex-direction:column;gap:16px}.care-segment button{min-height:44px}
+ .care-plan-grid{grid-template-columns:1fr;gap:18px;border:0}.care-plan{border:1px solid var(--care-line)}.care-plan--plus{border-color:var(--care-ink)}
+ .care-plan-body{grid-template-rows:auto auto auto auto auto 52px;padding-top:24px;padding-bottom:26px}
+ .care-plan-identity{min-height:90px}.care-plan-identity h3{font-size:38px}.care-plan-identity p{max-width:none}
+ .care-price-block{min-height:124px;padding-top:16px}.care-price strong,.care-plan--plus .care-price strong{font-size:80px;letter-spacing:-5px}
+ .care-price--pending strong{font-size:68px}.care-plan-options{min-height:68px}.care-pro-options{max-width:350px}.care-pro-options button{font-size:12px}
+ .care-benefits{padding:16px 0}.care-ai-note{min-height:52px;padding:0 0 18px}
+ .care-pricing-footnote{flex-direction:column;gap:12px}.care-pricing-footnote>span{max-width:none}
+ .care-comparison,.care-business,.care-faq{margin-top:60px}.care-section-heading{display:block;padding:24px 0}.care-section-heading>p{margin-top:18px}
+ .care-comparison-table th,.care-comparison-table td{padding:16px 12px}
+ .care-business-flow{grid-template-columns:1fr}.care-business-flow li,.care-business-flow li:first-child{border-left:0;padding:24px 0}.care-business-flow li+li{border-top:1px solid var(--care-line)}.care-business-flow h3{margin-top:12px}
+ .care-business-details>summary{padding:18px}.care-business-details summary small{display:block;margin:5px 0 0}.care-model-grid{grid-template-columns:1fr;padding:8px 18px 24px}
+ .care-faq{grid-template-columns:1fr;gap:26px}.care-faq h2{font-size:32px}.care-closing{flex-direction:column;align-items:flex-start;margin-top:50px}
+}
+@media(prefers-reduced-motion:reduce){.care-arrived{animation:none}.care-presentation *,.care-presentation *::before,.care-presentation *::after{transition:none!important;scroll-behavior:auto!important}}
+
+/* Explicit order: existing demo children already use order at this breakpoint. */
+@media(max-width:1000px){
+ main > .care-presentation{order:5;grid-column:1;grid-row:auto}
+ main > footer{order:6}
+}
+
+/* Pro: graphite metal, silver typography and an orbital particle study. */
+.care-plan--pro{
+ position:relative;isolation:isolate;overflow:hidden;color:#f2f0e9;
+ background:linear-gradient(145deg,#454b4e 0%,#303638 34%,#24282a 70%);
+ box-shadow:inset 0 0 0 1px #c7ceca80;
+}
+.care-plan--pro::after{
+ content:'';position:absolute;inset:0;z-index:2;pointer-events:none;
+ border:1px solid #c7ceca90;border-top:0;
+}
+.care-plan--pro .care-plan-banner{
+ position:relative;z-index:1;gap:8px;color:#171c1e;
+ background:linear-gradient(110deg,#e0e1d8,#aab4b3 64%,#d9dcd5);
+ border-top-color:#d5dad4;font-weight:700;letter-spacing:.6px;
+}
+.care-pro-orbits{position:absolute;right:0;top:48px;width:100%;height:calc(100% - 48px);z-index:0;pointer-events:none;opacity:.95}
+.care-plan--pro .care-plan-body{position:relative;z-index:1}
+.care-plan--pro .care-plan-identity h3{color:#e1e5e0;letter-spacing:-2px;text-shadow:0 1px 0 #fff3}
+.care-plan--pro .care-plan-identity p{max-width:215px;color:#e0e4df}
+.care-plan--pro .care-price strong{color:#f3f1e8;font-size:clamp(76px,6.7vw,96px)}
+.care-plan--pro .care-price-note,.care-plan--pro .care-ai-note{color:#c8ceca}
+.care-plan--pro .care-plan-options{border-bottom-color:#73807a80}
+.care-plan--pro .care-pro-options{border-color:#9da7a1;padding:3px;gap:4px;background:#1a2022}
+.care-plan--pro .care-pro-options button{color:#d5dcd6;font:700 15px/1.25 var(--shell-mono);letter-spacing:.5px}
+.care-plan--pro .care-pro-options button[aria-pressed="true"]{background:#dce0d8;color:#171c1e;box-shadow:inset 0 -3px #a63b36}
+.care-plan--pro .care-pro-options button:hover:not([aria-pressed="true"]){background:#424b4d;color:#fff}
+.care-plan--pro .care-benefits li::before{color:#eb9990}
+.care-plan--pro .care-plan-action{color:#fff;background:#a63b36;border:1px solid #d1847e}
+.care-plan--pro .care-plan-action:hover{background:#b64740;border-color:#f0b3a9}
+.care-plan--pro :focus-visible{outline-color:#fff0d9}
+@media(max-width:1199px){.care-plan--pro .care-plan-banner{padding-left:15px;padding-right:15px;font-size:9px;letter-spacing:0}}
+@media(min-width:781px) and (max-width:1000px){.care-plan--pro .care-price strong{font-size:76px}.care-plan--pro .care-plan-banner>span{max-width:105px}}
+@media(max-width:780px){.care-plan--pro .care-price strong{font-size:80px}.care-plan--pro .care-plan-banner{padding-left:var(--care-space);padding-right:var(--care-space)}}

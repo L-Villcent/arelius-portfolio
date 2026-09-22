@@ -1,0 +1,182 @@
+{
+  "recordedAt": "2026-09-20T13:11:44.638Z",
+  "scope": "Automated local scenarios and allowance rules, no external customer participants, messages or payments. Original twelve functional experiment records remain unchanged.",
+  "passed": 15,
+  "caseCount": 15,
+  "sourceSha256": {
+    "product-core.js": "647ae2ab54c9887a1be1cd891e548e8718d8c4671a02dcdb5d1755cf7ff9ca38",
+    "plan-value.js": "e6ea515e07d47d386e0af3d2ddf4bda34886a93e45a80c7077ed76df311589c6",
+    "evidence/run-value-checks.cjs": "4aa49a2605058fee5e7c42fbafc01810d795822591803008872ed7ead97e0809"
+  },
+  "results": [
+    {
+      "id": "plus-0",
+      "description": "Isolated plus care scenario step 1",
+      "result": "pass",
+      "observed": {
+        "owner": "Maya",
+        "state": "Help requested",
+        "used": 0,
+        "allowance": 20,
+        "hasOutput": false
+      }
+    },
+    {
+      "id": "plus-1",
+      "description": "Isolated plus care scenario step 2",
+      "result": "pass",
+      "observed": {
+        "owner": "Maya",
+        "state": "Follow-up recorded",
+        "used": 0,
+        "allowance": 20,
+        "hasOutput": false
+      }
+    },
+    {
+      "id": "plus-2",
+      "description": "Isolated plus care scenario step 3",
+      "result": "pass",
+      "observed": {
+        "owner": "Maya",
+        "state": "Follow-up recorded",
+        "used": 0,
+        "allowance": 20,
+        "hasOutput": true
+      }
+    },
+    {
+      "id": "pro5-0",
+      "description": "Isolated pro5 care scenario step 1",
+      "result": "pass",
+      "observed": {
+        "owner": "Maya",
+        "state": "Help requested",
+        "used": 0,
+        "allowance": 100,
+        "hasOutput": false
+      }
+    },
+    {
+      "id": "pro5-1",
+      "description": "Isolated pro5 care scenario step 2",
+      "result": "pass",
+      "observed": {
+        "owner": "Leo",
+        "state": "Help requested",
+        "used": 0,
+        "allowance": 100,
+        "hasOutput": false
+      }
+    },
+    {
+      "id": "pro5-2",
+      "description": "Isolated pro5 care scenario step 3",
+      "result": "pass",
+      "observed": {
+        "owner": "Leo",
+        "state": "Help requested",
+        "used": 0,
+        "allowance": 100,
+        "hasOutput": true
+      }
+    },
+    {
+      "id": "pro20-0",
+      "description": "Isolated pro20 care scenario step 1",
+      "result": "pass",
+      "observed": {
+        "owner": "Maya",
+        "state": "Waiting for a response",
+        "used": 100,
+        "allowance": 100,
+        "hasOutput": false
+      }
+    },
+    {
+      "id": "pro20-1",
+      "description": "Isolated pro20 care scenario step 2",
+      "result": "pass",
+      "observed": {
+        "owner": "Maya",
+        "state": "Waiting for a response",
+        "used": 100,
+        "allowance": 400,
+        "hasOutput": false
+      }
+    },
+    {
+      "id": "pro20-2",
+      "description": "Isolated pro20 care scenario step 3",
+      "result": "pass",
+      "observed": {
+        "owner": "Maya",
+        "state": "Waiting for a response",
+        "used": 101,
+        "allowance": 400,
+        "hasOutput": true
+      }
+    },
+    {
+      "id": "Q01",
+      "description": "Only a successful stored generation consumes one use",
+      "result": "pass",
+      "observed": {
+        "failedCancelledInvalid": 0,
+        "twoSuccesses": 2,
+        "viewSaveExportExtraCost": 0
+      }
+    },
+    {
+      "id": "Q02",
+      "description": "All recipients share one household counter",
+      "result": "pass",
+      "observed": {
+        "recipients": 2,
+        "householdUsed": 2
+      }
+    },
+    {
+      "id": "Q03",
+      "description": "Annual billing retains monthly limits; no rollover; results survive",
+      "result": "pass",
+      "observed": {
+        "monthlyAllowance": 20,
+        "usedAfterReset": 0,
+        "retainedResults": 1,
+        "unusedAllowanceAdded": 0
+      }
+    },
+    {
+      "id": "Q04",
+      "description": "Exhaustion leaves care and manual reporting available",
+      "result": "pass",
+      "observed": {
+        "used": 20,
+        "excessRejected": true,
+        "careOutcome": "resolved",
+        "reportAvailable": true
+      }
+    },
+    {
+      "id": "Q05",
+      "description": "Upgrade and downgrade retain used count",
+      "result": "pass",
+      "observed": {
+        "usedAfterUpgrade": 1,
+        "usedAfterDowngrade": 1
+      }
+    },
+    {
+      "id": "Q06",
+      "description": "Prices, allowance multiples and Pro care capabilities agree",
+      "result": "pass",
+      "observed": {
+        "monthlyUpgrade": 20,
+        "extraUses": 300,
+        "annualMonths": 10,
+        "sameProCare": true
+      }
+    }
+  ]
+}

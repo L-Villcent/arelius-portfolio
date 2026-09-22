@@ -1,0 +1,1320 @@
+{
+  "title": "Sliver Care Final Project Report",
+  "team": "Group6",
+  "date": "22 September 2026",
+  "decision": "Stop",
+  "members": [
+    [
+      "XINYU LAI",
+      "2023362046"
+    ],
+    [
+      "ZHENGYUAN QIU",
+      "2023362027"
+    ],
+    [
+      "MINXUAN LI",
+      "2023362005"
+    ],
+    [
+      "JINGHAO YU",
+      "2023362059"
+    ],
+    [
+      "RUI ZHOU",
+      "2023362052"
+    ],
+    [
+      "YIYANG FENG",
+      "2023362038"
+    ],
+    [
+      "SHENGWEI HUANG",
+      "2023362024"
+    ],
+    [
+      "TIANYI LI",
+      "2023362026"
+    ]
+  ],
+  "sections": [
+    {
+      "title": "1 The decision",
+      "blocks": [
+        {
+          "type": "claim",
+          "id": "C01",
+          "text": "Group6 has decided to stop advancing the venture after the course. The main reason is the team’s time and future resource commitments: the team cannot commit to ongoing development, maintenance and user support after the course."
+        },
+        {
+          "type": "paragraph",
+          "text": "Method and scope: the local care workflow and checkout use simulated care data and payments. Outreach now uses the team’s actual consultations and emails, supported by the supplied feedback summary, chat images and email-list image. Four chat screenshots and one email-list screenshot are selected for concise presentation; they are not the complete outreach archive. Previous course outreach simulations are excluded. The team’s decision after the course remains Stop."
+        },
+        {
+          "type": "claim",
+          "id": "C02",
+          "text": "The package provides an operating local family-care workflow. Twelve recorded automated functional experiments passed using controlled scenario data, with no external customer participants."
+        },
+        {
+          "type": "claim",
+          "id": "C03",
+          "text": "The report combines feedback from eight individuals consulted on 20–22 September 2026, ten organisational emails sent on 20 September as confirmed by the team, supplied screenshots, and dated local product experiments. Representative evidence is identified for each displayed example."
+        },
+        {
+          "type": "paragraph",
+          "text": "The next 90 days concern archiving the product and feedback, completing the team review and keeping the project inactive. The new comments help explain what customers may value, but do not establish sustained use, paid demand or reliable connected delivery."
+        }
+      ]
+    },
+    {
+      "title": "2 Problem and customer",
+      "blocks": [
+        {
+          "type": "claim",
+          "id": "C04",
+          "text": "Our initial problem hypothesis is that family members can lose track of who should follow up after a reminder and what happened after contact. The proposed customer is the adult child coordinating care for an independently living parent who can use a simple response interface."
+        },
+        {
+          "type": "paragraph",
+          "text": "The older adult and the family caregiver are intended users. The organising adult child is the proposed buyer. That distinction determines the design: a short response on one side, responsibility and a follow-up record on the other."
+        },
+        {
+          "type": "claim",
+          "id": "C05",
+          "text": "Early feedback supports exploring family responsibility and follow-up as a problem. One chat prioritises named responsibility, and another identifies parents living alone, distant children and several relatives sharing care. These qualitative comments do not establish how widespread the need is."
+        },
+        {
+          "type": "paragraph",
+          "text": "The two-phone example demonstrates a possible response and follow-up flow. The new feedback gives initial qualitative support to responsibility and record-keeping. The sample is small, recruitment is not documented, and comments after viewing an introduction are different from observed use."
+        },
+        {
+          "type": "paragraph",
+          "text": "An appropriate future test, only if the project is reopened, would observe a consenting family completing a specific handover without coaching, then ask for an explicit response to the quoted offer. Completion, confusion and the response would need dates and records. This is a proposed method, not a test already run."
+        }
+      ]
+    },
+    {
+      "title": "3 The product",
+      "blocks": [
+        {
+          "type": "claim",
+          "id": "C06",
+          "text": "A user receives a local browser application, sample care profiles, reminder plans, responsibility records and downloadable reports. It runs through a local server; the original two-phone example and the working household have separate histories."
+        },
+        {
+          "type": "claim",
+          "id": "C07",
+          "text": "The working sequence is to choose a recipient and responsible family member, start a reminder, record a self-reported response or help request, record a family outcome or handover, and generate a report from those saved actions."
+        },
+        {
+          "type": "claim",
+          "id": "C08",
+          "text": "The confirmed proposed family prices are Free ¥0, Plus ¥39/month or ¥390/year, Pro 5x ¥79/month or ¥790/year, and Pro 20x ¥99/month or ¥990/year. Annual totals are paid upfront in the proposal; the current offline evaluation costs ¥0."
+        },
+        {
+          "type": "table",
+          "headers": [
+            "Plan",
+            "Monthly RMB",
+            "Annual RMB",
+            "Local capacity",
+            "AI templates per cycle"
+          ],
+          "rows": [
+            [
+              "Free",
+              "0",
+              "0",
+              "1 recipient / 1 family role",
+              "0"
+            ],
+            [
+              "Plus",
+              "39",
+              "390",
+              "2 / 4",
+              "20"
+            ],
+            [
+              "Pro 5x",
+              "79",
+              "790",
+              "5 / 8",
+              "100"
+            ],
+            [
+              "Pro 20x",
+              "99",
+              "990",
+              "5 / 8",
+              "400"
+            ]
+          ],
+          "widths": [
+            0.85,
+            0.85,
+            0.85,
+            2.2,
+            1.4
+          ]
+        },
+        {
+          "type": "claim",
+          "id": "C09",
+          "text": "The table capacities are offline product defaults. The Pro options have identical care features; 5x and 20x describe the monthly AI allowance relative to Plus. The assistant generates local templates rather than calling a live model."
+        },
+        {
+          "type": "claim",
+          "id": "C10",
+          "text": "Checkout is simulated and the actual charge is zero. Failure or cancellation does not activate a plan. A successful local activation enables paid-tier features, while quota exhaustion does not block the core care response."
+        },
+        {
+          "type": "claim",
+          "id": "C11",
+          "text": "For the cost model, one unit means one active paying family for one month. Its assumed variable cost is ¥18.19 in the base scenario. Actual development hours, staff costs and supplier quotations have not been recorded, so no measured cost to build the first app or serve a real family is claimed."
+        },
+        {
+          "type": "paragraph",
+          "text": "A check-in is a self-report; recording an outcome does not establish clinical safety. This edition has no connected family accounts, real notifications, live payment, medical monitoring or emergency response."
+        },
+        {
+          "type": "claim",
+          "id": "C28",
+          "text": "The proposed tiers address different needs. Plus at RMB 39/month supports everyday responsibility, multiple plans and report export. Pro 5x at RMB 79/month adds rota, backups, handovers and adjustable follow-up. Pro 20x at RMB 99/month retains the same Pro care features and adds 300 generations for RMB 20 more per month. One contact conditionally accepts RMB39/month if the service is reliable and used regularly; this does not establish a paid conversion."
+        },
+        {
+          "type": "claim",
+          "id": "C29",
+          "text": "Plus provides 20 successful local generations per monthly cycle, Pro 5x 100 and Pro 20x 400. All roles and recipients in a household share the counter. Each new successful generation, including regeneration, costs one use; failed, cancelled or invalid requests cost zero. Reading or saving an existing draft and exporting a care report cost zero. Unused allowance does not roll over. Plan changes preserve usage, while a new monthly demo cycle resets it and retains past drafts. Annual totals equal ten monthly fees but do not multiply the monthly allowance."
+        },
+        {
+          "type": "paragraph",
+          "text": "The current local evaluation is free. Cross-device family accounts, remote notifications and live AI remain proposed capabilities, with no launch date under the Stop decision. Proposed live AI uses would include weekly summaries, handover drafts and follow-up lists based on saved records, subject to family review. Current local templates already produce summaries and handover drafts containing open items. Neither a template nor a future model can verify actual medication intake or establish clinical safety."
+        }
+      ]
+    },
+    {
+      "title": "4 Show the product",
+      "blocks": [
+        {
+          "type": "claim",
+          "id": "C12",
+          "text": "The version comparison below uses the earliest retained screenshot available for this report and the current working household. The earlier picture shows one older-adult and family pair. The current view shows saved care items, named responsibility and distinct open and recorded-outcome states."
+        },
+        {
+          "type": "comparison",
+          "images": [
+            "evidence/earlier-prototype.png",
+            "evidence/current-workspace-hd.jpg"
+          ],
+          "captions": [
+            "Earlier retained prototype: guided two-phone example. Date of first capture is not established.",
+            "Current local MVP: enlarged detail of an open care item, recaptured 20 September 2026. The complete screenshot is source S14."
+          ],
+          "crops": [
+            null,
+            {
+              "left": 0.22627118644067798,
+              "top": 0.395,
+              "right": 0.4322033898305085,
+              "bottom": 0.291
+            }
+          ]
+        },
+        {
+          "type": "table",
+          "headers": [
+            "Visible change",
+            "Earlier retained example",
+            "Current workspace"
+          ],
+          "rows": [
+            [
+              "Role of screen",
+              "Illustrates a response flow",
+              "Operates saved care records"
+            ],
+            [
+              "Responsibility",
+              "Single illustrated family pair",
+              "Recipient and responsible-person fields"
+            ],
+            [
+              "Output",
+              "On-screen event history",
+              "Report containing entered outcomes and handover"
+            ]
+          ],
+          "widths": [
+            1.5,
+            2.25,
+            2.4
+          ]
+        },
+        {
+          "type": "claim",
+          "id": "C13",
+          "text": "The verified report file contains the entered follow-up note and a handover, with 2,322 decoded characters and 2,329 UTF-8 bytes. Its content matches the report preview used in the download check."
+        },
+        {
+          "type": "paragraph",
+          "text": "Reproduce the product locally by running Start.cmd, opening Care workspace and following the demonstration script. Appendix B includes a report extract and evidence-file locations. No person outside the team appears using the product; no independent usability test is claimed. We cannot verify that the retained picture was the first-ever design."
+        }
+      ]
+    },
+    {
+      "title": "5 What you tested",
+      "blocks": [
+        {
+          "type": "claim",
+          "id": "C14",
+          "text": "On 20 September 2026, the coding assistant ran twelve automated functional experiments against a saved snapshot of the product rules. The evidence records each belief, procedure and result. These are implementation tests, not observations of market demand."
+        },
+        {
+          "type": "table",
+          "headers": [
+            "Experiments",
+            "Belief and action",
+            "Observed result"
+          ],
+          "rows": [
+            [
+              "E01–E02",
+              "Complete Free follow-up; activate Plus and inspect the report",
+              "Outcome recorded and note included"
+            ],
+            [
+              "E03–E04",
+              "Exercise checkout failure, cancellation, duplication and annual totals",
+              "State preserved; one receipt; 390 / 790 / 990 quotes"
+            ],
+            [
+              "E05–E07",
+              "Exhaust AI quota; use Pro backup and handover; downgrade",
+              "Core response works; responsibility changes; history persists"
+            ],
+            [
+              "E08–E09",
+              "Age an open reminder eight days, then record an outcome",
+              "Open item retained; later outcome counted in its event period"
+            ],
+            [
+              "E10",
+              "Reset care with synthetic outreach and request fixtures",
+              "Both fixture records retained; not written to real browser log"
+            ],
+            [
+              "E11–E12",
+              "Cross midnight with a rota; tamper with a simulated receipt",
+              "Due-date owner selected; invalid charged receipt rejected"
+            ]
+          ],
+          "widths": [
+            1.0,
+            2.65,
+            2.5
+          ]
+        },
+        {
+          "type": "claim",
+          "id": "C15",
+          "text": "A reconstructed period-only open-item rule counted zero open reminders after eight days even though one remained unresolved. The current all-date rule counted one and included it in the report. This experiment demonstrates why the reporting window must not hide open work."
+        },
+        {
+          "type": "claim",
+          "id": "C16",
+          "text": "A reconstructed full replacement reset retained zero outreach fixtures. The current care-only reset retained the one fixture and its unsent request. The fixture was synthetic and never entered the real outreach log."
+        },
+        {
+          "type": "paragraph",
+          "text": "These results support retaining all open work and preserving outreach during a care reset. They do not show that real families understand the interface. We also have no recorded timed presentation rehearsal or observed outside-user task completion, and do not substitute automated checks for either."
+        },
+        {
+          "type": "claim",
+          "id": "C30",
+          "text": "Fifteen additional automated checks recorded on 20 September 2026 cover nine scenario steps and six allowance contracts. All passed. The examples execute the same local product rules in isolated sample households. These checks supplement the original twelve experiments; they are not customer participants or evidence of willingness to pay."
+        },
+        {
+          "type": "claim",
+          "id": "C31",
+          "text": "The team-prepared feedback document contains eight bilingual question-and-answer themes, not a response-by-person dataset. It covers willingness to try, responsibility, ease of use, price, free evaluation, privacy, target households and proposed features. Four chat screenshots support selected themes; individual-level percentages cannot be calculated from this material."
+        },
+        {
+          "type": "table",
+          "headers": [
+            "Belief explored",
+            "Action and available result",
+            "Implication"
+          ],
+          "rows": [
+            [
+              "Families need clear responsibility",
+              "Shared product introduction; one chat prioritises named responsibility (S18)",
+              "Show responsibility and saved outcomes in the core demonstration"
+            ],
+            [
+              "RMB39/month may be acceptable",
+              "One chat accepts conditionally on reliability and frequent use (S19)",
+              "Keep pricing proposed; reminders alone may not justify it"
+            ],
+            [
+              "Connected coordination matters",
+              "One chat requests alerts and shared updates (S20)",
+              "Retain as proposed capabilities; delivery remains untested"
+            ],
+            [
+              "Organisations will engage",
+              "Team sent ten invitations; no replies by 22 September (S23)",
+              "This channel has produced no response yet; silence does not establish rejection"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "title": "6 Model and numbers",
+      "blocks": [
+        {
+          "type": "claim",
+          "id": "C17",
+          "text": "The revenue hypothesis is an optional subscription paid per family. The model assumes 70% Plus, 20% Pro 5x and 10% Pro 20x; within each plan, 60% pay monthly and 40% annually. Annual revenue is divided by 12 for monthly comparison."
+        },
+        {
+          "type": "table",
+          "headers": [
+            "Input",
+            "Base assumption"
+          ],
+          "rows": [
+            [
+              "Service, support and AI per paid family / month",
+              "¥12.00"
+            ],
+            [
+              "Free households funded per paid household",
+              "5 at ¥0.50 each"
+            ],
+            [
+              "Processing allowance",
+              "1% of recognised revenue"
+            ],
+            [
+              "Equivalent monthly churn and replacement acquisition",
+              "4% and ¥80"
+            ],
+            [
+              "Fixed operations per month",
+              "¥30,000"
+            ],
+            [
+              "Active paying households",
+              "800"
+            ]
+          ],
+          "widths": [
+            4.15,
+            2.0
+          ]
+        },
+        {
+          "type": "claim",
+          "id": "C18",
+          "text": "The calculated monthly revenue per paid family is ¥49.47. Variable cost including replacement acquisition is ¥18.19, leaving contribution of ¥31.27. With ¥30,000 fixed monthly operations, break-even is 960 paid families; at 800 families the monthly result is a loss of ¥4,982.40."
+        },
+        {
+          "type": "paragraph",
+          "text": "Calculation: variable cost = 12 + (5 × 0.50) + (49.4666667 × 1%) + (4% × 80). Monthly result = paid families × contribution − fixed operations. Rounding occurs only for display."
+        },
+        {
+          "type": "claim",
+          "id": "C19",
+          "text": "Allocating fixed costs over 800 assumed paying families gives a total monthly cost of ¥55.69 per family. The model excludes initial development, launch costs, growth acquisition, financing and taxes. It does not establish the cost or time needed to acquire 800 families."
+        },
+        {
+          "type": "paragraph",
+          "text": "No supplier quote, measured support load, retention observation or sale validates these inputs. The arithmetic works as a scenario, while the business case remains unproven. We therefore use it to identify evidence we lack, rather than as a forecast that supports continuing."
+        }
+      ]
+    },
+    {
+      "title": "7 Commitment",
+      "blocks": [
+        {
+          "type": "claim",
+          "id": "C20",
+          "text": "The team confirms eight individual consultations on 20–22 September 2026 and product-experience invitations emailed to ten organisations on 20 September. Those emails included an MVP demonstration video and product introduction PDF. No organisational reply had been received as of the team update on 22 September."
+        },
+        {
+          "type": "table",
+          "headers": [
+            "Activity / evidence",
+            "Count / period",
+            "Outcome and interpretation"
+          ],
+          "rows": [
+            [
+              "Individual consultations",
+              "8; 20–22 Sep 2026",
+              "Four chat screenshots plus a thematic summary; no per-person response-rate estimate"
+            ],
+            [
+              "Organisation invitations",
+              "10; sent 20 Sep 2026",
+              "No replies reported as of 22 Sep; six email rows shown"
+            ],
+            [
+              "Price feedback",
+              "One visible RMB39/month response",
+              "Conditional acceptance; reminders alone may feel expensive"
+            ],
+            [
+              "Purchase / pilot commitment",
+              "No supplied evidence",
+              "Stated interest is not a completed sale or trial"
+            ],
+            [
+              "Team decision",
+              "Stop after the course",
+              "Archive feedback; stop due to team time and resource commitments"
+            ]
+          ]
+        },
+        {
+          "type": "claim",
+          "id": "C21",
+          "text": "The supplied chats show interest in trying the product, a preference for named responsibility, conditional acceptance of RMB39/month, and requests for automatic notifications and shared updates. The materials contain no completed purchase, deposit, agreed pilot or observed product trial. No-reply institutional contacts remain pending rather than classified as rejections."
+        },
+        {
+          "type": "claim",
+          "id": "C22",
+          "text": "For the requirement to make at least ten commercial offers, the team reports ten organisational product-experience invitations. The report presents a selected email-list screenshot rather than reproducing all correspondence. The eight individual consultations are recorded separately and are not automatically counted as eight additional commercial offers."
+        },
+        {
+          "type": "paragraph",
+          "text": "The practical lesson is to demonstrate named responsibility and saved follow-up before discussing AI. The conditional price response adds a clear requirement: usefulness depends on reliable delivery and regular household use. The notification request identifies a gap in the current local MVP. The absence of replies after the reported email outreach has yielded no institutional commitment so far."
+        },
+        {
+          "type": "claim",
+          "text": "The email-list preview includes greetings to Taikang Home, Xinrong Linbang and Xiaode Zhineng. These examples identify the intended addressee in the message greeting; the screenshot does not independently establish the mailbox’s organisational ownership, delivery or a partnership. All ten institutional contacts remain without a reported reply as of 22 September.",
+          "id": "C33"
+        },
+        {
+          "type": "claim",
+          "id": "C32",
+          "text": "Earlier ten-record course simulations, including the four-interested, four-declined and two-pending split, are archived separately. They contribute zero contacts, responses or commitments to this updated actual-outreach account."
+        }
+      ]
+    },
+    {
+      "title": "8 Limitations",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "The eight consultations provide initial qualitative reactions. Recruitment, participant characteristics, independently usable task performance, repeat use and paid conversion remain unmeasured. The displayed chats are illustrative excerpts, not a quantitative distribution of opinions. Lack of institutional reply does not distinguish unread mail, low priority or lack of interest."
+        },
+        {
+          "type": "claim",
+          "id": "C23",
+          "text": "The functional evidence covers controlled local scenarios and a local browser. It does not establish cross-device delivery, real accounts, reliability in service, clinical effects or live billing."
+        },
+        {
+          "type": "paragraph",
+          "text": "The retained prototype screenshot provides a partial development history. We have no measured initial build cost, timed speaking rehearsal, completed customer purchase or agreed pilot. Feedback collection does not resolve live sync, notification reliability, security or service cost. These evidence limits are separate from the team’s main reason for stopping: time and future resource commitments."
+        },
+        {
+          "type": "table",
+          "headers": [
+            "Period after the course ends",
+            "Stop plan",
+            "Condition"
+          ],
+          "rows": [
+            [
+              "Days 1–30",
+              "Archive the product, evidence, outreach register and final report with their method and source notes",
+              "No commercial launch or new promises"
+            ],
+            [
+              "Days 31–60",
+              "Complete the team review, record unresolved questions and keep the project inactive",
+              "No assumed sales, recruitment or development commitment"
+            ],
+            [
+              "Days 61–90",
+              "Keep the project stopped; no further development or launch is scheduled",
+              "No new development, recruitment or launch promises"
+            ]
+          ],
+          "widths": [
+            1.4,
+            3.0,
+            1.75
+          ]
+        },
+        {
+          "type": "claim",
+          "id": "C24",
+          "text": "The course requires one team submission, a report of no more than 20 pages excluding the appendix, and a seven-minute presentation in four prescribed parts. The supplied final instructions do not state a calendar deadline."
+        },
+        {
+          "type": "paragraph",
+          "text": "The 90-day table is a proposed closure and review plan consistent with Stop. It is not evidence that actions have already occurred. Actual Blackboard submission remains a team action."
+        }
+      ]
+    }
+  ],
+  "claims": [
+    {
+      "id": "C01",
+      "claim": "Group6 has decided to stop advancing the venture after the course. The main reason is the team’s time and future resource commitments: the team cannot commit to ongoing development, maintenance and user support after the course.",
+      "classification": "Owner decision",
+      "basis": "S02",
+      "locator": "decision and decisionScope"
+    },
+    {
+      "id": "C02",
+      "claim": "The package provides an operating local family-care workflow. Twelve recorded automated functional experiments passed using controlled scenario data, with no external customer participants.",
+      "classification": "Observed fact",
+      "basis": "S04; S05",
+      "locator": "experimentCount, passed, scope and E01–E12"
+    },
+    {
+      "id": "C03",
+      "claim": "The report combines feedback from eight individuals consulted on 20–22 September 2026, ten organisational emails sent on 20 September as confirmed by the team, supplied screenshots, and dated local product experiments. Representative evidence is identified for each displayed example.",
+      "classification": "Observed feedback and team confirmation",
+      "basis": "S17; S18; S19; S20; S21; S22; S23; S24",
+      "locator": "Feedback document, four chat images, email list and team confirmation"
+    },
+    {
+      "id": "C04",
+      "claim": "Our initial problem hypothesis is that family members can lose track of who should follow up after a reminder and what happened after contact. The proposed customer is the adult child coordinating care for an independently living parent who can use a simple response interface.",
+      "classification": "Problem hypothesis informed by feedback",
+      "basis": "S17; S18; S21",
+      "locator": "Problem hypothesis and qualitative comments about responsibility and intended households"
+    },
+    {
+      "id": "C05",
+      "claim": "Early feedback supports exploring family responsibility and follow-up as a problem. One chat prioritises named responsibility, and another identifies parents living alone, distant children and several relatives sharing care. These qualitative comments do not establish how widespread the need is.",
+      "classification": "Observed feedback and team confirmation",
+      "basis": "S18; S21; S23",
+      "locator": "Two supplied chat screenshots and consultation context"
+    },
+    {
+      "id": "C06",
+      "claim": "A user receives a local browser application, sample care profiles, reminder plans, responsibility records and downloadable reports. It runs through a local server; the original two-phone example and the working household have separate histories.",
+      "classification": "Observed fact",
+      "basis": "S05; S06",
+      "locator": "newState, saveSchedule, report; browser workspace observation"
+    },
+    {
+      "id": "C07",
+      "claim": "The working sequence is to choose a recipient and responsible family member, start a reminder, record a self-reported response or help request, record a family outcome or handover, and generate a report from those saved actions.",
+      "classification": "Observed fact",
+      "basis": "S04",
+      "locator": "E01, E02, E06"
+    },
+    {
+      "id": "C08",
+      "claim": "The confirmed proposed family prices are Free ¥0, Plus ¥39/month or ¥390/year, Pro 5x ¥79/month or ¥790/year, and Pro 20x ¥99/month or ¥990/year. Annual totals are paid upfront in the proposal; the current offline evaluation costs ¥0.",
+      "classification": "Observed fact",
+      "basis": "S02; S05; S04",
+      "locator": "Prior owner pricing carried in PLANS; E04 totals. Prices are proposals for a future service."
+    },
+    {
+      "id": "C09",
+      "claim": "The table capacities are offline product defaults. The Pro options have identical care features; 5x and 20x describe the monthly AI allowance relative to Plus. The assistant generates local templates rather than calling a live model.",
+      "classification": "Observed fact",
+      "basis": "S05",
+      "locator": "PLANS and generate"
+    },
+    {
+      "id": "C10",
+      "claim": "Checkout is simulated and the actual charge is zero. Failure or cancellation does not activate a plan. A successful local activation enables paid-tier features, while quota exhaustion does not block the core care response.",
+      "classification": "Observed fact",
+      "basis": "S04",
+      "locator": "E02–E05"
+    },
+    {
+      "id": "C11",
+      "claim": "For the cost model, one unit means one active paying family for one month. Its assumed variable cost is ¥18.19 in the base scenario. Actual development hours, staff costs and supplier quotations have not been recorded, so no measured cost to build the first app or serve a real family is claimed.",
+      "classification": "Calculation with unvalidated inputs",
+      "basis": "S10",
+      "locator": "assumptions, calculated.variableCost and excluded"
+    },
+    {
+      "id": "C12",
+      "claim": "The version comparison below uses the earliest retained screenshot available for this report and the current working household. The earlier picture shows one older-adult and family pair. The current view shows saved care items, named responsibility and distinct open and recorded-outcome states.",
+      "classification": "Observed fact",
+      "basis": "S03; S07; S14",
+      "locator": "Earlier retained prototype, original workspace capture and fresh full-resolution source S14; the report enlarges the open care-item detail."
+    },
+    {
+      "id": "C13",
+      "claim": "The verified report file contains the entered follow-up note and a handover, with 2,322 decoded characters and 2,329 UTF-8 bytes. Its content matches the report preview used in the download check.",
+      "classification": "Observed fact",
+      "basis": "S06; S09",
+      "locator": "download observation, character count and SHA-256"
+    },
+    {
+      "id": "C14",
+      "claim": "On 20 September 2026, the coding assistant ran twelve automated functional experiments against a saved snapshot of the product rules. The evidence records each belief, procedure and result. These are implementation tests, not observations of market demand.",
+      "classification": "Observed fact",
+      "basis": "S04; S12",
+      "locator": "recordedAt, executor, results and reproduction script"
+    },
+    {
+      "id": "C15",
+      "claim": "A reconstructed period-only open-item rule counted zero open reminders after eight days even though one remained unresolved. The current all-date rule counted one and included it in the report. This experiment demonstrates why the reporting window must not hide open work.",
+      "classification": "Observed fact",
+      "basis": "S04",
+      "locator": "E08. The rejected rule is explicitly a reconstruction."
+    },
+    {
+      "id": "C16",
+      "claim": "A reconstructed full replacement reset retained zero outreach fixtures. The current care-only reset retained the one fixture and its unsent request. The fixture was synthetic and never entered the real outreach log.",
+      "classification": "Observed fact",
+      "basis": "S04",
+      "locator": "E10. Reconstructed rejected rule compared with current reset."
+    },
+    {
+      "id": "C17",
+      "claim": "The revenue hypothesis is an optional subscription paid per family. The model assumes 70% Plus, 20% Pro 5x and 10% Pro 20x; within each plan, 60% pay monthly and 40% annually. Annual revenue is divided by 12 for monthly comparison.",
+      "classification": "Scenario assumption",
+      "basis": "S10",
+      "locator": "assumptions; formula in S12"
+    },
+    {
+      "id": "C18",
+      "claim": "The calculated monthly revenue per paid family is ¥49.47. Variable cost including replacement acquisition is ¥18.19, leaving contribution of ¥31.27. With ¥30,000 fixed monthly operations, break-even is 960 paid families; at 800 families the monthly result is a loss of ¥4,982.40.",
+      "classification": "Calculation with unvalidated inputs",
+      "basis": "S10",
+      "locator": "calculated values"
+    },
+    {
+      "id": "C19",
+      "claim": "Allocating fixed costs over 800 assumed paying families gives a total monthly cost of ¥55.69 per family. The model excludes initial development, launch costs, growth acquisition, financing and taxes. It does not establish the cost or time needed to acquire 800 families.",
+      "classification": "Calculation with unvalidated inputs",
+      "basis": "S10",
+      "locator": "calculated.costIncludingFixedAt800 and excluded"
+    },
+    {
+      "id": "C20",
+      "claim": "The team confirms eight individual consultations on 20–22 September 2026 and product-experience invitations emailed to ten organisations on 20 September. Those emails included an MVP demonstration video and product introduction PDF. No organisational reply had been received as of the team update on 22 September.",
+      "classification": "Team-confirmed outreach with selected supporting screenshots",
+      "basis": "S22; S23; S24",
+      "locator": "Team count/date/attachment confirmation; six visible email rows"
+    },
+    {
+      "id": "C21",
+      "claim": "The supplied chats show interest in trying the product, a preference for named responsibility, conditional acceptance of RMB39/month, and requests for automatic notifications and shared updates. The materials contain no completed purchase, deposit, agreed pilot or observed product trial. No-reply institutional contacts remain pending rather than classified as rejections.",
+      "classification": "Observed feedback and team confirmation",
+      "basis": "S18; S19; S20; S21; S23",
+      "locator": "Visible chat responses and owner-reported institutional outcome"
+    },
+    {
+      "id": "C22",
+      "claim": "For the requirement to make at least ten commercial offers, the team reports ten organisational product-experience invitations. The report presents a selected email-list screenshot rather than reproducing all correspondence. The eight individual consultations are recorded separately and are not automatically counted as eight additional commercial offers.",
+      "classification": "Outreach scope and selected evidence",
+      "basis": "S13; S22; S23; S24",
+      "locator": "Course requirement compared with invitation content and available proof"
+    },
+    {
+      "id": "C23",
+      "claim": "The functional evidence covers controlled local scenarios and a local browser. It does not establish cross-device delivery, real accounts, reliability in service, clinical effects or live billing.",
+      "classification": "Evidence limitation",
+      "basis": "S04; S05; S06",
+      "locator": "Experiment scope and local implementation boundary"
+    },
+    {
+      "id": "C24",
+      "claim": "The course requires one team submission, a report of no more than 20 pages excluding the appendix, and a seven-minute presentation in four prescribed parts. The supplied final instructions do not state a calendar deadline.",
+      "classification": "Observed fact",
+      "basis": "S01",
+      "locator": "Report and presentation requirements"
+    },
+    {
+      "id": "C25",
+      "claim": "The page-one team roster is Group6 with the eight names and student numbers shown.",
+      "classification": "Owner-provided identity information",
+      "basis": "S02",
+      "locator": "members array. Supplied by the project owner; not independently verified against university records."
+    },
+    {
+      "id": "C26",
+      "claim": "The model input table uses service/support/AI 12, five free families at 0.50, processing 1%, churn 4%, acquisition 80, fixed operations 30000 and 800 paying families.",
+      "classification": "Scenario assumptions",
+      "basis": "S10",
+      "locator": "assumptions object. These are not measured customer data or supplier quotations."
+    },
+    {
+      "id": "C27",
+      "claim": "No completed outside-user task observation or timed speaking rehearsal is included in the report evidence. The six-minute-thirty-second presentation schedule is a plan.",
+      "classification": "Evidence limitation",
+      "basis": "S04; S06",
+      "locator": "Scope of experiment and browser records. The speaker schedule is a future rehearsal aid, not a measured result."
+    },
+    {
+      "id": "C28",
+      "classification": "Observed feedback and team confirmation",
+      "basis": "S05; S15; S19",
+      "locator": "Plan rules and conditional price response",
+      "claim": "The proposed tiers address different needs. Plus at RMB 39/month supports everyday responsibility, multiple plans and report export. Pro 5x at RMB 79/month adds rota, backups, handovers and adjustable follow-up. Pro 20x at RMB 99/month retains the same Pro care features and adds 300 generations for RMB 20 more per month. One contact conditionally accepts RMB39/month if the service is reliable and used regularly; this does not establish a paid conversion."
+    },
+    {
+      "id": "C29",
+      "classification": "Verified local allowance rules",
+      "basis": "S05; S15; S16",
+      "locator": "generate, nextCycle, activate and resetPurchase; Q01-Q06 in value-checks.json",
+      "claim": "Plus provides 20 successful local generations per monthly cycle, Pro 5x 100 and Pro 20x 400. All roles and recipients in a household share the counter. Each new successful generation, including regeneration, costs one use; failed, cancelled or invalid requests cost zero. Reading or saving an existing draft and exporting a care report cost zero. Unused allowance does not roll over. Plan changes preserve usage, while a new monthly demo cycle resets it and retains past drafts. Annual totals equal ten monthly fees but do not multiply the monthly allowance."
+    },
+    {
+      "id": "C30",
+      "classification": "Recorded implementation experiment",
+      "basis": "S15; S16",
+      "locator": "15 results and source hashes in value-checks.json",
+      "claim": "Fifteen additional automated checks recorded on 20 September 2026 cover nine scenario steps and six allowance contracts. All passed. The examples execute the same local product rules in isolated sample households. These checks supplement the original twelve experiments; they are not customer participants or evidence of willingness to pay."
+    },
+    {
+      "id": "C31",
+      "claim": "The team-prepared feedback document contains eight bilingual question-and-answer themes, not a response-by-person dataset. It covers willingness to try, responsibility, ease of use, price, free evaluation, privacy, target households and proposed features. Four chat screenshots support selected themes; individual-level percentages cannot be calculated from this material.",
+      "basis": "S17; S18; S19; S20; S21",
+      "locator": "Eight numbered topics and four screenshots",
+      "classification": "Thematic summary with limited attribution"
+    },
+    {
+      "id": "C32",
+      "claim": "Earlier ten-record course simulations, including the four-interested, four-declined and two-pending split, are archived separately. They contribute zero contacts, responses or commitments to this updated actual-outreach account.",
+      "basis": "S11; S24",
+      "locator": "Archived content file and current register",
+      "classification": "Method and exclusion rule"
+    },
+    {
+      "id": "C33",
+      "classification": "Visible email greeting examples",
+      "claim": "The email-list preview includes greetings to Taikang Home, Xinrong Linbang and Xiaode Zhineng. These examples identify the intended addressee in the message greeting; the screenshot does not independently establish the mailbox’s organisational ownership, delivery or a partnership. All ten institutional contacts remain without a reported reply as of 22 September.",
+      "basis": "S22; S24",
+      "locator": "Email-list rows 4–6; named examples in the current register"
+    }
+  ],
+  "sources": [
+    {
+      "id": "S01",
+      "type": "Producible source",
+      "file": "evidence/course-instructions.txt",
+      "scope": "Owner-supplied course requirements. The text provides no calendar deadline."
+    },
+    {
+      "id": "S02",
+      "type": "Producible source",
+      "file": "evidence/owner-instructions.json",
+      "scope": "Owner-supplied Group6 identities, Stop decision, pricing and confirmation that the teacher permits formal records within the course simulation. Teacher permission is owner-reported."
+    },
+    {
+      "id": "S03",
+      "type": "Producible source",
+      "file": "evidence/earlier-prototype.png",
+      "scope": "Earliest retained screenshot used in this report. Shows the two-phone example; capture date and first-ever version status are not established."
+    },
+    {
+      "id": "S04",
+      "type": "Recorded experiment",
+      "file": "evidence/functional-experiments.json",
+      "scope": "12 automated functional experiments on 20 September 2026. Controlled scenario fixtures, no external participants. E08 and E10 compare reconstructed rejected rules with current rules."
+    },
+    {
+      "id": "S05",
+      "type": "Producible source",
+      "file": "evidence/product-core-tested.js",
+      "scope": "Exact tested product rules and pricing. It establishes implementation, not demand or medical reliability."
+    },
+    {
+      "id": "S06",
+      "type": "Recorded experiment",
+      "file": "evidence/browser-observations.json",
+      "scope": "Local browser observations and report-download comparison. Identifies dates, actions, counts and limitations."
+    },
+    {
+      "id": "S07",
+      "type": "Producible source",
+      "file": "evidence/current-workspace.png",
+      "scope": "Retained screenshot of the working care desk from the 20 September 2026 local demonstration. Course scenario records; no outside user is shown."
+    },
+    {
+      "id": "S08",
+      "type": "Producible source",
+      "file": "evidence/report-preview.txt",
+      "scope": "Text read directly from the actual report preview on 20 September 2026; compare with the downloaded file S09."
+    },
+    {
+      "id": "S09",
+      "type": "Producible source",
+      "file": "evidence/downloaded-report-example.txt",
+      "scope": "Actual downloaded local report from the course demonstration. It is not a medical record."
+    },
+    {
+      "id": "S10",
+      "type": "Recorded calculation",
+      "file": "evidence/economics-scenario.json",
+      "scope": "Reproducible arithmetic from explicit assumptions. Neither cost quotes nor observed customer behaviour."
+    },
+    {
+      "id": "S11",
+      "type": "Producible source",
+      "file": "evidence/course-records-archive.js",
+      "scope": "Archived 20 September course exercise. Synthetic contact identities and responses are excluded from the actual outreach and current commitment counts."
+    },
+    {
+      "id": "S12",
+      "type": "Reproduction procedure",
+      "file": "evidence/run-functional-experiments.cjs",
+      "scope": "Run with Node.js to reproduce experiments against the supplied source snapshot. Results go to evidence-rerun."
+    },
+    {
+      "id": "S13",
+      "type": "Producible source",
+      "file": "evidence/earlier-course-notice.jpg",
+      "scope": "Original owner-supplied course announcement requiring at least ten real offers and an outreach record."
+    },
+    {
+      "id": "S14",
+      "type": "Fresh product screenshot",
+      "file": "evidence/current-workspace-hd.jpg",
+      "scope": "Actual existing local workspace, recaptured on 20 September 2026 at 1180 by 1000 pixels. No record changes. The report and slides crop and enlarge the open care item; the complete capture is retained here."
+    },
+    {
+      "id": "S15",
+      "type": "Value and allowance checks",
+      "file": "evidence/value-checks.json",
+      "scope": "Fifteen recorded automated checks: nine care-scenario steps and six allowance contracts. Local controlled fixtures, no external participants; original experiment records remain unchanged."
+    },
+    {
+      "id": "S16",
+      "type": "Value-check reproduction script",
+      "file": "evidence/run-value-checks.cjs",
+      "scope": "Reproduces the checks against product-core.js and plan-value.js. The default output goes to evidence-rerun; it does not change browser records or send messages."
+    },
+    {
+      "id": "S17",
+      "type": "Team-prepared feedback summary",
+      "file": "evidence/outreach-20260922/feedback-questions-answers.docx",
+      "scope": "Eight bilingual question-and-answer themes supplied by the team. Chinese answers are labelled examples in the document; it is a thematic summary, not eight individually attributed transcripts."
+    },
+    {
+      "id": "S18",
+      "type": "Chat evidence: responsibility",
+      "file": "evidence/outreach-20260922/chat-responsibility.png",
+      "scope": "Product PDF shared; contact prioritises named responsibility. A 20:11 marker is visible, with no calendar date. Consultation range is confirmed separately in S23."
+    },
+    {
+      "id": "S19",
+      "type": "Chat evidence: price",
+      "file": "evidence/outreach-20260922/chat-price.png",
+      "scope": "Product PDF and RMB39/month question visible. Acceptance is conditional on reliability and regular use; simple reminders could feel expensive. A 20:18 marker is visible, no calendar date."
+    },
+    {
+      "id": "S20",
+      "type": "Chat evidence: proposed features",
+      "file": "evidence/outreach-20260922/chat-notifications.png",
+      "scope": "Contact requests automatic notifications and shared current updates. A 20:21 marker is visible, no calendar date. These features remain proposed."
+    },
+    {
+      "id": "S21",
+      "type": "Chat evidence: interest and target users",
+      "file": "evidence/outreach-20260922/chat-trial.png",
+      "scope": "Contact expresses willingness to try and identifies households with parents living alone, distant children or shared caregiving. A 20:29 marker is visible, no calendar date."
+    },
+    {
+      "id": "S22",
+      "type": "Email-list screenshot",
+      "file": "evidence/outreach-20260922/email-list.png",
+      "scope": "Six email-list rows with product-experience invitation subjects are visible. Greeting examples include Taikang Home, Xinrong Linbang and Xiaode Zhineng. This is a representative selection from the ten-organisation campaign, not the full correspondence archive."
+    },
+    {
+      "id": "S23",
+      "type": "Team confirmation on outreach",
+      "file": "evidence/outreach-20260922/team-confirmation.json",
+      "scope": "Owner confirms eight individuals consulted on 20–22 September 2026 and ten organisations emailed on 20 September with MVP video and product PDF; no institutional replies reported by 22 September."
+    },
+    {
+      "id": "S24",
+      "type": "Current outreach register",
+      "file": "evidence/outreach-register-2026-09-22.json",
+      "scope": "18 separate entries: eight consultations and ten organisation emails. The displayed screenshots are representative selections. Individual discussions are not automatically counted as commercial offers."
+    }
+  ],
+  "appendixIntro": "This register covers the report narrative, tables, captions and identities. Actual outreach is documented through team confirmations, the supplied feedback summary and screenshots. Observed screenshot content is separated from unshown details, estimates, model assumptions and proposed actions. Earlier fictional outreach is archived and excluded. No clinical-effect or representative market claims are made.",
+  "outreachAppendix": {
+    "summary": {
+      "asOf": "2026-09-22",
+      "individualCount": 8,
+      "organisationCount": 10,
+      "organisationReplies": 0,
+      "personalScreenshots": 4,
+      "visibleEmailRows": 6,
+      "records": [
+        {
+          "id": "P01",
+          "target": "Individual 01",
+          "channel": "WeChat",
+          "date": "2026-09-20 to 2026-09-22 (team-confirmed range)",
+          "time": "Date range recorded; exact time omitted from this summary",
+          "offer": "Product introduction and feedback discussion; product PDF visible",
+          "outcome": "Feedback received",
+          "evidence": "S18",
+          "response": "Named responsibility is useful because family members can assume someone else will follow up.",
+          "notes": "The visible chat shows a product discussion, not a completed purchase or observed task.",
+          "next": "If the project reopens, invite a consented task trial and record the result.",
+          "status": "Screenshot-backed discussion"
+        },
+        {
+          "id": "P02",
+          "target": "Individual 02",
+          "channel": "WeChat",
+          "date": "2026-09-20 to 2026-09-22 (team-confirmed range)",
+          "time": "Date range recorded; exact time omitted from this summary",
+          "offer": "Product introduction and feedback discussion; product PDF visible",
+          "outcome": "Feedback received",
+          "evidence": "S19",
+          "response": "RMB39/month could be acceptable if reliable and used regularly; reminders alone could feel expensive.",
+          "notes": "The visible chat shows a product discussion, not a completed purchase or observed task.",
+          "next": "If the project reopens, invite a consented task trial and record the result.",
+          "status": "Screenshot-backed discussion"
+        },
+        {
+          "id": "P03",
+          "target": "Individual 03",
+          "channel": "WeChat",
+          "date": "2026-09-20 to 2026-09-22 (team-confirmed range)",
+          "time": "Date range recorded; exact time omitted from this summary",
+          "offer": "Product introduction and feedback discussion; product PDF visible",
+          "outcome": "Feedback received",
+          "evidence": "S20",
+          "response": "Requests automatic alerts after no response and shared current updates.",
+          "notes": "The visible chat shows a product discussion, not a completed purchase or observed task.",
+          "next": "If the project reopens, invite a consented task trial and record the result.",
+          "status": "Screenshot-backed discussion"
+        },
+        {
+          "id": "P04",
+          "target": "Individual 04",
+          "channel": "WeChat",
+          "date": "2026-09-20 to 2026-09-22 (team-confirmed range)",
+          "time": "Date range recorded; exact time omitted from this summary",
+          "offer": "Product introduction and feedback discussion; product PDF visible",
+          "outcome": "Feedback received",
+          "evidence": "S21",
+          "response": "Willing to try; sees use for older parents living alone, children in different cities and shared family care.",
+          "notes": "The visible chat shows a product discussion, not a completed purchase or observed task.",
+          "next": "If the project reopens, invite a consented task trial and record the result.",
+          "status": "Screenshot-backed discussion"
+        },
+        {
+          "id": "P05",
+          "target": "Individual 05",
+          "channel": "Not specified individually",
+          "date": "2026-09-20 to 2026-09-22 (team-confirmed range)",
+          "time": "Date range recorded; exact time omitted from this summary",
+          "offer": "Product introduction and feedback consultation",
+          "outcome": "Feedback received",
+          "evidence": "S23 (team confirmation; excerpt not selected)",
+          "response": "Individual transcript not reproduced in this concise selection; feedback themes are summarised collectively.",
+          "notes": "One of the eight consultations; not selected for individual screenshot display.",
+          "next": "If the project reopens, invite a consented task trial and record the result.",
+          "status": "Team-reported consultation"
+        },
+        {
+          "id": "P06",
+          "target": "Individual 06",
+          "channel": "Not specified individually",
+          "date": "2026-09-20 to 2026-09-22 (team-confirmed range)",
+          "time": "Date range recorded; exact time omitted from this summary",
+          "offer": "Product introduction and feedback consultation",
+          "outcome": "Feedback received",
+          "evidence": "S23 (team confirmation; excerpt not selected)",
+          "response": "Individual transcript not reproduced in this concise selection; feedback themes are summarised collectively.",
+          "notes": "One of the eight consultations; not selected for individual screenshot display.",
+          "next": "If the project reopens, invite a consented task trial and record the result.",
+          "status": "Team-reported consultation"
+        },
+        {
+          "id": "P07",
+          "target": "Individual 07",
+          "channel": "Not specified individually",
+          "date": "2026-09-20 to 2026-09-22 (team-confirmed range)",
+          "time": "Date range recorded; exact time omitted from this summary",
+          "offer": "Product introduction and feedback consultation",
+          "outcome": "Feedback received",
+          "evidence": "S23 (team confirmation; excerpt not selected)",
+          "response": "Individual transcript not reproduced in this concise selection; feedback themes are summarised collectively.",
+          "notes": "One of the eight consultations; not selected for individual screenshot display.",
+          "next": "If the project reopens, invite a consented task trial and record the result.",
+          "status": "Team-reported consultation"
+        },
+        {
+          "id": "P08",
+          "target": "Individual 08",
+          "channel": "Not specified individually",
+          "date": "2026-09-20 to 2026-09-22 (team-confirmed range)",
+          "time": "Date range recorded; exact time omitted from this summary",
+          "offer": "Product introduction and feedback consultation",
+          "outcome": "Feedback received",
+          "evidence": "S23 (team confirmation; excerpt not selected)",
+          "response": "Individual transcript not reproduced in this concise selection; feedback themes are summarised collectively.",
+          "notes": "One of the eight consultations; not selected for individual screenshot display.",
+          "next": "If the project reopens, invite a consented task trial and record the result.",
+          "status": "Team-reported consultation"
+        },
+        {
+          "id": "O01",
+          "target": "Organisation 01",
+          "channel": "Email",
+          "date": "2026-09-20 (team-confirmed)",
+          "time": "22:05 shown in email-list row; timezone not visible",
+          "offer": "Product experience invitation with MVP demo video and product introduction PDF (team-confirmed attachments). Correspondence is represented by selected excerpts.",
+          "outcome": "No reply reported as of 2026-09-22",
+          "evidence": "S22 row 1; S23",
+          "response": "No response reported. This is not a rejection.",
+          "notes": "Anonymous row identifier; organisation identity and full sent message not independently checked.",
+          "next": "Archive the contact and available evidence under Stop; no follow-up has been sent by the assistant.",
+          "status": "Visible email-list row plus team confirmation"
+        },
+        {
+          "id": "O02",
+          "target": "Organisation 02",
+          "channel": "Email",
+          "date": "2026-09-20 (team-confirmed)",
+          "time": "22:05 shown in email-list row; timezone not visible",
+          "offer": "Product experience invitation with MVP demo video and product introduction PDF (team-confirmed attachments). Correspondence is represented by selected excerpts.",
+          "outcome": "No reply reported as of 2026-09-22",
+          "evidence": "S22 row 2; S23",
+          "response": "No response reported. This is not a rejection.",
+          "notes": "Anonymous row identifier; organisation identity and full sent message not independently checked.",
+          "next": "Archive the contact and available evidence under Stop; no follow-up has been sent by the assistant.",
+          "status": "Visible email-list row plus team confirmation"
+        },
+        {
+          "id": "O03",
+          "target": "Organisation 03",
+          "channel": "Email",
+          "date": "2026-09-20 (team-confirmed)",
+          "time": "22:03 shown in email-list row; timezone not visible",
+          "offer": "Product experience invitation with MVP demo video and product introduction PDF (team-confirmed attachments). Correspondence is represented by selected excerpts.",
+          "outcome": "No reply reported as of 2026-09-22",
+          "evidence": "S22 row 3; S23",
+          "response": "No response reported. This is not a rejection.",
+          "notes": "Anonymous row identifier; organisation identity and full sent message not independently checked.",
+          "next": "Archive the contact and available evidence under Stop; no follow-up has been sent by the assistant.",
+          "status": "Visible email-list row plus team confirmation"
+        },
+        {
+          "id": "O04",
+          "target": "Taikang Home (name in email greeting)",
+          "channel": "Email",
+          "date": "2026-09-20 (team-confirmed)",
+          "time": "22:02 shown in email-list row; timezone not visible",
+          "offer": "Product experience invitation with MVP demo video and product introduction PDF (team-confirmed attachments). Correspondence is represented by selected excerpts.",
+          "outcome": "No reply reported as of 2026-09-22",
+          "evidence": "S22 row 4; S23",
+          "response": "No response reported. This is not a rejection.",
+          "notes": "Screenshot greeting: 泰康之家. Visible recipient: sales@adinnet.cn. This does not independently verify the organisation-mailbox relationship or delivery.",
+          "next": "Archive the contact and available evidence under Stop; no follow-up has been sent by the assistant.",
+          "status": "Visible email-list row plus team confirmation"
+        },
+        {
+          "id": "O05",
+          "target": "Xinrong Linbang (name in email greeting)",
+          "channel": "Email",
+          "date": "2026-09-20 (team-confirmed)",
+          "time": "22:01 shown in email-list row; timezone not visible",
+          "offer": "Product experience invitation with MVP demo video and product introduction PDF (team-confirmed attachments). Correspondence is represented by selected excerpts.",
+          "outcome": "No reply reported as of 2026-09-22",
+          "evidence": "S22 row 5; S23",
+          "response": "No response reported. This is not a rejection.",
+          "notes": "Screenshot greeting: 新融邻帮. Visible recipient: cs@eohelp.com. This does not independently verify the organisation-mailbox relationship or delivery.",
+          "next": "Archive the contact and available evidence under Stop; no follow-up has been sent by the assistant.",
+          "status": "Visible email-list row plus team confirmation"
+        },
+        {
+          "id": "O06",
+          "target": "Xiaode Zhineng (name in email greeting)",
+          "channel": "Email",
+          "date": "2026-09-20 (team-confirmed)",
+          "time": "22:00 shown in email-list row; timezone not visible",
+          "offer": "Product experience invitation with MVP demo video and product introduction PDF (team-confirmed attachments). Correspondence is represented by selected excerpts.",
+          "outcome": "No reply reported as of 2026-09-22",
+          "evidence": "S22 row 6; S23",
+          "response": "No response reported. This is not a rejection.",
+          "notes": "Screenshot greeting: 孝德智能. Visible recipient: info@xiaodeyun.com. This does not independently verify the organisation-mailbox relationship or delivery.",
+          "next": "Archive the contact and available evidence under Stop; no follow-up has been sent by the assistant.",
+          "status": "Visible email-list row plus team confirmation"
+        },
+        {
+          "id": "O07",
+          "target": "Organisation 07",
+          "channel": "Email",
+          "date": "2026-09-20 (team-confirmed)",
+          "time": "Not supplied",
+          "offer": "Product experience invitation with MVP demo video and product introduction PDF (team-confirmed attachments). Correspondence is represented by selected excerpts.",
+          "outcome": "No reply reported as of 2026-09-22",
+          "evidence": "S23 (team confirmation only)",
+          "response": "No response reported. This is not a rejection.",
+          "notes": "Anonymous row identifier; organisation identity and full sent message not independently checked.",
+          "next": "Archive the contact and available evidence under Stop; no follow-up has been sent by the assistant.",
+          "status": "Team-reported email"
+        },
+        {
+          "id": "O08",
+          "target": "Organisation 08",
+          "channel": "Email",
+          "date": "2026-09-20 (team-confirmed)",
+          "time": "Not supplied",
+          "offer": "Product experience invitation with MVP demo video and product introduction PDF (team-confirmed attachments). Correspondence is represented by selected excerpts.",
+          "outcome": "No reply reported as of 2026-09-22",
+          "evidence": "S23 (team confirmation only)",
+          "response": "No response reported. This is not a rejection.",
+          "notes": "Anonymous row identifier; organisation identity and full sent message not independently checked.",
+          "next": "Archive the contact and available evidence under Stop; no follow-up has been sent by the assistant.",
+          "status": "Team-reported email"
+        },
+        {
+          "id": "O09",
+          "target": "Organisation 09",
+          "channel": "Email",
+          "date": "2026-09-20 (team-confirmed)",
+          "time": "Not supplied",
+          "offer": "Product experience invitation with MVP demo video and product introduction PDF (team-confirmed attachments). Correspondence is represented by selected excerpts.",
+          "outcome": "No reply reported as of 2026-09-22",
+          "evidence": "S23 (team confirmation only)",
+          "response": "No response reported. This is not a rejection.",
+          "notes": "Anonymous row identifier; organisation identity and full sent message not independently checked.",
+          "next": "Archive the contact and available evidence under Stop; no follow-up has been sent by the assistant.",
+          "status": "Team-reported email"
+        },
+        {
+          "id": "O10",
+          "target": "Organisation 10",
+          "channel": "Email",
+          "date": "2026-09-20 (team-confirmed)",
+          "time": "Not supplied",
+          "offer": "Product experience invitation with MVP demo video and product introduction PDF (team-confirmed attachments). Correspondence is represented by selected excerpts.",
+          "outcome": "No reply reported as of 2026-09-22",
+          "evidence": "S23 (team confirmation only)",
+          "response": "No response reported. This is not a rejection.",
+          "notes": "Anonymous row identifier; organisation identity and full sent message not independently checked.",
+          "next": "Archive the contact and available evidence under Stop; no follow-up has been sent by the assistant.",
+          "status": "Team-reported email"
+        }
+      ],
+      "themes": [
+        {
+          "theme": "Willingness to try",
+          "finding": "A contact expressed willingness to try because families cannot always know how a parent living alone is doing.",
+          "sources": "S21; S17",
+          "implication": "Show a short local follow-up workflow.",
+          "limit": "This is stated interest, not observed trial participation."
+        },
+        {
+          "theme": "Responsibility",
+          "finding": "A contact prioritised a named responsible person because relatives may each assume somebody else will act.",
+          "sources": "S18; S17",
+          "implication": "Lead the Plus explanation with responsibility and recorded follow-up.",
+          "limit": "A qualitative account, not a measured reduction in missed care."
+        },
+        {
+          "theme": "Ease of use",
+          "finding": "The team summary asks for large buttons, few steps and simple completed/help choices.",
+          "sources": "S17",
+          "implication": "Retain the simple older-adult screen.",
+          "limit": "This theme is summarised in S17; it is not an observed older-adult task-performance result."
+        },
+        {
+          "theme": "Price",
+          "finding": "One contact said RMB39/month could be acceptable with reliable, regular use, but simple reminders alone could feel expensive.",
+          "sources": "S19; S17",
+          "implication": "Keep the proposed price and show the workflow beyond reminders.",
+          "limit": "Conditional price feedback, not a payment commitment."
+        },
+        {
+          "theme": "Free evaluation",
+          "finding": "The summary favours trying the tool first to see whether the older person will use it and communication improves.",
+          "sources": "S17",
+          "implication": "Offer the existing free local evaluation.",
+          "limit": "No completed trial or retention observation supplied."
+        },
+        {
+          "theme": "Privacy",
+          "finding": "The summary identifies privacy and access to family information as concerns.",
+          "sources": "S17",
+          "implication": "If reopened, validate access control before connected service.",
+          "limit": "The local demo does not establish production security."
+        },
+        {
+          "theme": "Intended households",
+          "finding": "A contact highlighted parents living alone, children in other cities and several relatives sharing care.",
+          "sources": "S21; S17",
+          "implication": "Keep this as a segment hypothesis to test.",
+          "limit": "No representative sample or prevalence estimate."
+        },
+        {
+          "theme": "Notifications and shared updates",
+          "finding": "A contact requested notification of a designated family member after no response and simultaneous updates for relatives.",
+          "sources": "S20; S17",
+          "implication": "Record sync and remote notifications as future requirements.",
+          "limit": "Neither capability is connected in the current local MVP."
+        }
+      ],
+      "commercialOfferAssessment": "Ten organisational product-experience invitations were reported sent. Four chat records and one email-list image were selected to demonstrate the outreach without reproducing the entire archive. Eight personal consultations are tracked separately and are not automatically counted as eight commercial offers. Visible greeting examples include Taikang Home, Xinrong Linbang and Xiaode Zhineng; these are outreach examples, not responding partners.",
+      "priorSimulation": "Previous 4 interested / 4 declined / 2 pending exercise records are archived and excluded from the current outreach totals.",
+      "namedExamples": [
+        {
+          "id": "O04",
+          "name": "Taikang Home",
+          "originalGreeting": "泰康之家",
+          "visibleAddress": "sales@adinnet.cn",
+          "basis": "S22 email preview greeting; relationship not independently verified"
+        },
+        {
+          "id": "O05",
+          "name": "Xinrong Linbang",
+          "originalGreeting": "新融邻帮",
+          "visibleAddress": "cs@eohelp.com",
+          "basis": "S22 email preview greeting; relationship not independently verified"
+        },
+        {
+          "id": "O06",
+          "name": "Xiaode Zhineng",
+          "originalGreeting": "孝德智能",
+          "visibleAddress": "info@xiaodeyun.com",
+          "basis": "S22 email preview greeting; relationship not independently verified"
+        }
+      ]
+    },
+    "screenshots": [
+      {
+        "source": "S18",
+        "file": "evidence/outreach-20260922/chat-responsibility.png",
+        "caption": "Product PDF shared; contact prioritises named responsibility. A 20:11 marker is visible, with no calendar date. Consultation range is confirmed separately in S23."
+      },
+      {
+        "source": "S19",
+        "file": "evidence/outreach-20260922/chat-price.png",
+        "caption": "Product PDF and RMB39/month question visible. Acceptance is conditional on reliability and regular use; simple reminders could feel expensive. A 20:18 marker is visible, no calendar date."
+      },
+      {
+        "source": "S20",
+        "file": "evidence/outreach-20260922/chat-notifications.png",
+        "caption": "Contact requests automatic notifications and shared current updates. A 20:21 marker is visible, no calendar date. These features remain proposed."
+      },
+      {
+        "source": "S21",
+        "file": "evidence/outreach-20260922/chat-trial.png",
+        "caption": "Contact expresses willingness to try and identifies households with parents living alone, distant children or shared caregiving. A 20:29 marker is visible, no calendar date."
+      },
+      {
+        "source": "S22",
+        "file": "evidence/outreach-20260922/email-list.png",
+        "caption": "Six email-list rows with product experience invitation subjects are visible. Representative email-list excerpt selected for brevity. Examples include Taikang Home, Xinrong Linbang and Xiaode Zhineng. The campaign covered ten organisations."
+      }
+    ]
+  }
+}

@@ -1,0 +1,25 @@
+Final project instructions supplied by the project owner on 20 September 2026
+
+The report is compulsory and is what is marked, the presentation is given in class.
+One report per team. ONLY ONE SUBMISSION PER GROUP.
+Clearly state all group members' names and student numbers on the report.
+Page limit: 20 pages plus appendix. No page limit for appendix.
+Submit a PDF or Word file on Blackboard, with team name and all members' names on page one.
+The source says nine sections but explicitly enumerates the following eight, followed by the appendix.
+
+1. The decision: Continue, pivot, narrow or stop. Put the real decision on page one.
+2. Problem and customer: Who has this problem, and how do you know it is not just you?
+3. The product: What it is, what a customer receives, the complete workflow, customer cost and your cost to make one.
+4. Show the product: Pictures, screenshots, links; someone outside the team using it if suitable; first version next to current version.
+5. What you tested: What you believed, did and observed, including failures.
+6. Model and numbers: Where money comes from and whether the arithmetic works.
+7. Commitment: Obtained commitments and proof. Failed commitments and rejections also count.
+8. Limitations: What is still unknown.
+
+Appendix: List every factual claim, what it rests on and where proof is. Evidence must be an action by a person with a date and count, a source that can be produced, or a recorded experiment. Rewrite or delete unsupported claims. Supporting screenshots and product information may be included.
+Grading prioritises authentic evidence and judgement. A well-evidenced stop can score better than an unsupported continue decision.
+
+Presentation: Last class, team or designated presenter, seven-minute hard limit, questions afterwards.
+Cover these four sections in order: (1) where the venture is, for whom, and stage reached; (2) evidence and commitment, including market experience from problem through prototype to MVP; (3) working product demonstration; (4) decision and next 90 days.
+Slides are optional or recommended. The report is marked. An attendance-exempt team must upload a video with the same four parts and seven-minute limit, everyone appearing and speaking, with the report by the same deadline.
+No calendar deadline is included in the supplied text.

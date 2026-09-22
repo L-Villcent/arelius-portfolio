@@ -1,0 +1,23 @@
+{
+  "recordedOn": "2026-09-22",
+  "source": "Project owner messages in this task; source statement rather than independently inspected mail account",
+  "individuals": 8,
+  "individualConsultationDates": "2026-09-20 through 2026-09-22",
+  "organisations": 10,
+  "organisationEmailDate": "2026-09-20",
+  "organisationRepliesAsOf20260922": 0,
+  "emailAttachments": [
+    "MVP demonstration video",
+    "Product introduction PDF"
+  ],
+  "organisationNames": "Anonymous identifiers requested by the owner",
+  "exactIndividualDatesAndTimes": "Not supplied per person",
+  "fullEmailBodiesAndFourAdditionalEmailRows": "Not supplied",
+  "purchaseOrPaidPilotEvidence": "None supplied",
+  "originalStatements": [
+    "目前，我们询问了大概八个人对我们产品的想法，十个机构企业的email均未回复我们，我们整理了一下个人对我们的建议和想法。做成了文档，同时附上几个截图作为证据。",
+    "个人咨询集中在九月20日至22日，机构的集中在20日，个人是八位。机构名称我认为不用明确写出，油价包含了MVP演示视频和产品介绍pdf。"
+  ],
+  "interpretationOfTypo": "In context, 油价 is treated as 邮件 (email), referring to the included video and PDF, not to oil prices.",
+  "displaySelection": "The team confirmed that four chats and one email screenshot were selected for concise presentation, not because these are the only records."
+}

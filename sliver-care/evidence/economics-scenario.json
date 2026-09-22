@@ -1,0 +1,29 @@
+{
+  "type": "Illustrative scenario, not observed unit costs or a forecast",
+  "unit": "One active paying family per month",
+  "assumptions": {
+    "planMix": [
+      0.7,
+      0.2,
+      0.1
+    ],
+    "monthlyBillingShare": 0.6,
+    "serviceSupportAI": 12,
+    "freeFamiliesPerPaid": 5,
+    "freeFamilyCost": 0.5,
+    "paymentFeeFraction": 0.01,
+    "churnFraction": 0.04,
+    "replacementAcquisitionCost": 80,
+    "fixedOperations": 30000,
+    "paidFamilies": 800
+  },
+  "calculated": {
+    "arpu": 49.46666666666667,
+    "variableCost": 18.194666666666667,
+    "contribution": 31.272000000000002,
+    "breakEvenFamilies": 960,
+    "monthlyResult": -4982.399999999998,
+    "costIncludingFixedAt800": 55.69466666666666
+  },
+  "excluded": "Tax, financing, initial build effort, launch costs and growth acquisition. Actual developer hours and supplier quotes are unavailable."
+}

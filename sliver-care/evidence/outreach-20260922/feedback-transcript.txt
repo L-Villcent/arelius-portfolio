@@ -1,0 +1,80 @@
+问题：
+1. 使用意愿 / Willingness to Use
+中文问题：
+如果你的父母或祖父母独自生活，你愿意尝试使用 Sliver Care 这样的家庭养老协作工具吗？为什么？
+English Question:
+If your parents or grandparents lived alone, would you be willing to try a family-care coordination tool like Sliver Care? Why or why not?
+中文回答示例：
+我愿意尝试，因为如果老人独自生活，家人不一定能随时知道他们的情况。这个工具可以帮助家庭成员记录提醒和后续处理，我觉得比较方便。
+English Answer:
+Yes, I would be willing to try it because family members may not always know what is happening when an older person lives alone. This tool could help us record reminders and follow-up actions, which seems useful.
+
+2. 最有用的功能 / Most Useful Feature
+中文问题：
+在提醒、家庭成员责任分配、后续记录和照护报告这些功能中，你觉得哪个最有用？为什么？
+English Question:
+Among reminders, assigning responsibility to family members, follow-up records, and care reports, which feature would be the most useful to you? Why?
+中文回答示例：
+我觉得责任分配最有用，因为有时候家里人都会以为其他人会去联系老人，最后反而没人处理。如果系统能清楚显示谁负责，会减少这种情况。
+English Answer:
+I think assigning responsibility would be the most useful feature. Sometimes family members may assume that someone else will contact the older person, and then nobody actually does it. A clear responsibility record could reduce this problem.
+
+3. 老人是否容易使用 / Ease of Use for Older Adults
+中文问题：
+你觉得老年人自己使用这样的系统会不会有困难？你希望界面有什么特点？
+English Question:
+Do you think older adults would have difficulty using this kind of system? What kind of interface would you prefer?
+中文回答示例：
+我觉得有些老人可能会觉得复杂，所以界面应该尽量简单，按钮要大，而且每一步操作不要太多。如果可以只点击“已完成”或者“需要帮助”这样的按钮，会更容易使用。
+English Answer:
+I think some older adults may find it difficult, so the interface should be very simple. The buttons should be large, and there should not be too many steps. Simple options such as “Completed” or “Need Help” would be easier to use.
+
+4. 付费意愿 / Willingness to Pay
+中文问题：
+如果 Sliver Care 的基础付费版本价格约为每月 39 元，你觉得这个价格可以接受吗？
+English Question:
+If the basic paid version of Sliver Care costs around RMB 39 per month, would you consider this price acceptable?
+中文回答示例：
+我觉得可以接受，但前提是它真的能稳定运行，而且家人会经常使用。如果只是简单提醒功能，我可能会觉得有一点贵。
+English Answer:
+I think the price could be acceptable if the system works reliably and my family actually uses it regularly. If it only provides simple reminders, I might feel that RMB 39 is a little expensive.
+
+5. 免费试用 / Free Trial
+中文问题：
+如果你暂时不愿意付费，你是否愿意先免费试用一段时间？
+English Question:
+If you are not ready to pay for it, would you be willing to try the product for free first?
+中文回答示例：
+愿意。我觉得先免费试用比较合理，因为我需要先知道老人是否愿意使用，以及这个产品到底能不能真正帮助家庭减少沟通问题。
+English Answer:
+Yes. I think a free trial would be reasonable because I would first want to know whether the older person is willing to use it and whether the product can really reduce communication problems in the family.
+
+6. 最大顾虑 / Main Concern
+中文问题：
+如果你考虑使用这款产品，你最大的顾虑会是什么？
+English Question:
+What would be your biggest concern if you considered using this product?
+中文回答示例：
+我最大的顾虑是隐私和数据安全，因为系统可能会记录老人每天的情况和家庭成员的信息。我希望这些数据不会被其他人随意看到。
+English Answer:
+My biggest concern would be privacy and data security because the system may contain information about the older person's daily activities and family members. I would want to make sure that this information cannot be accessed by unauthorized people.
+
+7. 哪类家庭最需要 / Target Users
+中文问题：
+你觉得什么样的家庭最需要 Sliver Care 这样的产品？
+English Question:
+What type of family do you think would benefit most from a product like Sliver Care?
+中文回答示例：
+我觉得最适合父母独居、子女不住在同一个城市，或者家里有多个家庭成员共同照顾老人的家庭。因为这种情况下最容易出现沟通和责任分配的问题。
+English Answer:
+I think it would be most useful for families where older parents live alone, their children live in different cities, or several family members share caregiving responsibilities. These situations are more likely to create communication and responsibility problems.
+
+8. 希望增加的功能 / Suggested Improvement
+中文问题：
+如果未来继续开发这个产品，你最希望增加什么功能？
+English Question:
+If this product is developed further in the future, what feature would you most like to see added?
+中文回答示例：
+我希望增加自动通知功能，比如老人没有回应提醒时，系统可以通知指定的家庭成员。另外，如果可以让几个家庭成员同时查看最新情况，也会比较方便。
+English Answer:
+I would like to see automatic notifications. For example, if the older person does not respond to a reminder, the system could notify a designated family member. It would also be useful if several family members could see the latest updates at the same time.

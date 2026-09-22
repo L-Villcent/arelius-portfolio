@@ -1,0 +1,152 @@
+{
+  "recordedAt": "2026-09-20T09:39:18.771Z",
+  "executor": "Automated local harness run by the coding assistant",
+  "scope": "Functional experiments using fictional, in-memory care data. No customer participation, medical validation or market testing.",
+  "experimentCount": 12,
+  "passed": 12,
+  "sourceSha256": "647ae2ab54c9887a1be1cd891e548e8718d8c4671a02dcdb5d1755cf7ff9ca38",
+  "results": [
+    {
+      "id": "E01",
+      "hypothesis": "The core follow-up works on Free.",
+      "procedure": "Start one reminder, request help, and save a fictional outcome.",
+      "result": "pass",
+      "observations": {
+        "careItems": 1,
+        "followUpOutcomes": 1,
+        "actualContacts": 0
+      }
+    },
+    {
+      "id": "E02",
+      "hypothesis": "A Plus report includes the entered outcome.",
+      "procedure": "Confirm Free report gating, simulate Plus, then generate a report.",
+      "result": "pass",
+      "observations": {
+        "reportContainsEnteredNote": true,
+        "aiUsage": 0,
+        "actualCharge": 0
+      }
+    },
+    {
+      "id": "E03",
+      "hypothesis": "Failure, cancellation and duplicate checkout preserve account state.",
+      "procedure": "Attempt failure and cancel, then complete the same order twice.",
+      "result": "pass",
+      "observations": {
+        "savedOrders": 1,
+        "quotedAnnualTotal": 390,
+        "actualCharge": 0
+      }
+    },
+    {
+      "id": "E04",
+      "hypothesis": "Annual totals match the confirmed catalogue.",
+      "procedure": "Activate each paid annual plan in a fresh fixture.",
+      "result": "pass",
+      "observations": [
+        {
+          "plan": "plus",
+          "total": 390,
+          "actualCharge": 0
+        },
+        {
+          "plan": "pro5",
+          "total": 790,
+          "actualCharge": 0
+        },
+        {
+          "plan": "pro20",
+          "total": 990,
+          "actualCharge": 0
+        }
+      ]
+    },
+    {
+      "id": "E05",
+      "hypothesis": "AI limits cannot prevent the basic care response.",
+      "procedure": "Consume Plus allowance, reject an extra generation, then record a check-in.",
+      "result": "pass",
+      "observations": {
+        "usedGenerations": 20,
+        "excessGenerationRejected": true,
+        "careResponse": "confirmed"
+      }
+    },
+    {
+      "id": "E06",
+      "hypothesis": "Pro backup and handover update responsibility.",
+      "procedure": "Configure 10/25-minute rules, advance 25 minutes, then hand back with a note.",
+      "result": "pass",
+      "observations": {
+        "backupTookOver": true,
+        "recordedHandovers": 1
+      }
+    },
+    {
+      "id": "E07",
+      "hypothesis": "Downgrade preserves records and current-cycle usage.",
+      "procedure": "Generate one result, downgrade, then record an outcome.",
+      "result": "pass",
+      "observations": {
+        "plan": "free",
+        "used": 1,
+        "retainedResults": 1,
+        "outcome": "resolved"
+      }
+    },
+    {
+      "id": "E08",
+      "hypothesis": "Earlier open work remains visible in a seven-day report.",
+      "procedure": "Leave one reminder open and advance eight demo days.",
+      "result": "pass",
+      "observations": {
+        "reconstructedRejectedPeriodOnlyRule": 0,
+        "currentOpenCount": 1,
+        "fixtureDaysAdvanced": 8,
+        "baselineIsReconstruction": true
+      }
+    },
+    {
+      "id": "E09",
+      "hypothesis": "A new outcome on an old reminder counts in the current period.",
+      "procedure": "Resolve the eight-day-old reminder and inspect one-day activity.",
+      "result": "pass",
+      "observations": {
+        "oneDayFollowUpCount": 1,
+        "currentlyOpen": 0
+      }
+    },
+    {
+      "id": "E10",
+      "hypothesis": "Care reset preserves outreach and unsent request records.",
+      "procedure": "Use one in-memory synthetic outreach fixture and one request, then reset care.",
+      "result": "pass",
+      "observations": {
+        "reconstructedFullReplacementRetains": 0,
+        "currentResetRetains": 1,
+        "unsentRequestsRetained": 1,
+        "fixtureNeverWrittenToBrowser": true
+      }
+    },
+    {
+      "id": "E11",
+      "hypothesis": "Cross-midnight scheduling uses the due-date rota.",
+      "procedure": "Set a dated rota and evening reminder, then advance 24 hours.",
+      "result": "pass",
+      "observations": {
+        "dueAt": "2026-09-15T18:00:00.000Z",
+        "ownerMatchesDueDateRota": true
+      }
+    },
+    {
+      "id": "E12",
+      "hypothesis": "Invalid backup data cannot create a charged demo order.",
+      "procedure": "Tamper with actualCharge on a simulated receipt and validate.",
+      "result": "pass",
+      "observations": {
+        "tamperedBackupRejected": true
+      }
+    }
+  ]
+}

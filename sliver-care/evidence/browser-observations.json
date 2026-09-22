@@ -1,0 +1,43 @@
+{
+  "recordedAt": "2026-09-20T09:49:28.537Z",
+  "observer": "Coding assistant using the local browser",
+  "scope": "Functional and interface observations only. No outside-user session or market response was supplied.",
+  "workspace": {
+    "page": "workspace.html#desk",
+    "viewportWidth": 1280,
+    "documentWidth": 1265,
+    "captureFile": "current-workspace.png",
+    "captureSavedAt": "2026-09-19T19:50:13.845Z",
+    "fictionalRecipientsShown": 2,
+    "openItems": 1,
+    "recordedOutcomes": 1,
+    "imageProvenance": "Retained workspace-desktop.png from the 20 September local demonstration; no outside user shown."
+  },
+  "report": {
+    "page": "workspace.html#reports",
+    "previewFile": "report-preview.txt",
+    "observedOn": "2026-09-20",
+    "previewCharacters": 2322
+  },
+  "download": {
+    "observedOn": "2026-09-20",
+    "filename": "Sliver-Care-Report-2026-09-20T07-21-33-719Z.txt",
+    "bytes": 2329,
+    "characters": 2322,
+    "previewRollingHash": -1832074418,
+    "fileRollingHash": -1832074418,
+    "sha256": "fe726bafd2bde3646737bd1b0d684e43be9bc1062632005115084f1fb53d0cb3",
+    "method": "Normal download button; saved file read from Downloads and compared with the rendered preformatted report.",
+    "outsideParticipants": 0
+  },
+  "outreach": {
+    "page": "outreach.html",
+    "distinctActualTargets": 0,
+    "actualOfferEntries": 0,
+    "fictionalScenarios": 10,
+    "statusText": "No actual outreach entries. The scenarios below remain separate.",
+    "captureFile": "outreach-status.png",
+    "captureSavedAt": "2026-09-20T09:48:48.414Z"
+  },
+  "limits": "The empty log only establishes what is recorded here. It does not prove that no person ever discussed the project elsewhere. No timed speaking rehearsal is recorded."
+}
